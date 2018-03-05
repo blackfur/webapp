@@ -6,3 +6,9 @@ from django.shortcuts import render
 def index(req):
     # return HttpResponse("<h2>Hello World!</h2>")
     return render(req, 'webapp/home.html')
+
+
+def contact(req):
+    return render(req, 'webapp/basic.html',
+                  {'content': ['Please contact me:',
+                               'junehwang@gmail.com']})
