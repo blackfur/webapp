@@ -2,30 +2,9 @@
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <groupId>fakeghost.com</groupId>
-  <artifactId>discovery</artifactId>
-  <packaging>jar</packaging>
   <version>1.0-SNAPSHOT</version>
-  <name>discovery</name>
   <url>http://maven.apache.org</url>
 
-  <dependencies>
-    <dependency>
-      <groupId>junit</groupId>
-      <artifactId>junit</artifactId>
-      <version>3.8.1</version>
-      <scope>test</scope>
-    </dependency>
-
-<dependency>
-    <groupId>org.springframework.cloud</groupId>
-    <artifactId>spring-cloud-starter-config</artifactId>
-</dependency>
-<dependency>
-    <groupId>org.springframework.cloud</groupId>
-    <artifactId>spring-cloud-starter-eureka-server</artifactId>
-</dependency>
-
-  </dependencies>
 <dependencyManagement>
     <dependencies>
         <dependency>
@@ -35,6 +14,15 @@
             <type>pom</type>
             <scope>import</scope>
         </dependency>
+<dependency>
+    <groupId>org.springframework.cloud</groupId>
+    <artifactId>spring-cloud-starter-config</artifactId>
+</dependency>
+<dependency>
+    <groupId>org.springframework.cloud</groupId>
+    <artifactId>spring-cloud-starter-eureka-server</artifactId>
+</dependency>
     </dependencies>
 </dependencyManagement>
+
 </project>

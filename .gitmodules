@@ -1,0 +1,4 @@
+[submodule "SuicideGame.com.conf"]
+	path = SuicideGame.com.conf
+	url = https://github.com/blackfur/SuicideGame.com.conf
+	branch = bbs
