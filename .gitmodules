@@ -2,3 +2,7 @@
 	path = SuicideGame.com.conf
 	url = https://github.com/blackfur/SuicideGame.com.conf
 	branch = bbs
+[submodule "BBS"]
+	path = BBS
+	url =  git@github.com:blackfur/bbs.git
+	branch = master
