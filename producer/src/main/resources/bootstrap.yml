@@ -1,3 +1,7 @@
 spring:
    application:
       name: producer
+   cloud:
+      config:
+         #name: producer
+         uri: http://localhost:8888

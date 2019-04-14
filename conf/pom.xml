@@ -8,12 +8,18 @@
   <name>conf</name>
   <url>http://maven.apache.org</url>
 
-<parent>
-    <groupId>fakeghost.com</groupId>
-    <artifactId>fakeghost.com.root</artifactId>
-        <version>1.0.0-SNAPSHOT</version>
-        <relativePath>../</relativePath>
-</parent>
+  <parent>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-parent</artifactId>
+		<version>1.4.1.RELEASE</version>
+		<relativePath /> <!-- lookup parent from repository -->
+	</parent>
+
+   <properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+		<java.version>1.8</java.version>
+	</properties>
 
   <dependencies>
 
@@ -27,14 +33,12 @@
     <groupId>org.springframework.cloud</groupId>
     <artifactId>spring-cloud-config-server</artifactId>
    </dependency>
+   <!--
    <dependency>
     <groupId>org.springframework.cloud</groupId>
     <artifactId>spring-cloud-starter-eureka</artifactId>
    </dependency>
-      <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-security</artifactId>
-      </dependency>
+   -->
 
     <dependency>
       <groupId>junit</groupId>
@@ -49,7 +53,7 @@
         <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-dependencies</artifactId>
-            <version>Brixton.SR5</version>
+            <version>Camden.SR6</version>
             <type>pom</type>
             <scope>import</scope>
         </dependency>
@@ -63,6 +67,17 @@
             <artifactId>spring-boot-maven-plugin</artifactId>
         </plugin>
     </plugins>
+
+      <resources>
+			<resource>
+				<filtering>true</filtering>
+				<directory>src/main/resources</directory>
+				<includes>
+					<include>*.yml</include>
+					<include>global/</include>
+				</includes>
+			</resource>
+		</resources>
 </build>
 
 </project>
