@@ -8,9 +8,7 @@
     <packaging>pom</packaging>
 
     <modules>
-        <module>eureka-serv</module>
-    <module>zuul</module>
-    <module>admin</module>
+         <module>admin</module>
   </modules>
 
 </project>
