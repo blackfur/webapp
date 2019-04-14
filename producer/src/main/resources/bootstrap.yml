@@ -5,3 +5,8 @@ spring:
       config:
          #name: producer
          uri: http://localhost:8888
+management:
+   endpoints:
+      web:
+         exposure:
+            #include: *
