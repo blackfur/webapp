@@ -8,22 +8,37 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
+import org.springframework.cloud.client.discovery.DiscoveryClient;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import java.util.List;
+import org.springframework.cloud.client.ServiceInstance;
 
 public class ConsumerCtrlClient{
 
+   final Logger log = LoggerFactory.getLogger(getClass());
+
+   @Autowired
+   private DiscoveryClient discoveryClient;
+
 	public void getEmployee() throws RestClientException, IOException {
 
-		String baseUrl = "http://localhost:8080/employee";
+		//String baseUrl = "http://localhost:8080/employee";
+      List<ServiceInstance> instances=discoveryClient.getInstances("producer");
+		ServiceInstance serviceInstance=instances.get(0);
+		String baseUrl=serviceInstance.getUri().toString();
+      log.info(baseUrl);
+
 		RestTemplate restTemplate = new RestTemplate();
 		ResponseEntity<String> response=null;
 		try{
-		response=restTemplate.exchange(baseUrl,
-				HttpMethod.GET, getHeaders(),String.class);
+         response=restTemplate.exchange(baseUrl+"/employee", HttpMethod.GET, getHeaders(),String.class);
 		}catch (Exception ex)
 		{
-			System.out.println(ex);
+         log.error("Request failed: ",ex);
 		}
-		System.out.println(response.getBody());
+		log.info(response.getBody());
 	}
 
 	private static HttpEntity<?> getHeaders() throws IOException {

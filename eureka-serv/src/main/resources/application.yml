@@ -6,7 +6,7 @@ eureka:
       register-with-eureka: false
       fetch-registry: false
       #serviceUrl:
-         #defaultZone: http://127.0.0.1:8090/eureka
+         #defaultZone: http://127.0.0.1:8761/eureka
    instance:
       hostname: DESKTOP-C641NAO
       prefer-ip-address: true
