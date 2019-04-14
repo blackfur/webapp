@@ -14,19 +14,22 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import java.util.List;
 import org.springframework.cloud.client.ServiceInstance;
+import org.springframework.cloud.client.loadbalancer.LoadBalancerClient;
 
 public class ConsumerCtrlClient{
 
    final Logger log = LoggerFactory.getLogger(getClass());
 
    @Autowired
-   private DiscoveryClient discoveryClient;
+   //private DiscoveryClient discoveryClient;
+	private LoadBalancerClient loadBalancer;
 
 	public void getEmployee() throws RestClientException, IOException {
 
 		//String baseUrl = "http://localhost:8080/employee";
-      List<ServiceInstance> instances=discoveryClient.getInstances("producer");
-		ServiceInstance serviceInstance=instances.get(0);
+      //List<ServiceInstance> instances=discoveryClient.getInstances("producer");
+		//ServiceInstance serviceInstance=instances.get(0);
+      ServiceInstance serviceInstance=loadBalancer.choose("producer");
 		String baseUrl=serviceInstance.getUri().toString();
       log.info(baseUrl);
 

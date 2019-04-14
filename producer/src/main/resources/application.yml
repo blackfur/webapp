@@ -7,3 +7,7 @@ eureka:
    instance:
       hostname: DESKTOP-C641NAO
       appname: producer
+      #      instanceId: :
+
+server:
+   port: @server.port@
