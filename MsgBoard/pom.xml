@@ -120,6 +120,24 @@
         </configuration>
       </plugin>
 
+      <plugin>
+         <groupId>org.eclipse.jetty</groupId>
+         <artifactId>jetty-maven-plugin</artifactId>
+         <version>9.2.11.v20150529</version>
+         <!--
+         <configuration>
+            <scanIntervalSeconds>16</scanIntervalSeconds>
+            <webApp>
+               <contextPath>/suicidegame</contextPath>
+            </webApp>
+            <httpConnector>
+          	     <port>8080</port>
+            </httpConnector>
+            <jettyXml>jetty.xml</jettyXml>
+         </configuration>
+         -->
+      </plugin>
+
         </plugins>
     </build>
 
