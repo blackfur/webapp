@@ -15,7 +15,9 @@
         <property name = "suffix" value = ".jsp" />
     </bean>
 
-    <mvc:resources mapping="/static/**" location="/static/" />
+    <!--
+    <mvc:resources mapping="/api/static/**" location="/static/" />
+    -->
 
     <mvc:annotation-driven />
 

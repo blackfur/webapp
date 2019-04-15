@@ -1,0 +1,106 @@
+*{
+    margin:0px;
+    padding:0px;
+}
+a{
+    text-decoration: none;
+}
+ul{
+    list-style: none;
+}
+body{
+    background:rgba(238,238,238,0.5);
+    position:relative;
+    font-family: 微软雅黑;
+    background-color: lightblue;
+}
+
+.input1{
+    width:250px;
+    height:40px;
+    line-height: 40px;
+    padding-left: 5px;
+    border:1px solid #d0d6d9;
+    background: #F9F9F9;
+}
+.td1{
+    height: 40px;
+    width: 100px;
+}
+table{
+    padding: 0px;
+    margin:0px;
+}
+td{
+    padding:5px;
+    margin:10px;
+}
+.create{
+    width:450px;
+    height:580px;
+    background: white;
+    position:absolute;
+    top:50%;
+    left:50%;
+    margin-left:-225px;
+    /*margin-top:-225px;*/
+    margin-top:35px;
+    margin-bottom:35px;
+    padding:5px 15px;
+}
+.create>.header{
+    width:100%;
+    padding:10px 0px;
+    border-bottom: 1px solid #ccc;
+    overflow: hidden;
+}
+.create>.header>span{
+    font-size:18px;
+    font-weight: normal;
+    float:left;
+}
+.create>.header>span>a{
+    padding:5px;
+    margin-left:10px;
+    color:black;
+}
+.create>.header>span>a:first-child{
+    margin-left:50px;
+}
+.create>.header>span>a:last-child{
+    color:#2C689B;
+}
+
+
+.create>form{
+    margin-top:30px;
+    padding:0 50px;
+}
+.create>form>div>input{
+    width:350px;
+    height:40px;
+    line-height: 40px;
+    padding-left: 5px;
+    border:1px solid #d0d6d9;
+    background: #F9F9F9;
+}
+
+.clear{
+    clear:both;
+}
+.btn-red{
+    margin:20px 0px;
+}
+#reg-btn{
+    width:100%;
+    height:50px;
+    background:#2C689B;
+    border-color:#2C689B;
+    text-align: center;
+    line-height:50px;
+    color:#fff;
+    font-size: 17px;
+}
+#reg-btn:hover{
+    cursor:pointer;
+}

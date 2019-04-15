@@ -1,0 +1,60 @@
+*{
+    padding: 0;
+    margin: 0;
+}
+body{
+    background:rgba(238,238,238,0.5);
+    position:relative;
+    font-family: 微软雅黑;
+    background-color: lightblue;
+}
+ul{
+    list-style: none;
+}
+.button {
+    background: rgba(238, 238, 238, 0.6);
+    border-radius: 10px;
+    margin:0 4px;
+    height: 32px;
+    width: 80px;
+}
+.search{
+    border:2px solid #C5c5c5;
+    line-height: 30px;
+    width: 400px;
+    background: rgba(255,255,255,0.5);
+}
+.searchdiv{
+    position: absolute;
+    top: 30%;
+    left: 25%;
+}
+
+h2{
+    position: absolute;
+    top: 20%;
+    left: 45%;
+}
+.tb{
+    position: absolute;
+    top: 40%;
+    left: 30%;
+}
+.td1{
+    height: 40px;
+    width: 100px;
+}
+td{
+    padding:5px;
+    margin:10px;
+}
+.return{
+    text-decoration: none;
+    position: absolute;
+    top: 20%;
+    left: 25%;
+    font-size: x-large;
+}
+a {
+    text-decoration: none;
+}
