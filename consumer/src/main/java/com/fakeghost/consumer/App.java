@@ -9,11 +9,13 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.web.client.RestClientException;
 //import org.springframework.cloud.netflix.feign.EnableFeignClients;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
+import org.springframework.boot.web.support.SpringBootServletInitializer;
+import org.springframework.boot.builder.SpringApplicationBuilder;
 
 @SpringBootApplication
 @EnableDiscoveryClient
 //@EnableFeignClients
-public class App {
+public class App extends SpringBootServletInitializer{
 
 	public static void main(String[] args) throws RestClientException, IOException {
 		ApplicationContext ctx = SpringApplication.run(App.class, args);
@@ -23,6 +25,10 @@ public class App {
       consumerControllerClient.getEmployee();
 		
 	}
+    @Override
+    protected SpringApplicationBuilder configure(SpringApplicationBuilder builder) {
+        return builder.sources(App.class);
+    }
 	
 	@Bean
 	public  ConsumerCtrlClient  consumerControllerClient()
