@@ -15,14 +15,26 @@ import org.slf4j.LoggerFactory;
 
 @RunWith(SpringRunner.class)
 @WebMvcTest(controllers = TestCtrl.class)
+//@WebMvcTest(value = <Your Class Name>.class, secure = false)
 public class WebContentTest {
    final Logger log = LoggerFactory.getLogger(getClass());
 
     @Autowired
     private MockMvc mockMvc;
+    /*
+@MockBean
+<Your Service class>
+*/
 
     @Test
     public void indexhtml() throws Exception {
+       // Mockito.when().thenReturn()
+       // Mockito.anyString()
+       // Mockito.any(<Specified class>)
+       // RequestBuilder MockMvcRequestBuilders.get(<Your REST api Path>).accept(MediaType.APPLICATION_JSON)
+       // RequestBuilder MockMvcRequestBuilders.post(<Your REST api Path>).accept(MediaType.APPLICATION_JSON).content(<String>).contentType(MediaType.APPLICATION_JSON)
+       // MockMvc.perform(<RequestBuilder>).andReturn()
+       // JSONAssert.assertEquals(<expected String>, <MvcResult>.getResponse().getContentAsString(), false)
         mockMvc.perform(get("/index.html")) .andExpect(content().string(containsString("html6")));
     }
 
