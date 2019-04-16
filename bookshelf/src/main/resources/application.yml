@@ -10,7 +10,9 @@ eureka:
       #instanceId: :
 
 server:
-   port: @server.port@
+   # mvn test -Dserver.port=8080
+   #port: @server.port@
+   port: 8080
 
 spring:
    thymeleaf:

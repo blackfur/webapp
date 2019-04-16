@@ -14,7 +14,7 @@ public class TestCtrl{
 
 		Employee emp = new Employee();
 		emp.setName("emp1");
-		emp.setDesignation("manager");
+		emp.setDesignation("officeboy");
 		emp.setEmpId("1");
 		emp.setSalary(3000);
 
