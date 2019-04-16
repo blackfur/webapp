@@ -8,3 +8,9 @@ mvn jetty:run -Djetty.port=8080
 http://localhost:8080/static/index.html
 http://localhost:8080/index/
 http://localhost:8080/
+
+bin\mysql -u root -p1234.abcd
+create database bookshelf
+use bookshelf
+create table if not exists books(title varchar(128) not null, type int) engine=innodb;
+insert into books values("Utopia for Realists", 0);

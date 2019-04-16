@@ -1,0 +1,53 @@
+package com.fakeghost.bbs;
+
+//import org.junit.jupiter.api.Test;
+import org.apache.log4j.Logger;
+import org.springframework.context.ApplicationContext;  
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.jdbc.core.JdbcTemplate;
+import java.util.List;
+import java.util.Map;
+import org.springframework.util.StringUtils;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.instanceOf;
+import static org.hamcrest.Matchers.is;
+ 
+@RunWith(SpringJUnit4ClassRunner.class)
+//@ContextConfiguration(classes = {AppConf.class})
+@ContextConfiguration({"classpath*:application.xml"})
+public class JdbcTemplTest {
+    Logger log = Logger.getLogger(getClass().getSimpleName());
+
+    @Autowired
+    @Qualifier("jdbcTemplate")
+      JdbcTemplate jdbcTemplate;
+ 
+    @Test
+    public void testQueryList() {
+       //ApplicationContext ctx=new ClassPathXmlApplicationContext("application.xml");  
+       //JdbcTemplate jdbcTemplate=(JdbcTemplate)ctx.getBean("jdbcTemplate");
+       assertThat(jdbcTemplate, instanceOf(JdbcTemplate.class));
+       log.info("JdbcTemplate fetch size: " + jdbcTemplate.getFetchSize());
+        assertThat(jdbcTemplate.getFetchSize(), is(-1));
+
+       String sql = "select title, type from books";
+       log.info(sql);
+       // List<Map<String, Object>> queryForList(String sql)
+       List<Map<String, Object>> rows = jdbcTemplate.queryForList(sql);
+       if(rows != null && rows.size() >0){
+         for(int i = 0; i< rows.size(); i++){
+            Map<String, Object> row = rows.get(i);
+            String title = row.get("title").toString();
+            String type = row.get("type").toString();
+            log.info("index: " + i + ", title: " + title + ", type: " + type);
+         }
+       }
+    }
+}

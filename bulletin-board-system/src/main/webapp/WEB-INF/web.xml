@@ -29,7 +29,8 @@
         <load-on-startup>1</load-on-startup>
         <init-param>
             <param-name>contextConfigLocation</param-name>
-            <param-value>classpath:SpringDispatcher-servlet.xml</param-value>
+            <!-- default file is SpringDispatcher-servlet.xml -->
+            <param-value>classpath:application.xml</param-value>
         </init-param>
     </servlet>
 
