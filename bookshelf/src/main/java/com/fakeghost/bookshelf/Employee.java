@@ -1,4 +1,4 @@
-package com.fakeghost.producer;
+package com.fakeghost.bookshelf;
 
 public class Employee {
 	private String empId;

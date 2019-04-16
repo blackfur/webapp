@@ -1,0 +1,32 @@
+eureka:
+   client:
+      registerWithEureka: true
+      fetchRegistry: true 
+      #serviceUrl: 
+         #defaultZone: http://127.0.0.1:8762/eureka
+   instance:
+      hostname: DESKTOP-C641NAO
+      appname: bookshelf
+      #instanceId: :
+
+server:
+   port: @server.port@
+
+spring:
+   thymeleaf:
+      cache: false
+   mustache:
+      cache: false
+   groovy:
+      template:
+         cache: false
+   devtools:
+      livereload:
+         enabled: true
+      restart:
+         exclude: doc/**,lib/**
+         additional-paths: script/
+         additional-exclude: build/**
+         log-condition-evaluation-delta: true
+         enabled: true
+         #trigger-file: restart-trigger.txt

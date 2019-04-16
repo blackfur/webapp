@@ -1,9 +1,9 @@
 spring:
    application:
-      name: producer
+      name: bookshelf
    cloud:
       config:
-         #name: producer
+         #name: bookshelf
          uri: http://localhost:8888
 management:
    endpoints:
