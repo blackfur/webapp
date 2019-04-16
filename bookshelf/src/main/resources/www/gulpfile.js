@@ -70,7 +70,7 @@ var banner = {
  */
 
 // General
-var {gulp, src, dest, watch, series, parallel} = require('gulp');
+var {task,src, dest, watch, series, parallel} = require('gulp');
 var del = require('del');
 var flatmap = require('gulp-flatmap');
 var lazypipe = require('lazypipe');
@@ -297,4 +297,40 @@ exports.watch = series(
 	exports.default,
 	startServer,
 	watchSource
+);
+
+var connect = require("gulp-connect");
+var Reproxy = require("gulp-connect-reproxy");
+//var gulp_watch = require("gulp-watch");
+
+function watchOut2reload(done){
+      // connect.reload() needs to be used in a stream. it returns a stream handler that takes input and does something with it.
+      src(paths.input).pipe(connect.reload());
+      done();
+}
+
+function conn2proxy(done) {
+    connect.server({
+        root: paths.output,
+        port: 9000,
+        livereload: true,
+
+        middleware: function (connect, options) {
+
+            options.rule = [/\.api/,/\.do/, /\.jsp/, /\.htm/];
+//or        options.rule = /\.do/;
+
+            options.server = "127.0.0.1:8080";
+
+            var proxy = new Reproxy(options);
+
+            return [proxy];
+        }
+    });
+	watch(paths.input, series(exports.default, watchOut2reload));
+   done();
+}
+exports.proxy= series(
+	exports.default,
+	conn2proxy
 );
