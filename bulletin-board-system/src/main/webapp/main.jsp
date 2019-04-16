@@ -18,20 +18,20 @@
         <div align="right" style="margin:10px 60px 10px 10px">
             <img src="./img/default.jpg" width="120px" height="120px"/>
             <h2 align="right">欢迎你 <%=user%></h2>
-            <a href="/BBS/login.jsp"  style="font-size: large">退出</a>
+            <a href="/login.jsp"  style="font-size: large">退出</a>
         </div>
         <table>
             <tr>
                 <td><h3 style="margin-left: 70px">主界面</h3></td>
             </tr>
             <tr>
-                <td>****<a href="/BBS/view.jsp">查看帖子</a>****</td>
+                <td>****<a href="/view.jsp">查看帖子</a>****</td>
             </tr>
             <tr>
-                <td>****<a href="/BBS/search.jsp">查询帖子</a>****</td>
+                <td>****<a href="/search.jsp">查询帖子</a>****</td>
             </tr>
             <tr>
-                <td>****<a href="/BBS/create.jsp">新建帖子</a>****</td>
+                <td>****<a href="/create.jsp">新建帖子</a>****</td>
             </tr>
         </table>
 </body>

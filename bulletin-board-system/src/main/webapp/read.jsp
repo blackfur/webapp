@@ -24,7 +24,7 @@
 
     <div class="header">
         <h1>
-            <a href="/BBS/main.jsp" style="margin-left: 0">返回</a>
+            <a href="/main.jsp" style="margin-left: 0">返回</a>
         </h1>
         <%
             List<Message> msgList = (List<Message>) application.getAttribute("msgList");
@@ -32,10 +32,10 @@
                 if(msg.getId() == Long.valueOf(request.getParameter("id")) && msg.getAuthor().equals(session.getAttribute("username"))){%>
 
 
-                    <form style="float:right" action="/BBS/DeleteServlet?id=<%=id%>" method="post" >
+                    <form style="float:right" action="/DeleteServlet?id=<%=id%>" method="post" >
                             <input style="padding: 5px;float:inherit" type="submit" value="删除帖子">
                     </form>
-                    <form style="float:right" action="/BBS/ModifyServlet?id=<%=id%>" method="post" id="form">
+                    <form style="float:right" action="/ModifyServlet?id=<%=id%>" method="post" id="form">
                            <input style="padding: 5px;float:inherit" type="submit"  value="提交修改">
                     </form>
                     <%break;

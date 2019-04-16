@@ -17,7 +17,7 @@
 <div class="reg">
     <div class="header">
         <h1>
-            <a href="/BBS/login.jsp">登录</a> <a href="/BBS/register.jsp">注册</a>
+            <a href="/login.jsp">登录</a> <a href="/register.jsp">注册</a>
         </h1>
     </div>
 
@@ -28,7 +28,7 @@
         }
     %>
     <h1 style="color: #FF0000;text-align:center;font-size: medium"><%=msg%></h1>
-    <form action="/BBS/RegisterServlet" method="post">
+    <form action="/RegisterServlet" method="post">
         <table>
             <tr>
                 <td class="td1">用户名</td>

@@ -31,14 +31,14 @@
 <div class="create">
     <div class="header">
         <span>
-            <a href="/BBS/main.jsp">返回</a>
+            <a href="/main.jsp">返回</a>
         </span>
         <span style="margin-left: 120px">
             新建帖子
         </span>
     </div>
 
-    <form action="/BBS/CreateServlet" method="post">
+    <form action="/CreateServlet" method="post">
         <table>
             <tr>
                 <td class="td1">ID</td>

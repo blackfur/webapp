@@ -13,7 +13,7 @@
 </head>
 <body>
     <div>
-        <a class="return" href="/BBS/main.jsp">返回</a>
+        <a class="return" href="/main.jsp">返回</a>
         <h2 style="text-align: center">查询帖子</h2>
     </div>
     <div class="searchdiv">
@@ -44,7 +44,7 @@
             //1.创建一个 xmlhttpRequest对象
             var xmlHttpRequest = new XMLHttpRequest();
             //2.规定请求的类型、URL 以及是否异步处理请求。
-            xmlHttpRequest.open("GET","/BBS/AjaxServlet?flag=A&input="+input,true);
+            xmlHttpRequest.open("GET","/AjaxServlet?flag=A&input="+input,true);
             //3.将请求发送到服务器。
             xmlHttpRequest.send();
             //4、接收服务器端的响应(readyState=4表示请求已完成且响应已就绪    status=200表示请求响应一切正常)
@@ -60,7 +60,7 @@
         function funB(){
             var input = document.getElementById("input").value;
             var xmlHttpRequest = new XMLHttpRequest();
-            xmlHttpRequest.open("GET","/BBS/AjaxServlet?flag=B&input=" + input,true);
+            xmlHttpRequest.open("GET","/AjaxServlet?flag=B&input=" + input,true);
             xmlHttpRequest.send();
             xmlHttpRequest.onreadystatechange = function () {
                 if(xmlHttpRequest.readyState == 4 && xmlHttpRequest.status == 200){
@@ -73,7 +73,7 @@
         function funC(){
             var input = document.getElementById("input").value;
             var xmlHttpRequest = new XMLHttpRequest();
-            xmlHttpRequest.open("GET","/BBS/AjaxServlet?flag=C&input="+input,true);
+            xmlHttpRequest.open("GET","/AjaxServlet?flag=C&input="+input,true);
             xmlHttpRequest.send();
             xmlHttpRequest.onreadystatechange = function () {
                 if(xmlHttpRequest.readyState == 4 && xmlHttpRequest.status == 200){
@@ -86,7 +86,7 @@
         function funD(){
             var input = document.getElementById("input").value;
             var xmlHttpRequest = new XMLHttpRequest();
-            xmlHttpRequest.open("GET","/BBS/AjaxServlet?flag=D&input="+input,true);
+            xmlHttpRequest.open("GET","/AjaxServlet?flag=D&input="+input,true);
             xmlHttpRequest.send();
             xmlHttpRequest.onreadystatechange = function () {
                 if(xmlHttpRequest.readyState == 4 && xmlHttpRequest.status == 200){

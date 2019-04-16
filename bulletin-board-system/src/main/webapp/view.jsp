@@ -31,7 +31,7 @@
 <div class="reg">
     <div class="header">
         <h1>
-            <a href="/BBS/main.jsp" style="margin-left: 0">返回</a>
+            <a href="/main.jsp" style="margin-left: 0">返回</a>
         </h1>
         <h1 style="margin-left: 200px">
             查看帖子
@@ -53,7 +53,7 @@
                     <td class="td1" style="text-align: center"><%=msg.getAuthor()%></td>
                     <td class="td1" style="text-align: center"><%=msg.getCreateTime()%></td>
                     <td class="td1" style="text-align: center"><%=msg.getCategory()%></td>
-                    <td class="td1" style="text-align: center"><a href="/BBS/read.jsp?id=<%=msg.getId()%>"><%=msg.getTitle()%></a></td>
+                    <td class="td1" style="text-align: center"><a href="/read.jsp?id=<%=msg.getId()%>"><%=msg.getTitle()%></a></td>
                     </tr>
             <%}%>
 
