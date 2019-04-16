@@ -89,8 +89,8 @@
 
   	<build>
 
-      <!--
       <resources>
+      <!--
          <resource>
                <directory>src/main/resources/static</directory>
                <filtering>false</filtering>
@@ -103,8 +103,14 @@
                   <include>*.properties</include>
                </includes>
          </resource>
-      </resources>
       -->
+         <resource>
+               <directory>src/main/resources</directory>
+               <excludes>
+                  <exclude>html/*</exclude>
+               </excludes>
+         </resource>
+      </resources>
 
 		<plugins>
 			<plugin>
