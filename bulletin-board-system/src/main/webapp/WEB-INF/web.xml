@@ -11,13 +11,27 @@
     </welcome-file-list>
 
     <!-- Root Context -->
+    <!--
+    Remember, XmlWebApplicationContext is the default context implementation used by Spring for web applications and therefore you never specify this context class explicitly in your web.xml file. Now as you will be using Java based configuration, you will need to specify AnnotationConfigApplicationContext class in your web.xml file while configuring it for web application.-->
+    <!--
+    <context-param>
+		<param-name>contextClass</param-name>
+		<param-value>
+			org.springframework.web.context.support.AnnotationConfigWebApplicationContext
+		</param-value>
+	</context-param>
+   <context-param>
+		<param-name>contextConfigLocation</param-name>
+		<param-value> com.fakeghost.bbs.AppConf </param-value>
+	</context-param>
+    -->
     <listener>
         <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
     </listener>
+        <!-- Beans defined here can be Accessed by multiple Spring servlet context -->
     <context-param>
         <param-name>contextConfigLocation</param-name>
-        <!-- Beans defined here can be Accessed by multiple Spring servlet context -->
-        <param-value>classpath:*-context.xml</param-value>
+        <param-value>classpath:application.xml</param-value>
     </context-param>
 
     <!-- Servlet context -->
@@ -27,11 +41,23 @@
             org.springframework.web.servlet.DispatcherServlet
         </servlet-class>
         <load-on-startup>1</load-on-startup>
+            <!-- default file is SpringDispatcher-servlet.xml -->
         <init-param>
             <param-name>contextConfigLocation</param-name>
-            <!-- default file is SpringDispatcher-servlet.xml -->
             <param-value>classpath:application.xml</param-value>
         </init-param>
+        <!--
+        <init-param>
+            <param-name>contextClass</param-name>
+            <param-value>
+               org.springframework.web.context.support.AnnotationConfigWebApplicationContext
+            </param-value>
+         </init-param>
+        <init-param>
+            <param-name>contextConfigLocation</param-name>
+            <param-value> com.fakeghost.bbs.AppConf </param-value>
+        </init-param>
+        -->
     </servlet>
 
     <servlet-mapping>

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.fakeghost.bbs.UserMapper">
+   <!-- Because we have defined typeAlias 'User' in mybatis.xml, Here we can just drop 'type=User' omitting fully qualified package name -->
+	<resultMap id="userMap" type="User" >
+		<id column="id" property="id"  />
+		<result column="nickname" property="nickname" />
+	</resultMap>
+
+	<select id="users" resultMap="userMap" parameterType="Integer">
+		SELECT
+      ID, NICKNAME
+		FROM
+         user
+		WHERE
+         id = #{value}
+		ORDER BY id DESC
+			limit 0, 32;
+	</select>
+</mapper>

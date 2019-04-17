@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.fakeghost.bbs.BookMapper">
+	<resultMap id="bookMap" type="com.fakeghost.bbs.Book" >
+		<result column="title" property="title"  />
+		<result column="type" property="type" />
+	</resultMap>
+
+	<select id="books" resultMap="bookMap" parameterType="String">
+		SELECT
+         title, type
+		FROM
+         books
+		WHERE
+         title like '%#{value}%'
+		ORDER BY title DESC
+			limit 0, 32;
+	</select>
+</mapper>
