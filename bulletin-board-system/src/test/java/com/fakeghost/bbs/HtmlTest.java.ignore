@@ -1,0 +1,20 @@
+package com.fakeghost.bbs;
+
+import org.junit.Test;
+import org.springframework.test.web.servlet.MvcResult;
+
+import static org.hamcrest.Matchers.containsString;
+import static org.junit.Assert.assertThat;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+
+public class HtmlTest extends MvcTestCase{
+    @Test
+    public void index_ShouldReturnSpecifiedString() throws Exception {
+
+        MvcResult resp =  mockMvc.perform(get("/static/index.html")
+        ).andExpect(status().isOk()) .andDo(print()) .andReturn();
+        assertThat(resp.getResponse().getContentAsString(), containsString("Hello ghost"));
+    }
+}

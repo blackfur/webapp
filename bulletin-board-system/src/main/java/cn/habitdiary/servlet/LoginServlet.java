@@ -13,6 +13,8 @@ import java.util.List;
 
 @SuppressWarnings("serial")
 @WebServlet("/LoginServlet")
+//The handler bean id and the servlet name are exactly same.
+//@WebServlet(urlPatterns = { "/LoginServlet" }, name = "loginHandler")
 public class LoginServlet extends HttpServlet {
     /**
      * @param request

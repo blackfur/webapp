@@ -7,16 +7,32 @@
 	<resultMap id="userMap" type="User" >
 		<id column="id" property="id"  />
 		<result column="nickname" property="nickname" />
+		<result column="password" property="password" />
 	</resultMap>
+
+	<insert id="register" >
+		insert into user(id, nickname, password) values(#{id},#{nickname},#{password})
+	</insert>
 
 	<select id="users" resultMap="userMap" parameterType="Integer">
 		SELECT
-      ID, NICKNAME
+      ID, NICKNAME, password
 		FROM
          user
 		WHERE
          id = #{value}
 		ORDER BY id DESC
 			limit 0, 32;
+	</select>
+	<select id="user" resultMap="userMap">
+		SELECT
+      ID, NICKNAME, password
+		FROM
+         user
+		WHERE
+         nickname = #{nickname}
+         and password = #{password}
+		ORDER BY id DESC
+			limit 0, 1;
 	</select>
 </mapper>

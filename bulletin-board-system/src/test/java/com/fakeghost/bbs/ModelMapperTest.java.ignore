@@ -1,15 +1,14 @@
 package com.fakeghost.bbs;
 
 import org.apache.log4j.Logger;
-import org.springframework.context.ApplicationContext;  
-import java.util.List;
-import org.springframework.util.StringUtils;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+
+import java.util.List;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.instanceOf;
@@ -37,12 +36,12 @@ public class ModelMapperTest {
        if(rows != null && rows.size() >0){
          for(int i = 0; i< rows.size(); i++){
             User row = rows.get(i);
-            int id = row.getId();
-            String nickname = row.getNickname();
+            int id = row.id;
+            String nickname = row.nickname;
             log.info("index: " + i + ", id: " + id + ", nickname: " + nickname);
          }
          User one = rows.get(0);
-         assertThat(one.getNickname(), is(equalTo("Jenkins")));
+         assertThat(one.nickname, is(equalTo("Jenkins")));
        }
     }
 }

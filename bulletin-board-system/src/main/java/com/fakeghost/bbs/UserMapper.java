@@ -1,7 +1,11 @@
 package com.fakeghost.bbs;
 
+import org.apache.ibatis.annotations.Param;
+
 import java.util.List;
 
 public interface UserMapper{
-   public List<User> users(int userid);
+   List<User> users(int userid);
+   User user(@Param("nickname") String nickname, @Param("password") String password);
+   void register(@Param("id")int id,@Param("nickname")String nickname, @Param("password")String password);
 }

@@ -68,7 +68,7 @@
     </h1>
   </div>
   <h1 style="font-size: medium;color: #FF0000;text-align: center"><%=msg%></h1>
-  <form action="/LoginServlet" method="post">
+  <form action="/api/LoginServlet" method="post">
     <table>
       <tr>
         <td class="td1">Username</td>
@@ -89,7 +89,7 @@
       <tr>
         <td class="td1" colspan="2">
           <input style="margin-right: 10px" type="checkbox" name="remember" value="true" checked="checked"> Remember Username
-          <span id="tourist"><a href="/LoginServlet">no login Access</a></span>
+          <span id="tourist"><a href="/api/LoginServlet">no login Access</a></span>
         </td>
       </tr>
       <tr>

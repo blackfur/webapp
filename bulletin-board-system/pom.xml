@@ -86,21 +86,18 @@ Never write another getter or equals method again, with one annotation your clas
 		<artifactId>log4j</artifactId>
 		<version>1.2.17</version>
 	</dependency>
-        <!-- https://mvnrepository.com/artifact/commons-logging/commons-logging -->
         <dependency>
             <groupId>commons-logging</groupId>
             <artifactId>commons-logging</artifactId>
             <version>1.2</version>
         </dependency>
 
-        <!-- https://mvnrepository.com/artifact/org.springframework/spring-core -->
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-core</artifactId>
             <version>${spring.version}</version>
         </dependency>
 
-        <!-- https://mvnrepository.com/artifact/org.springframework/spring-context -->
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-context</artifactId>
@@ -115,28 +112,24 @@ Never write another getter or equals method again, with one annotation your clas
         </dependency>
         -->
 
-        <!-- https://mvnrepository.com/artifact/org.springframework/spring-web -->
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-web</artifactId>
             <version>${spring.version}</version>
         </dependency>
 
-        <!-- https://mvnrepository.com/artifact/org.springframework/spring-beans -->
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-beans</artifactId>
             <version>${spring.version}</version>
         </dependency>
 
-        <!-- https://mvnrepository.com/artifact/org.springframework/spring-expression -->
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-expression</artifactId>
             <version>${spring.version}</version>
         </dependency>
 
-        <!-- https://mvnrepository.com/artifact/org.springframework/spring-webmvc -->
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-webmvc</artifactId>
@@ -169,12 +162,21 @@ Never write another getter or equals method again, with one annotation your clas
                 </exclusion>
             </exclusions>
         </dependency>
+        <!--
+            <artifactId>hamcrest-library</artifactId>
+        -->
         <dependency>
             <groupId>org.hamcrest</groupId>
-            <artifactId>hamcrest-library</artifactId>
+            <artifactId>hamcrest-all</artifactId>
             <version>1.3</version>
             <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>org.mockito</groupId>
+            <artifactId>mockito-core</artifactId>
+            <version>1.9.0</version>
+            <scope>test</scope>
+         </dependency>
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-test</artifactId>
