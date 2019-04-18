@@ -98,10 +98,22 @@ Never write another getter or equals method again, with one annotation your clas
             <version>${spring.version}</version>
         </dependency>
 
+        <!-- Spring-context supports Caching since Version 3.1-->
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-context</artifactId>
             <version>${spring.version}</version>
+        </dependency>
+        <!-- Support for Ehcache and others -->
+         <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-context-support</artifactId>
+            <version>${spring.version}</version>
+         </dependency>
+        <dependency>
+            <groupId>net.sf.ehcache</groupId>
+            <artifactId>ehcache</artifactId>
+            <version>2.9.0</version>
         </dependency>
 
         <!--

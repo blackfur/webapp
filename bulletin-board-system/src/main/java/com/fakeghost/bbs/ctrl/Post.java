@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import org.springframework.cache.annotation.Cacheable;
 
 @Controller
 @RequestMapping(value="/posts")
@@ -25,6 +26,9 @@ public class Post{
 
     @ResponseBody
     @RequestMapping(value="")
+    //Current Spring cache implementation uses all method parameters as the cache key if not specified otherwise.
+    //@Cacheable(value="sampleCache", key="#offset")
+    @Cacheable(value="sampleCache")
     public ResponseEntity posts(
           // get Post content
           // @RequestBody String txt

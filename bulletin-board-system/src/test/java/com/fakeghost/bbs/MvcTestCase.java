@@ -14,8 +14,8 @@ import org.springframework.web.context.WebApplicationContext;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration({"classpath:application.xml"})
-//@ContextConfiguration(classes = {TestAppConf.class})
+//@ContextConfiguration({"classpath:application.xml"})
+@ContextConfiguration(classes = {AppConf.class})
 @WebAppConfiguration(value= "src/main/webapp")
 public abstract class MvcTestCase {
     @Autowired

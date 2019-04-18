@@ -1,4 +1,4 @@
-package com.fakeghost.bbs;
+package com.fakeghost.bbs.model;
 
 import java.util.List;
 
