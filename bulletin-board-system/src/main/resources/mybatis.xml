@@ -6,10 +6,11 @@
 <configuration>
    <settings><setting name="logImpl" value="LOG4J"/></settings>
 	<typeAliases>
-		<typeAlias type="com.fakeghost.bbs.User" alias="User"/>
+		<typeAlias type="com.fakeghost.bbs.model.User" alias="User"/>
 	</typeAliases>
    <!-- No need to specify classpath: -->
     <mappers>
        <mapper resource="UserMapper.xml" />
+        <mapper resource="PostMapper.xml" />
     </mappers>
 </configuration>

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.fakeghost.bbs.model.PostMapper">
+	<resultMap id="postMap" type="com.fakeghost.bbs.model.Post" >
+		<id column="id" property="id"  />
+		<result column="title" property="title" />
+		<result column="author" property="author" />
+		<result column="content" property="content" />
+		<result column="createTime" property="createTime" />
+		<result column="category" property="category" />
+	</resultMap>
+
+	<insert id="submit" >
+      insert into posts(id, title, author,content, createTime, category) 
+      values(null, #{title},#{author},#{content}, #{createTime},#{category})
+	</insert>
+
+	<select id="posts" resultMap="postMap">
+		SELECT
+      id, title, author, content, createTime, category
+		FROM
+         posts
+		ORDER BY id DESC
+      limit #{offset}, #{limit};
+	</select>
+	<select id="pick" resultMap="postMap">
+		SELECT
+      id, title, author, content, createTime, category
+		FROM
+         posts
+		WHERE id = #{id}
+			limit 0, 1;
+	</select>
+</mapper>
+

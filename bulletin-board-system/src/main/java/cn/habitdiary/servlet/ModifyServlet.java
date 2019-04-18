@@ -1,6 +1,6 @@
 package cn.habitdiary.servlet;
 
-import cn.habitdiary.domain.Message;
+import com.fakeghost.bbs.model.Post;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -14,8 +14,8 @@ import java.util.List;
 public class ModifyServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String content = request.getParameter("textarea");
-        List<Message> msgList = (List<Message>) request.getServletContext().getAttribute("msgList");
-        for (Message msg : msgList) {
+        List<Post> msgList = (List<Post>) request.getServletContext().getAttribute("msgList");
+        for (Post msg : msgList) {
             if (msg.getId() == Long.valueOf(request.getParameter("id"))) {
                 msg.setContent(content);
             }

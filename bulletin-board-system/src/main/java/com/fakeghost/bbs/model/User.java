@@ -1,4 +1,4 @@
-package com.fakeghost.bbs;
+package com.fakeghost.bbs.model;
 
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
@@ -8,7 +8,7 @@ import lombok.Setter;
 @Getter @Setter @AllArgsConstructor @NoArgsConstructor
 public class User{
    int id;
-   String nickname;
+   public String nickname;
    String password;
 
 }

@@ -20,3 +20,5 @@ insert into user values(32, "Jenkins");
 insert into user values(16, "Albert");
 alter table user add column password varchar(32);
 update user set password = "1234.abcd" where id = 16;
+create table posts(id MEDIUMINT UNSIGNED NOT NULL AUTO_INCREMENT,title varchar(32), author varchar(32), createTime varchar(16), category varchar(16), PRIMARY KEY (id));
+alter table posts add column (content varchar(1024));

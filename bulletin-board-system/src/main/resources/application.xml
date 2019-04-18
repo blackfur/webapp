@@ -39,7 +39,10 @@
      <property name="sqlSessionFactory" ref="sqlSessionFactory" />
       </bean>
       <bean id="userMapper" parent="baseMapperBean">
-         <property name="mapperInterface" value="com.fakeghost.bbs.UserMapper" />
+         <property name="mapperInterface" value="com.fakeghost.bbs.model.UserMapper" />
+      </bean>
+      <bean id="postMapper" parent="baseMapperBean">
+         <property name="mapperInterface" value="com.fakeghost.bbs.model.PostMapper" />
       </bean>
 
 

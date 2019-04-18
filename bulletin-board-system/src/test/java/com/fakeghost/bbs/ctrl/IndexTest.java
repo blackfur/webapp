@@ -1,5 +1,6 @@
-package com.fakeghost.bbs;
+package com.fakeghost.bbs.ctrl;
 
+import com.fakeghost.bbs.MvcTestCase;
 import org.junit.Test;
 
 import static org.hamcrest.Matchers.is;
@@ -10,7 +11,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-public class IndexCtrlTest extends MvcTestCase{
+public class IndexTest extends MvcTestCase {
     @Test
     public void index_ShouldReturnString() throws Exception {
 

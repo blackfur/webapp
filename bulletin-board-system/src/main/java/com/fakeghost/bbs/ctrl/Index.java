@@ -1,4 +1,4 @@
-package com.fakeghost.bbs;
+package com.fakeghost.bbs.ctrl;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
 @RequestMapping("/index")
-public class IndexCtrl {
+public class Index {
     @RequestMapping("/license")
     @ResponseBody
     public String license(){

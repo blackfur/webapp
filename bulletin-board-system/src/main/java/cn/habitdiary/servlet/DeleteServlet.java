@@ -1,6 +1,6 @@
 package cn.habitdiary.servlet;
 
-import cn.habitdiary.domain.Message;
+import com.fakeghost.bbs.model.Post;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -13,8 +13,8 @@ import java.util.List;
 @WebServlet("/DeleteServlet")
 public class DeleteServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        List<Message> msgList = (List<Message>) request.getServletContext().getAttribute("msgList");
-        for (Message msg : msgList) {
+        List<Post> msgList = (List<Post>) request.getServletContext().getAttribute("msgList");
+        for (Post msg : msgList) {
             if (msg.getId() == Long.valueOf(request.getParameter("id"))) {
                 msgList.remove(msg);
                 break;

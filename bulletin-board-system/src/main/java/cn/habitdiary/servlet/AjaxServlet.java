@@ -1,6 +1,6 @@
 package cn.habitdiary.servlet;
 
-import cn.habitdiary.domain.Message;
+import com.fakeghost.bbs.model.Post;
 
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -19,7 +19,7 @@ public class AjaxServlet extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         ServletContext servletContext = this.getServletContext();
-        List<Message> msgList = (List<Message>) servletContext.getAttribute("msgList");
+        List<Post> msgList = (List<Post>) servletContext.getAttribute("msgList");
         //1.获取Ajax传递过来的参数信息
         String flag = request.getParameter("flag");
         String input = request.getParameter("input");
@@ -27,7 +27,7 @@ public class AjaxServlet extends HttpServlet {
         StringBuilder data = new StringBuilder();
         boolean mark = false;
         if(flag.equals("A")){
-            for (Message msg : msgList) {
+            for (Post msg : msgList) {
                 if(String.valueOf(msg.getId()).equals(input)){
                     mark = true;
                     data.append(msg.toString());
@@ -35,14 +35,14 @@ public class AjaxServlet extends HttpServlet {
             }
 
         }else if(flag.equals("B")){
-            for (Message msg : msgList) {
+            for (Post msg : msgList) {
                 if(msg.getAuthor().equals(input)){
                     mark = true;
                     data.append(msg.toString());
                 }
             }
         }else if(flag.equals("C")){
-            for (Message msg : msgList) {
+            for (Post msg : msgList) {
                 if(msg.getTitle().equals(input)){
                     mark = true;
                     data.append(msg.toString());
@@ -50,7 +50,7 @@ public class AjaxServlet extends HttpServlet {
             }
 
         }else{
-            for (Message msg : msgList) {
+            for (Post msg : msgList) {
                 if(msg.getCategory().equals(input)){
                     mark = true;
                     data.append(msg.toString());

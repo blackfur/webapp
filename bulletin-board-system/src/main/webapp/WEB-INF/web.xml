@@ -93,6 +93,7 @@
         <servlet-name>Kaptcha</servlet-name>
         <url-pattern>/kaptcha.jpg</url-pattern>
     </servlet-mapping>
+    <!--
     <servlet>
         <servlet-name>InitServlet</servlet-name>
         <servlet-class>cn.habitdiary.servlet.InitServlet</servlet-class>
@@ -102,6 +103,7 @@
         <servlet-name>InitServlet</servlet-name>
         <url-pattern>/InitServlet</url-pattern>
     </servlet-mapping>
+    -->
 
     <filter>
         <filter-name>CharacterEncodingFilter</filter-name>
@@ -127,6 +129,7 @@
         <filter-class>cn.habitdiary.filter.LoginFilter</filter-class>
     </filter>
 
+    <!--
     <filter-mapping>
         <filter-name>LoginFilter</filter-name>
         <url-pattern>/main.jsp</url-pattern>
@@ -135,6 +138,7 @@
         <url-pattern>/read.jsp</url-pattern>
         <url-pattern>/search.jsp</url-pattern>
     </filter-mapping>
+    -->
     <listener>
         <listener-class>cn.habitdiary.listener.LoginSessionListener</listener-class>
     </listener>

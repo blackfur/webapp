@@ -1,4 +1,4 @@
-package com.fakeghost.bbs;
+package com.fakeghost.bbs.model;
 
 import org.apache.ibatis.annotations.Param;
 

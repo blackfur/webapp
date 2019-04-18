@@ -1,6 +1,6 @@
 package cn.habitdiary.servlet;
 
-import cn.habitdiary.domain.Message;
+import com.fakeghost.bbs.model.Post;
 
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -9,7 +9,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.Date;
 import java.util.List;
 
 @WebServlet("/CreateServlet")
@@ -22,8 +21,8 @@ public class CreateServlet extends HttpServlet {
          String createTime = request.getParameter("createTime");
          String category = request.getParameter("category");
          ServletContext servletContext = this.getServletContext();
-         List<Message> msgList = (List<Message>) servletContext.getAttribute("msgList");
-         Message msg = new Message();
+         List<Post> msgList = (List<Post>) servletContext.getAttribute("msgList");
+         Post msg = new Post();
          msg.setId(id);
          msg.setTitle(title);
          msg.setAuthor(author);

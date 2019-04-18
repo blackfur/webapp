@@ -1,26 +1,26 @@
-package com.fakeghost.bbs;
+package com.fakeghost.bbs.ctrl;
 
+import com.fakeghost.bbs.model.User;
+import com.fakeghost.bbs.model.UserMapper;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.Cookie;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 
 @Controller
 @RequestMapping("/LoginServlet")
-public class LoginCtrl {
+public class Login {
 
     @Autowired
     @Qualifier("userMapper")
-      UserMapper userMapper;
+    UserMapper userMapper;
 
     @RequestMapping(value="/", method = RequestMethod.POST)
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

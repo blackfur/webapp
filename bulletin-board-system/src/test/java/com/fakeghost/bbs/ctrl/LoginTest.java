@@ -1,16 +1,17 @@
-package com.fakeghost.bbs;
+package com.fakeghost.bbs.ctrl;
 
+import com.fakeghost.bbs.MvcTestCase;
+import com.fakeghost.bbs.model.UserMapper;
 import org.junit.Test;
 import org.mockito.InjectMocks;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.MediaType;
 
-import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
-public class LoginCtrlTest extends MvcTestCase{
+public class LoginTest extends MvcTestCase {
 
    @InjectMocks
    @Autowired
