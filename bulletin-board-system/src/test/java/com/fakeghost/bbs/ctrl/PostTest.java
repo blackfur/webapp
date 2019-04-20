@@ -1,17 +1,17 @@
 package com.fakeghost.bbs.ctrl;
 
 import com.fakeghost.bbs.MvcTestCase;
-import org.apache.log4j.Logger;
 import org.junit.Test;
-
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 public class PostTest extends MvcTestCase{
-    Logger log = Logger.getLogger(getClass().getSimpleName());
     @Test
     public void posts_ShouldList() throws Exception {
+        final Logger log = LoggerFactory.getLogger(getClass());
 
        mockMvc.perform(
                 get("/posts/submit")

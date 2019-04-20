@@ -1,8 +1,11 @@
 package com.fakeghost.bbs;
 
-import org.apache.log4j.Logger;
+import com.fakeghost.bbs.model.User;
+import com.fakeghost.bbs.model.UserMapper;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.test.context.ContextConfiguration;
@@ -18,11 +21,11 @@ import static org.hamcrest.core.IsEqual.equalTo;
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration({"classpath:spring.xml"})
 public class ModelMapperTest {
-    Logger log = Logger.getLogger(getClass().getSimpleName());
+    final Logger log = LoggerFactory.getLogger(getClass());
 
     @Autowired
     @Qualifier("userMapper")
-      UserMapper userMapper;
+    UserMapper userMapper;
 
     @Test
     public void testQueryList() {

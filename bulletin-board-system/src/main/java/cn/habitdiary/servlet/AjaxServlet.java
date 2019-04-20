@@ -12,6 +12,9 @@ import java.io.IOException;
 import java.util.List;
 
 @WebServlet("/AjaxServlet")
+/*
+ * @WebServlet(   name = "",   description = ",   urlPatterns = {"/..."} )
+ */
 public class AjaxServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         doGet(request,response);

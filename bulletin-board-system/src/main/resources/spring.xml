@@ -46,7 +46,9 @@
       </bean>
 
 
+      <!--
     <mvc:resources mapping="/api/static/**" location="/static/" />
+      -->
 
     <mvc:annotation-driven />
 

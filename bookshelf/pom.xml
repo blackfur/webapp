@@ -107,7 +107,7 @@
          <resource>
                <directory>src/main/resources</directory>
                <excludes>
-                  <exclude>html/*</exclude>
+                  <exclude>www/*</exclude>
                </excludes>
          </resource>
       </resources>

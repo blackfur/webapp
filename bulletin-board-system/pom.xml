@@ -4,6 +4,12 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
+    <parent>         
+       <groupId>org.springframework.boot</groupId>         
+       <artifactId>spring-boot-starter-parent</artifactId>         
+		<version>1.4.1.RELEASE</version>
+    </parent>
+
     <groupId>com.fakeghost</groupId>
     <artifactId>bbs</artifactId>
     <packaging>war</packaging>
@@ -12,161 +18,59 @@
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-        <spring.version>4.3.0.RELEASE</spring.version>
     </properties>
 
     <dependencies>
+      <dependency><groupId>org.springframework.boot</groupId><artifactId>spring-boot-starter-web</artifactId></dependency>
+       <!-- Support for Ehcache and others -->          
+      <dependency><groupId>org.springframework</groupId><artifactId>spring-context-support</artifactId></dependency>
+      <dependency><groupId>org.springframework</groupId><artifactId>spring-jdbc</artifactId></dependency>
+       <!-- To enable support for JSP -->
+      <dependency><groupId>org.apache.tomcat.embed</groupId><artifactId>tomcat-embed-jasper</artifactId><scope>provided</scope></dependency>
       <dependency>
          <groupId>mysql</groupId>
          <artifactId>mysql-connector-java</artifactId>
          <version>8.0.15</version>
-      </dependency>
-      <dependency>
-         <groupId>org.springframework</groupId>
-         <artifactId>spring-jdbc</artifactId>
-         <version>${spring.version}</version>
-      </dependency>
-      <dependency>
-         <groupId>org.springframework</groupId>
-         <artifactId>spring-tx</artifactId>
-         <version>${spring.version}</version>
       </dependency>
 <dependency>
     <groupId>com.github.penggle</groupId>
     <artifactId>kaptcha</artifactId>
     <version>2.3.2</version>
 </dependency>
-<dependency>
-    <groupId>javax.servlet</groupId>
-    <artifactId>javax.servlet-api</artifactId>
-    <version>3.1.0</version>
-    <scope>provided</scope>
-</dependency>
+   <dependency>
+      <groupId>javax.servlet</groupId>
+      <artifactId>javax.servlet-api</artifactId>
+      <version>3.1.0</version>
+      <scope>provided</scope>
+   </dependency>
     <dependency>
 		<groupId>net.jodah</groupId>
 		<artifactId>concurrentunit</artifactId>
 		<version>0.4.5-SNAPSHOT</version>
 	</dependency>
 
-   <!--
-   <dependency>
-    <groupId>c3p0</groupId>
-    <artifactId>c3p0</artifactId>
-    <version>0.9.1.2</version>
-    </dependency>
-   -->
     <dependency>
       <groupId>org.mybatis</groupId>
       <artifactId>mybatis-spring</artifactId>
-      <!--
-      <version>1.0.0</version>
-      -->
       <version>1.2.1</version>
    </dependency>
 
-   <dependency> <groupId>org.mybatis</groupId> <artifactId>mybatis</artifactId> 
-      <!--
-      <version>3.0.4</version> 
-      -->
-      <version>3.2.3</version> 
-   </dependency>
+   <dependency> <groupId>org.mybatis</groupId> <artifactId>mybatis</artifactId> <version>3.2.3</version> </dependency>
    <!--
 Project Lombok is a java library that automatically plugs into your editor and build tools, spicing up your java.
 Never write another getter or equals method again, with one annotation your class has a fully featured builder, Automate your logging variables, and much more.
    -->
-   <dependency>
-		<groupId>org.projectlombok</groupId>
-		<artifactId>lombok</artifactId>
-		<version>1.18.6</version>
-		<scope>provided</scope>
-	</dependency>
+   <dependency> <groupId>org.projectlombok</groupId> <artifactId>lombok</artifactId> <version>1.18.6</version> <scope>provided</scope> </dependency>
 
-    <dependency>
-		<groupId>log4j</groupId>
-		<artifactId>log4j</artifactId>
-		<version>1.2.17</version>
-	</dependency>
-        <dependency>
-            <groupId>commons-logging</groupId>
-            <artifactId>commons-logging</artifactId>
-            <version>1.2</version>
-        </dependency>
+        <dependency> <groupId>net.sf.ehcache</groupId> <artifactId>ehcache</artifactId> <version>2.9.0</version> </dependency> 
+        <dependency> <groupId>com.fasterxml.jackson.core</groupId> <artifactId>jackson-databind</artifactId> <version>2.8.1</version> </dependency>
 
         <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-core</artifactId>
-            <version>${spring.version}</version>
-        </dependency>
-
-        <!-- Spring-context supports Caching since Version 3.1-->
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-context</artifactId>
-            <version>${spring.version}</version>
-        </dependency>
-        <!-- Support for Ehcache and others -->
-         <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-context-support</artifactId>
-            <version>${spring.version}</version>
-         </dependency>
-        <dependency>
-            <groupId>net.sf.ehcache</groupId>
-            <artifactId>ehcache</artifactId>
-            <version>2.9.0</version>
-        </dependency>
-
-        <!--
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-asm</artifactId>
-            <version>${spring.version}</version>
-        </dependency>
-        -->
-
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-web</artifactId>
-            <version>${spring.version}</version>
-        </dependency>
-
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-beans</artifactId>
-            <version>${spring.version}</version>
-        </dependency>
-
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-expression</artifactId>
-            <version>${spring.version}</version>
-        </dependency>
-
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-webmvc</artifactId>
-            <version>${spring.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>com.fasterxml.jackson.core</groupId>
-            <artifactId>jackson-databind</artifactId>
-            <version>2.8.1</version>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
         </dependency>
         <!--
-    <dependency>
-        <groupId>org.junit.jupiter</groupId>
-        <artifactId>junit-jupiter-api</artifactId>
-        <version>5.4.0</version>
-        <scope>test</scope>
-    </dependency>
-    <dependency>
-        <groupId>org.junit.jupiter</groupId>
-        <artifactId>junit-jupiter-engine</artifactId>
-        <version>5.4.0</version>
-        <scope>test</scope>
-    </dependency>
-        -->
-
          <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
@@ -179,9 +83,6 @@ Never write another getter or equals method again, with one annotation your clas
                 </exclusion>
             </exclusions>
         </dependency>
-        <!--
-            <artifactId>hamcrest-library</artifactId>
-        -->
         <dependency>
             <groupId>org.hamcrest</groupId>
             <artifactId>hamcrest-all</artifactId>
@@ -193,16 +94,19 @@ Never write another getter or equals method again, with one annotation your clas
             <artifactId>mockito-core</artifactId>
             <version>1.9.0</version>
             <scope>test</scope>
-         </dependency>
+        </dependency>
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-test</artifactId>
-            <version>${spring.version}</version>
             <scope>test</scope>
         </dependency>
+        -->
 
     </dependencies>
     <build>
+        <testResources>
+            <testResource> <directory>src/main/resources</directory> </testResource>
+        </testResources>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -210,13 +114,13 @@ Never write another getter or equals method again, with one annotation your clas
                 <version>3.2.2</version>
             </plugin>
             <!--runs the JUnit unit tests in an isolated classloader.  -->
+            <!--
         <plugin>
             <groupId>org.apache.maven.plugins</groupId>
             <artifactId>maven-surefire-plugin</artifactId>
             <version>2.22.1</version>
         </plugin>
-            <!--
-        -->
+            -->
 
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
@@ -239,14 +143,6 @@ Never write another getter or equals method again, with one annotation your clas
                         <org.eclipse.jetty.servlet.Default.useFileMappedBuffer>false</org.eclipse.jetty.servlet.Default.useFileMappedBuffer>
                </_initParams>
             </webApp>
-         <!--
-            <webApp>
-               <contextPath>/suicidegame</contextPath>
-            </webApp>
-            <httpConnector>
-          	     <port>8080</port>
-            </httpConnector>
-         -->
             <jettyXml>jetty.xml</jettyXml>
          </configuration>
       </plugin>

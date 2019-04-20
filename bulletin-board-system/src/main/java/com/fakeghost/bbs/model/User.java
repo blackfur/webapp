@@ -7,7 +7,7 @@ import lombok.Setter;
 
 @Getter @Setter @AllArgsConstructor @NoArgsConstructor
 public class User{
-   int id;
+   public int id;
    public String nickname;
    String password;
 

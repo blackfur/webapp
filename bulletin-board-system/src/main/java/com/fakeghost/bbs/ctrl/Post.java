@@ -1,7 +1,9 @@
 package com.fakeghost.bbs.ctrl;
 
 import com.fakeghost.bbs.model.PostMapper;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.ResponseEntity;
@@ -13,12 +15,12 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import org.springframework.cache.annotation.Cacheable;
+//import org.springframework.cache.annotation.Cacheable;
 
 @Controller
 @RequestMapping(value="/posts")
 public class Post{
-    Logger log = Logger.getLogger(getClass().getSimpleName());
+    final Logger log = LoggerFactory.getLogger(getClass());
 
     @Autowired
     @Qualifier("postMapper")
@@ -28,7 +30,7 @@ public class Post{
     @RequestMapping(value="")
     //Current Spring cache implementation uses all method parameters as the cache key if not specified otherwise.
     //@Cacheable(value="sampleCache", key="#offset")
-    @Cacheable(value="sampleCache")
+    //@Cacheable(value="sampleCache")
     public ResponseEntity posts(
           // get Post content
           // @RequestBody String txt
