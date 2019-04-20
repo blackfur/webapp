@@ -12,7 +12,7 @@ import org.springframework.context.annotation.ImportResource;
 
 @Configuration
 @EnableCaching
-@ImportResource("classpath:application.xml")
+@ImportResource("classpath:spring.xml")
 //@ImportResource(value="classpath:context.properties", reader=PropertiesBeanDefinitionReader.class)
 public class AppConf {
 

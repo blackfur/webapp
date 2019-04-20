@@ -32,7 +32,7 @@
         <!--
     <context-param>
         <param-name>contextConfigLocation</param-name>
-        <param-value>classpath*:application.xml</param-value>
+        <param-value>classpath*:spring.xml</param-value>
     </context-param>
         -->
 
@@ -57,7 +57,7 @@
         <!--
         <init-param>
             <param-name>contextConfigLocation</param-name>
-            <param-value>classpath*:application.xml</param-value>
+            <param-value>classpath*:spring.xml</param-value>
         </init-param>
         -->
     </servlet>

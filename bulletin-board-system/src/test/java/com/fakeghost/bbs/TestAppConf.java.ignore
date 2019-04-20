@@ -9,6 +9,6 @@ import org.springframework.context.annotation.ImportResource;
 //the @AnnotationDrivenConfig needs to accompany the @Configuration annotation in order for the container to recognize the @Autowired annotation in other places of the code.
 //@AnnotationDrivenConfig
 //@Import({ WebConf.class })
-@ImportResource("classpath:application.xml")
+@ImportResource("classpath:spring.xml")
 public class TestAppConf {
 }

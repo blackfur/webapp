@@ -21,7 +21,7 @@ import static org.hamcrest.Matchers.is;
  
 @RunWith(SpringJUnit4ClassRunner.class)
 //@ContextConfiguration(classes = {AppConf.class})
-@ContextConfiguration({"classpath*:application.xml"})
+@ContextConfiguration({"classpath*:spring.xml"})
 public class JdbcTemplTest {
     Logger log = Logger.getLogger(getClass().getSimpleName());
 
@@ -31,7 +31,7 @@ public class JdbcTemplTest {
  
     @Test
     public void testQueryList() {
-       //ApplicationContext ctx=new ClassPathXmlApplicationContext("application.xml");  
+       //ApplicationContext ctx=new ClassPathXmlApplicationContext("spring.xml");  
        //JdbcTemplate jdbcTemplate=(JdbcTemplate)ctx.getBean("jdbcTemplate");
        assertThat(jdbcTemplate, instanceOf(JdbcTemplate.class));
        log.info("JdbcTemplate fetch size: " + jdbcTemplate.getFetchSize());

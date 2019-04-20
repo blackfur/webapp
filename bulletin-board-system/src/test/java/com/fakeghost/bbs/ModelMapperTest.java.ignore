@@ -16,7 +16,7 @@ import static org.hamcrest.Matchers.is;
 import static org.hamcrest.core.IsEqual.equalTo;
  
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration({"classpath:application.xml"})
+@ContextConfiguration({"classpath:spring.xml"})
 public class ModelMapperTest {
     Logger log = Logger.getLogger(getClass().getSimpleName());
 
