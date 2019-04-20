@@ -2,11 +2,12 @@ package com.fakeghost.bbs;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-//import org.springframework.boot.web.support.SpringBootServletInitializer;
-import org.springframework.context.annotation.ComponentScan;
 
 @SpringBootApplication
-@ComponentScan("com.fakeghost.bbs")
+//@ComponentScan("com.fakeghost.bbs")
+//@Configuration
+//@EnableAutoConfiguration
+//@Import({ AppConf.class, OtherConf.class })
 public class App 
    //extends SpringBootServletInitializer
 {

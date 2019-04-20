@@ -22,3 +22,11 @@ alter table user add column password varchar(32);
 update user set password = "1234.abcd" where id = 16;
 create table posts(id MEDIUMINT UNSIGNED NOT NULL AUTO_INCREMENT,title varchar(32), author varchar(32), createTime varchar(16), category varchar(16), PRIMARY KEY (id));
 alter table posts add column (content varchar(1024));
+
+${ELASTICSEARCH_HOME}\config\elasticsearch.yml
+cluster.name: suicidegame
+g:\elasticsearch-2.0.0\README.textile
+* Run @bin/elasticsearch@ on unix, or @bin\elasticsearch.bat@ on windows.
+our data is stored at ${ELASTICSEARCH_HOME}\data\suicidegame
+# None of the configured nodes are available
+Use elasticsearch-2.0.0

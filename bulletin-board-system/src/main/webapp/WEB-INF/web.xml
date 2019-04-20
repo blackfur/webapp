@@ -23,7 +23,7 @@
 	</context-param>
    <context-param>
 		<param-name>contextConfigLocation</param-name>
-		<param-value> com.fakeghost.bbs.AppConf </param-value>
+		<param-value>com.fakeghost.bbs.conf.AppConf</param-value>
 	</context-param>
     <listener>
         <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
@@ -51,7 +51,7 @@
          </init-param>
         <init-param>
             <param-name>contextConfigLocation</param-name>
-            <param-value> com.fakeghost.bbs.AppConf </param-value>
+            <param-value>com.fakeghost.bbs.conf.AppConf</param-value>
         </init-param>
             <!-- default file is SpringDispatcher-servlet.xml -->
         <!--
