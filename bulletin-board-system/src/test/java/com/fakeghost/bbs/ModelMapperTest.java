@@ -8,8 +8,10 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.List;
 
@@ -18,8 +20,10 @@ import static org.hamcrest.Matchers.instanceOf;
 import static org.hamcrest.Matchers.is;
 import static org.hamcrest.core.IsEqual.equalTo;
  
-@RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration({"classpath:spring.xml"})
+//@RunWith(SpringJUnit4ClassRunner.class)
+//@ContextConfiguration({"classpath:spring.xml"})
+@RunWith(SpringRunner.class)
+@SpringBootTest(classes = App.class)
 public class ModelMapperTest {
     final Logger log = LoggerFactory.getLogger(getClass());
 

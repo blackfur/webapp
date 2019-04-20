@@ -1,8 +1,16 @@
 server:
    servlet:
-      context-path: /api
+      #context-path: /api
 spring:
    mvc:
       view:
          prefix: /WEB-INF/
          #suffix: .jsp
+   devtools:
+      livereload:
+         enabled: true
+      restart:
+         exclude: doc/**,lib/**
+         additional-exclude: build/**
+         log-condition-evaluation-delta: true
+         enabled: true

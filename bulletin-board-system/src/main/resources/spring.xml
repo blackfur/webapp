@@ -8,10 +8,6 @@
    http://www.springframework.org/schema/context
    http://www.springframework.org/schema/context/spring-context-3.0.xsd">
 
-   <!--
-   <context:annotation-config /> 
-<tx:annotation-driven />  
--->
     <context:component-scan base-package = "com.fakeghost.bbs" />
 
     <bean class = "org.springframework.web.servlet.view.InternalResourceViewResolver">
@@ -35,21 +31,6 @@
       <property name="dataSource" ref="dataSource" />
       <property name="configLocation" value="classpath:mybatis.xml"/>
     </bean>
-      <bean id="baseMapperBean" class="org.mybatis.spring.mapper.MapperFactoryBean" abstract="true" lazy-init="true">
-     <property name="sqlSessionFactory" ref="sqlSessionFactory" />
-      </bean>
-      <bean id="userMapper" parent="baseMapperBean">
-         <property name="mapperInterface" value="com.fakeghost.bbs.model.UserMapper" />
-      </bean>
-      <bean id="postMapper" parent="baseMapperBean">
-         <property name="mapperInterface" value="com.fakeghost.bbs.model.PostMapper" />
-      </bean>
-
-
-      <!--
-    <mvc:resources mapping="/api/static/**" location="/static/" />
-      -->
-
     <mvc:annotation-driven />
 
 </beans>

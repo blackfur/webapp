@@ -11,7 +11,7 @@ $(document).ready( function () {
          serverSide: true,
          ajax: function(argv, notify, conf){
             $.ajax({
-               url: '/api/posts',
+               url: '/posts',
                data: {
                   offset: argv.start,
                   limit: argv.length

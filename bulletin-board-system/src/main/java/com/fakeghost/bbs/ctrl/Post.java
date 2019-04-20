@@ -44,7 +44,7 @@ public class Post{
         List<com.fakeghost.bbs.model.Post> rows = postMapper.posts(offset, limit);
         if(null !=rows&& rows.size()> 0){
            resp.put("payload", rows);
-           resp.put("msg", "Success.");
+           resp.put("msg", "Successfully");
            log.info("Query posts Successfully.");
             return ResponseEntity.ok(resp);
         }
