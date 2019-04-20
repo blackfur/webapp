@@ -30,6 +30,7 @@
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
+            <!--org.elasticsearch:elasticsearch:jar:2.4.0:compile-->
             <artifactId>spring-boot-starter-data-elasticsearch</artifactId>
         </dependency>
       <dependency><groupId>org.springframework.boot</groupId><artifactId>spring-boot-starter-web</artifactId></dependency>
