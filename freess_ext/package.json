@@ -9,6 +9,9 @@
   "keywords": [
     "shadowsocks"
   ],
+   "bin": {
+      "fssext": "./bin/fssext"
+   },
   "author": "suicidegame",
   "license": "ISC",
   "devDependencies": {

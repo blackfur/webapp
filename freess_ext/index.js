@@ -4,7 +4,8 @@ const cherrio = require('cheerio')
 const translator = { 'IP Address': 'address', 'Port': 'port', 'Password': 'password', 'Method': 'method' }
 const C_ISXB_TOP = 'C.ISXB.TOP';
 
-var parseServer =module.exports['parseServer'] = function (serverStr, specified) {
+//var parseServer =module.exports['parseServer'] = function (serverStr, specified) {
+var parseServer = function (serverStr, specified) {
    let server = {}
    serverStr.split('\n').forEach(function (line) {
       let kv = line.split(':')

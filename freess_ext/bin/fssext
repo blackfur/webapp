@@ -1,0 +1,27 @@
+#!/usr/bin/env node
+
+require('..').c_isxb_top().then(
+   (resp) => {
+      console.info(resp)
+      const spawn = require('child_process').spawn ;
+      const sslocalcmd = spawn('sslocal.cmd', [
+         '-s', resp.address, 
+         '-p', resp.port, 
+         '-k', resp.password,
+         '-m', resp.method
+      ]);
+
+      sslocalcmd.stdout.on('data', (data) => {
+         console.log(`${data}`);
+      });
+
+      sslocalcmd.stderr.on('data', (data) => {
+         console.log(`${data}`);
+      });
+
+      sslocalcmd.on('close', (code) => {
+         console.log(`child process(sslocal.cmd) exited with code ${code}`);
+      });
+   },
+   (err) => {console.error(err)}
+)
