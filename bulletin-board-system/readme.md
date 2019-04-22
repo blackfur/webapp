@@ -35,3 +35,5 @@ create table employee(PersonID int, LastName varchar(255), FirstName varchar(255
 INSERT INTO employee (PersonID, LastName, FirstName, City, Date) VALUES ('4005','Kallis','Jaques','Cape Town','2016-05-23 16:12:03.568810');
 INSERT INTO employee (PersonID, LastName, FirstName, City, Date) VALUES ('4004','Baron','Richard','Cape Town','2016-05-23 16:12:04.370460');
 INSERT INTO employee (PersonID, LastName, FirstName, City, Date) VALUES ('4003','McWell','Sharon','Cape Town','2016-05-23 16:12:06.874801');
+
+logstash.bat -f logstash.conf
