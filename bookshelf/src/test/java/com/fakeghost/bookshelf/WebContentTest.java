@@ -36,6 +36,7 @@ public class WebContentTest {
        // MockMvc.perform(<RequestBuilder>).andReturn()
        // JSONAssert.assertEquals(<expected String>, <MvcResult>.getResponse().getContentAsString(), false)
         mockMvc.perform(get("/index.html")) .andExpect(content().string(containsString("html6")));
+
     }
 
     @Test
