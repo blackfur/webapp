@@ -12,7 +12,7 @@ eureka:
 server:
    # mvn test -Dserver.port=8080
    #port: @server.port@
-   port: 8080
+   port: 9000
 
 spring:
    thymeleaf:
