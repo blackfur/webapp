@@ -6,3 +6,4 @@
 /.settings
 *.log
 /data
+bootstrap-*-dist/

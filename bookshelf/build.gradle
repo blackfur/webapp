@@ -1,8 +1,12 @@
 plugins {
    id "org.springframework.boot" version "2.0.1.RELEASE"
+   id "io.freefair.lombok" version "3.2.1"
 }
 
-repositories { maven{ url'http://maven.aliyun.com/nexus/content/groups/public/'} }
+repositories { 
+   maven{ url'http://maven.aliyun.com/nexus/content/groups/public/'}
+   mavenCentral()
+}
 // for gradle earlier than 2.1
 /*
 buildscript {
@@ -58,4 +62,6 @@ dependencies {
     compile ("org.springframework.boot:spring-boot-starter-actuator")
     compile ("org.springframework.boot:spring-boot-starter-actuator")
     testCompile ("org.springframework.boot:spring-boot-starter-test")
+    //compileOnly 'org.projectlombok:lombok:1.18.6'
+    //annotationProcessor 'org.projectlombok:lombok:1.18.6'
 }
