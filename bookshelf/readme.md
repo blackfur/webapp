@@ -13,3 +13,6 @@ If you want devtools work with *__spring-boot-maven-plugin__*, You must `mvn pac
 
 ***windows***
 `set NODE_ENV=production`
+
+curl http://localhost:8080/todos
+curl -i --header "Content-Type: application/json" -XPOST http://localhost:8080/todos --data "{\"title\":\"I have a juicer now\"}"
