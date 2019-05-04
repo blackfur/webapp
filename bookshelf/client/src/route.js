@@ -13,9 +13,10 @@ const About = {
    template: '<div>About</div>'
 }
 const Post = {
-  template: '<div>Post: {{ $route.params.post_slug }} from {{ $route.params.author }}</div>',
+   props: ['post_slug', 'author'],
+  template: '<div>Post(print from props): {{ post_slug }} from {{ author }}</div>',
   beforeRouteUpdate(to, from, next) {
-    this.$log.debug(`Updating slug from ${from} to ${to}`)
+    this.$log.debug(`Updating from ${from.fullPath} to ${to.fullPath}`)
     next() //make sure you always call next()
   }
 }
@@ -24,7 +25,7 @@ const router = new VueRouter({
       { path: '/', component: Home },
       { path: '/login', component: Login },
       { path: '/about', component: About },
-      { path: '/post/:author/:post_slug', component: Post }
+      { path: '/post/:author/:post_slug', component: Post, props: true }
    ]
 })
 
