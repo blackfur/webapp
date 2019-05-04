@@ -6,7 +6,6 @@ const parseServer = require('../index').parseServer
 describe('ishadowx.com', function () {
    it('should provide ss info', function (done) {
 
-      expect(0).to.be.equal(0);
       superagent.get('http://ss.ishadowx.com/').then(function (resp) {
          //console.log(resp.text);
          let $ = cherrio.load(resp.text)

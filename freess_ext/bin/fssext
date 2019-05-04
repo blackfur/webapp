@@ -4,23 +4,22 @@ require('..').c_isxb_top().then(
    (resp) => {
       console.info(resp)
       const spawn = require('child_process').spawn ;
-      const sslocalcmd = spawn('sslocal.cmd', [
+      const sslocalcmd = spawn('sslocal.exe', [
          '-s', resp.address, 
          '-p', resp.port, 
+         '-b', '127.0.0.1',
+         '-l', 1080,
          '-k', resp.password,
-         '-m', resp.method
+         '-m', resp.method,
+         '-v'
       ]);
 
-      sslocalcmd.stdout.on('data', (data) => {
-         console.log(`${data}`);
-      });
+      sslocalcmd.stdout.on('data', (data) => { process.stdout.write(`${data}`); });
 
-      sslocalcmd.stderr.on('data', (data) => {
-         console.log(`${data}`);
-      });
+      sslocalcmd.stderr.on('data', (data) => { process.stderr.write(`${data}`); });
 
       sslocalcmd.on('close', (code) => {
-         console.log(`child process(sslocal.cmd) exited with code ${code}`);
+         process.stdout.write(`child process(sslocal.exe) exited with code ${code}`);
       });
    },
    (err) => {console.error(err)}

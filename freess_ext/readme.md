@@ -1,10 +1,14 @@
+```
 npm init
 npm install --save-dev mocha chai free-shadowsocks
-
-`node mocha test\\ishadowx_com.js`
-`npm run <command> [-- <args>]`
-`npm run mocha -- test\ishadowx_com.js`
-
+node mocha test\\ishadowx_com.js
+npm run <command> [-- <args>]
+npm run mocha -- test\c_isxb_top.js
 npm pack
-`npm install <tgz file>`
-$ fssext
+npm i -g <tgz file>
+rename g:\node-v10.15.3-win-x64\node_modules\shadowsocks\config.json config.json.default
+pip install shadowsocks
+where sslocal
+where ssserver
+fssext
+```
