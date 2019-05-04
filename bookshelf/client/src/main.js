@@ -1,5 +1,4 @@
 import Vue from 'vue'
-import App from './App.vue'
 
 Vue.config.productionTip = false
 
@@ -14,6 +13,10 @@ Vue.use(VueLogger, {
   showConsoleColors: true
 });
 
+import RouteApp from './RouteApp.vue'
+import router from './route.js'
+
 new Vue({
-  render: h => h(App),
+   router,
+  render: h => h(RouteApp),
 }).$mount('#app')

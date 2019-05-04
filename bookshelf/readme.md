@@ -21,3 +21,4 @@ yarn global add @vue/cli@3.1.5
 vue create -d client
 yarn serve
 yarn add axios@0.18.0 vuejs-logger@1.5.3
+yarn add vue-router
