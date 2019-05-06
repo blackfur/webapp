@@ -1,4 +1,4 @@
 name = "sslug"
 
 # for from sslug import *
-#__all__ = [""]
+# __all__ = ["foo"]
