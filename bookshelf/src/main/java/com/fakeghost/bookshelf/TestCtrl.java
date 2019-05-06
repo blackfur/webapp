@@ -1,6 +1,7 @@
 package com.fakeghost.bookshelf;
 
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 //import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
@@ -8,6 +9,11 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class TestCtrl{
 
+	@RequestMapping(value = "/sample", method = RequestMethod.GET)
+   @ResponseBody
+   public String sample(){
+      return "sample";
+   }
 	@RequestMapping(value = "/register", method = RequestMethod.GET)
    //@HystrixCommand(fallbackMethod = "getDataFallBack")
 	public Employee register() {

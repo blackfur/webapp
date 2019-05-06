@@ -1,6 +1,11 @@
+buildscript {
+   repositories { mavenCentral() }
+}
+
 plugins {
    id "org.springframework.boot" version "2.0.1.RELEASE"
    id "io.freefair.lombok" version "3.2.1"
+   id "io.spring.dependency-management" version "1.0.4.RELEASE"
 }
 
 repositories { 
@@ -10,9 +15,13 @@ repositories {
 apply plugin: 'java'
 apply plugin: 'war'
 apply plugin: 'io.spring.dependency-management'
+apply plugin: 'eclipse'
+apply plugin: 'idea'
 
 bootJar{
    mainClassName = 'com.fakeghost.bookshelf.App'
+   baseName = 'bookshelf'
+   version = '0.1.0'
 }
 springBoot{
    mainClassName = 'com.fakeghost.bookshelf.App'
@@ -42,3 +51,9 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-data-rest'
     runtimeOnly 'com.h2database:h2'
 }
+
+/*
+task wrapper(type: Wrapper) {
+   gradleVersion = '4.6'
+}
+*/
