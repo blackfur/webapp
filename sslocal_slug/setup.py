@@ -18,5 +18,5 @@ setuptools.setup(
         "License :: OSI Approved :: MIT License",
         "Operating System :: OS Independent",
     ],
-    scripts=['bin/sslug.bat'],
+    scripts=['bin/sslug.bat','bin/sslug.sh'],
 )
