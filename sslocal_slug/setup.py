@@ -23,7 +23,8 @@ setuptools.setup(
     keywords='shadowsocks',
     license='MIT',
     # packages=[''],
-    include_package_date=True,
+    # In order to copy files listed in MANIFEST.in to 'site-packages'
+    include_package_data=True,
     scripts=['bin/sslug.bat','bin/sslug.sh'],
     install_requires=[
         'markdown'
