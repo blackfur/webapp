@@ -5,6 +5,12 @@ set "PATH=g:\Python27;g:\Python27\Scripts;%PATH%"
 python setup.py develop
 ```
 
+```
+python
+from sslug.command_line import main
+main()
+```
+
 ### generate *.tar.gz and *.whl
 ```
 python setup.py sdist bdist_wheel

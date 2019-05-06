@@ -31,5 +31,8 @@ setuptools.setup(
     # dependency_links=['http://github.com/user/repo/tarball/master#egg=package-1.0'],
     zip_safe=False,
     test_suite='nose.collector',
-    tests_require=['nose']
+    tests_require=['nose'],
+    entry_points={
+        'console_scripts': ['ssjoke=sslug.cmd:main']
+        }
 )
