@@ -2,6 +2,7 @@ package com.fakeghost.bbs;
 
 import com.fakeghost.bbs.model.User;
 import com.fakeghost.bbs.model.UserMapper;
+import org.apache.ibatis.session.RowBounds;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.slf4j.Logger;
@@ -14,6 +15,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.List;
+import static org.junit.Assert.assertTrue;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.instanceOf;
@@ -39,7 +41,8 @@ public class ModelMapperTest {
          //ctx.refresh();
        assertThat(userMapper, instanceOf(UserMapper.class));
 
-       List<User> rows = userMapper.users(32);
+       //List<User> rows = userMapper.users(32);
+       List<User> rows = userMapper.users(new RowBounds(0, 2));
        if(rows != null && rows.size() >0){
          for(int i = 0; i< rows.size(); i++){
             User row = rows.get(i);
@@ -48,7 +51,8 @@ public class ModelMapperTest {
             log.info("index: " + i + ", id: " + id + ", nickname: " + nickname);
          }
          User one = rows.get(0);
-         assertThat(one.nickname, is(equalTo("Jenkins")));
+         //assertThat(one.nickname, is(equalTo("Jenkins")));
+         assertTrue(rows.size() <= 2);
        }
     }
 }

@@ -21,6 +21,13 @@
     </properties>
 
     <dependencies>
+       <!--
+<dependency>
+  <groupId>com.github.andromedarabbit</groupId>
+  <artifactId>mybatis-pagination</artifactId>
+  <version>0.0.1</version>
+</dependency>
+-->
         <!-- java.lang.ClassNotFoundException: com.sun.jna.Native -->
         <dependency><groupId>net.java.dev.jna</groupId><artifactId>jna</artifactId><version>4.2.2</version></dependency>
         <dependency>
@@ -77,12 +84,14 @@ Never write another getter or equals method again, with one annotation your clas
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
         </dependency>
+        <!--
         <dependency>
             <groupId>net.jodah</groupId>
             <artifactId>concurrentunit</artifactId>
             <scope>test</scope>
             <version>0.4.5-SNAPSHOT</version>
         </dependency>
+        -->
 
     </dependencies>
     <build>
@@ -123,5 +132,22 @@ Never write another getter or equals method again, with one annotation your clas
 
         </plugins>
     </build>
+
+    <!--
+<repositories>
+  <repository>
+    <id>jitpack.io</id>
+    <url>https://jitpack.io</url>
+	</repository>
+  <repository>
+    <id>ali</id> 
+    <url>http://maven.aliyun.com/nexus/content/groups/public/</url> 
+	</repository>
+  <repository>
+    <id>mvncenter</id> 
+    <url>https://repo.maven.apache.org/maven2</url> 
+	</repository>
+</repositories>
+    -->
 
 </project>

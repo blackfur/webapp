@@ -19,8 +19,9 @@
       ID, NICKNAME, password
 		FROM
          user
-		WHERE
-         id = #{value}
+    <if test="value != null" >
+		WHERE id = #{value}
+    </if>
 		ORDER BY id DESC
 			limit 0, 32;
 	</select>
