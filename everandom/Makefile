@@ -15,6 +15,39 @@ password=password
 JNIDIR=jni
 JNI_SRC=$(wildcard ./$(JNIDIR)/%.c)
 
+# OS detect
+ifeq ($(OS),Windows_NT)
+    CCFLAGS += -D WIN32
+    ifeq ($(PROCESSOR_ARCHITEW6432),AMD64)
+        CCFLAGS += -D AMD64
+    else
+        ifeq ($(PROCESSOR_ARCHITECTURE),AMD64)
+            CCFLAGS += -D AMD64
+        endif
+        ifeq ($(PROCESSOR_ARCHITECTURE),x86)
+            CCFLAGS += -D IA32
+        endif
+    endif
+else
+    UNAME_S := $(shell uname -s)
+    ifeq ($(UNAME_S),Linux)
+        CCFLAGS += -D LINUX
+    endif
+    ifeq ($(UNAME_S),Darwin)
+        CCFLAGS += -D OSX
+    endif
+    UNAME_P := $(shell uname -p)
+    ifeq ($(UNAME_P),x86_64)
+        CCFLAGS += -D AMD64
+    endif
+    ifneq ($(filter %86,$(UNAME_P)),)
+        CCFLAGS += -D IA32
+    endif
+    ifneq ($(filter arm%,$(UNAME_P)),)
+        CCFLAGS += -D ARM
+    endif
+endif
+
 start: install
 	adb shell am start -n $(PACKAGE)/.$(Main)
 
@@ -65,9 +98,16 @@ clean:
 	if exist "gen" rmdir /s /q gen
 
 # JNI
+ifeq ($(OS),Windows_NT)
+Separator=;
+else
+Separator=:
+endif
+#type  $(JNIDIR)\$(Main).h
+#grep -Al $(argv) $(JNIDIR)/$(Main).h
 javah:
-	$(JAVA_HOME)\bin\javah.exe -classpath "${PLATFORM}/android.jar;bin/classes" -o $(JNIDIR)\$(Main).h $(PACKAGE).$(Main)
-	grep -Al $(argv) $(JNIDIR)/$(Main).h
+	$(JAVA_HOME)\bin\javah.exe -classpath "${PLATFORM}/android.jar$(Separator)bin/classes" -o $(JNIDIR)\$(Main).h $(PACKAGE).$(Main)
+	findstr $(argv) $(JNIDIR)\$(Main).h
 
 # make src="msg" build
 build: init
