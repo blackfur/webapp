@@ -22,4 +22,5 @@ javac -source 1.7 -target 1.7 -bootclasspath "${JAVA_HOME}/jre/lib/rt.jar" \
 
 ndk-build clean
 ndk-build
+ant debug install
 ```

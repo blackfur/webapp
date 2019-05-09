@@ -1,12 +1,15 @@
+Drive=g:
 PACKAGE=com.suicide.everandom
 packpath=com\\suicide\\everandom
 NAME=everandom
 Main=MainActivity
-NDK=d:\android-ndk-r16-beta1
-SDK=d:\Android\android-sdk
-PLATFORM=$(SDK)\platforms\android-26
-BUILD_TOOLS=$(SDK)\build-tools\26.0.0
-JAVA_HOME=d:\Java\jdk1.8.0_131
+NDK=$(Drive)\android-ndk-r16-beta1
+SDK=$(Drive)\android-sdk-windows
+PLATFORM=$(SDK)\platforms\android-21
+platool=$(SDK)\platform-tools
+tools=$(SDK)\tools
+BUILD_TOOLS=$(SDK)\build-tools\21.1.2
+JAVA_HOME=$(Drive)\Java\jdk1.8.0_131
 source=1.8
 target=1.8
 keystore=keystore
@@ -49,8 +52,9 @@ else
     endif
 endif
 
-start: install
-	adb shell am start -n $(PACKAGE)/.$(Main)
+#start: install
+start:
+	$(platool)\adb shell am start -n $(PACKAGE)/.$(Main)
 
 ARM_TOOLCHAIN=$(NDK)\toolchains\arm-linux-androideabi-4.9\prebuilt\windows-x86_64\bin\arm-linux-androideabi-gcc.exe
 X86_TOOLCHAIN=$(NDK)\toolchains\x86_64-4.9\prebuilt\windows-x86_64\bin\x86_64-linux-android-gcc.exe
@@ -124,9 +128,16 @@ x86_incl=-Id:\android-ndk-r16-beta1\sysroot\usr\include\x86_64-linux-android
 #	"${ARM_TOOLCHAIN}" $(CFLAGS) $(arm_incl) -I --sysroot="${NDK}/platforms/android-26/arch-arm" -march=armv7-a -mfpu=vfpv3-d16 -mfloat-abi=softfp -Wl,--fix-cortex-a8 -fPIC -shared -o bin/armeabi-v7a/lib$(src).so $(JNI_SRC)
 #	"${X86_TOOLCHAIN}" $(CFLAGS) $(x86_incl) --sysroot="${NDK}/platforms/android-26/arch-x86" -fPIC -shared -o bin/x86/lib$(src).so $(JNI_SRC)
 
-EXE=echo
-exe: $(JNI_SRC) init
-	ndk-build NDK_APPLICATION_MK=$(JNIDIR)/Application.mk
-	adb push libs\x86\$(EXE) /mnt/sdcard/
-	adb shell chmod 777 /mnt/sdcard/$(EXE)
-	adb shell /mnt/sdcard/$(EXE)
+build: $(JNI_SRC) init
+	$(NDK)\ndk-build NDK_APPLICATION_MK=$(JNIDIR)/Application.mk
+
+#EXE=echo
+#$(platool)\adb push libs\x86\$(EXE) /mnt/sdcard/
+#$(platool)\adb shell chmod 777 /mnt/sdcard/$(EXE)
+#$(platool)\adb shell /mnt/sdcard/$(EXE)
+
+avd:
+	$(tools)\android avd
+
+device:
+	$(platool)\adb devices

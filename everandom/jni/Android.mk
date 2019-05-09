@@ -6,9 +6,10 @@ include $(CLEAR_VARS)
 
 #LOCAL_LDLIBS := -llog
 
-LOCAL_MODULE    := echo
+src=msg
+LOCAL_MODULE    := $(src)
 #LOCAL_C_INCLUDES :=
-LOCAL_SRC_FILES := echo.c
+LOCAL_SRC_FILES := $(src).c
 
-#include $(BUILD_SHARED_LIBRARY)
-include $(BUILD_EXECUTABLE)
+include $(BUILD_SHARED_LIBRARY)
+# include $(BUILD_EXECUTABLE)
