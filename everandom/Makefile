@@ -4,16 +4,17 @@ NAME=everandom
 Main=MainActivity
 NDK=d:\android-ndk-r16-beta1
 SDK=d:\Android\android-sdk
-PLATFORM=$(SDK)\platforms\android-28
-BUILD_TOOLS=$(SDK)\build-tools\28.0.3
+PLATFORM=$(SDK)\platforms\android-26
+BUILD_TOOLS=$(SDK)\build-tools\26.0.0
 JAVA_HOME=d:\Java\jdk1.8.0_131
 source=1.8
 target=1.8
 keystore=keystore
 alias=keystore
 password=password
-JNIDIR=jni
-JNI_SRC=$(wildcard ./$(JNIDIR)/%.c)
+JNIDIR=.\\jni
+JNI_SRC=$(wildcard $(JNIDIR)/*.c)
+prop=$(wildcard ./%.properties)
 
 # OS detect
 ifeq ($(OS),Windows_NT)
@@ -51,12 +52,14 @@ endif
 start: install
 	adb shell am start -n $(PACKAGE)/.$(Main)
 
+ARM_TOOLCHAIN=$(NDK)\toolchains\arm-linux-androideabi-4.9\prebuilt\windows-x86_64\bin\arm-linux-androideabi-gcc.exe
+X86_TOOLCHAIN=$(NDK)\toolchains\x86_64-4.9\prebuilt\windows-x86_64\bin\x86_64-linux-android-gcc.exe
+
+#set NDK_PROJECT_PATH=$(JNIDIR)
+#if not exist "bin\armeabi-v7a" mkdir bin\armeabi-v7a
+#if not exist "bin\x86" mkdir bin\x86
 init:
 	set NDK=$(NDK)
-	set ARM_TOOLCHAIN=$(NDK)\toolchains\arm-linux-androideabi-4.9\prebuilt\windows-x86_64\bin\arm-linux-androideabi-gcc.exe
-	set X86_TOOLCHAIN=$(NDK)\toolchains\x86_64-4.9\prebuilt\windows-x86_64\bin\x86_64-linux-android-gcc.exe
-	if not exist "bin\armeabi-v7a" mkdir bin\armeabi-v7a
-	if not exist "bin\x86" mkdir bin\x86
 
 aapt: gen\$(packpath)\R.java
 gen\$(packpath)\R.java: AndroidManifest.xml
@@ -105,11 +108,25 @@ Separator=:
 endif
 #type  $(JNIDIR)\$(Main).h
 #grep -Al $(argv) $(JNIDIR)/$(Main).h
+ifeq ($(argv),)
+argv=""
+endif
 javah:
+	if exist "$(JNIDIR)\$(Main).h" del $(JNIDIR)\$(Main).h
 	$(JAVA_HOME)\bin\javah.exe -classpath "${PLATFORM}/android.jar$(Separator)bin/classes" -o $(JNIDIR)\$(Main).h $(PACKAGE).$(Main)
 	findstr $(argv) $(JNIDIR)\$(Main).h
 
+CFLAGS=-g -Wall -Id:\android-ndk-r16-beta1\sysroot\usr\include
+arm_incl=-Id:\android-ndk-r16-beta1\sysroot\usr\include\arm-linux-androideabi
+x86_incl=-Id:\android-ndk-r16-beta1\sysroot\usr\include\x86_64-linux-android
 # make src="msg" build
-build: init
-	"${ARM_TOOLCHAIN}" --sysroot="${NDK}/platforms/android-26/arch-arm" -march=armv7-a -mfpu=vfpv3-d16 -mfloat-abi=softfp -Wl,--fix-cortex-a8 -fPIC -shared -o bin/armeabi-v7a/lib$(src).so $(JNI_SRC)
-	"${X86_TOOLCHAIN}" --sysroot="${NDK}/platforms/android-26/arch-x86" -fPIC -shared -o bin/x86/lib$(src).so $(JNI_SRC)
+#build: $(JNI_SRC) init
+#	"${ARM_TOOLCHAIN}" $(CFLAGS) $(arm_incl) -I --sysroot="${NDK}/platforms/android-26/arch-arm" -march=armv7-a -mfpu=vfpv3-d16 -mfloat-abi=softfp -Wl,--fix-cortex-a8 -fPIC -shared -o bin/armeabi-v7a/lib$(src).so $(JNI_SRC)
+#	"${X86_TOOLCHAIN}" $(CFLAGS) $(x86_incl) --sysroot="${NDK}/platforms/android-26/arch-x86" -fPIC -shared -o bin/x86/lib$(src).so $(JNI_SRC)
+
+EXE=echo
+exe: $(JNI_SRC) init
+	ndk-build NDK_APPLICATION_MK=$(JNIDIR)/Application.mk
+	adb push libs\x86\$(EXE) /mnt/sdcard/
+	adb shell chmod 777 /mnt/sdcard/$(EXE)
+	adb shell /mnt/sdcard/$(EXE)

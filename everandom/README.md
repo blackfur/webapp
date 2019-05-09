@@ -19,4 +19,7 @@ ${BUILD_TOOLS}/aapt package -f -m -J gen/ -S res \
 javac -source 1.7 -target 1.7 -bootclasspath "${JAVA_HOME}/jre/lib/rt.jar" \
       -classpath "${PLATFORM}/android.jar" -d build/obj \
       build/gen/net/hanshq/hello/R.java java/net/hanshq/hello/MainActivity.java
+
+ndk-build clean
+ndk-build
 ```

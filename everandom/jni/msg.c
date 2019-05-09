@@ -1,5 +1,5 @@
 #include <stdlib.h>
-#include <MainActivity.h>
+#include <jni.h>
 
 static const char *const messages[] = {
         "Hello, world!",
