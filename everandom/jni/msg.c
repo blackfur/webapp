@@ -8,7 +8,7 @@ static const char *const messages[] = {
 };
 
 JNIEXPORT jstring JNICALL
-Java_com_suicide_everandom_MainActivity_msg(JNIEnv *env, jobject obj)
+Java_net_suicide_everandom_MainActivity_msg(JNIEnv *env, jobject obj)
 {
         int i;
 

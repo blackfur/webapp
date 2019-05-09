@@ -103,14 +103,22 @@ install: bin/$(NAME).apk
 	"${SDK}/platform-tools/adb" install -r $<
 
 # start Release
+# $(gradle) installRelease
 startr: build
+	ant release
+	ant installr
+	$(platool)\adb shell am start -n $(PACKAGE)/.$(Main)
+
+gstartr: build
 	$(gradle) installRelease
 	$(platool)\adb shell am start -n $(PACKAGE)/.$(Main)
 
 clean:
+	ant uninstall
 	if exist "gen" rmdir /s /q gen
 	$(NDK)\ndk-build clean
 	$(gradle) clean
+	ant clean
 
 # JNI
 ifeq ($(OS),Windows_NT)
