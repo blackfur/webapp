@@ -26,3 +26,4 @@ ant debug install
 
 android create project -n everandom -a MainActivity -k net.suicide -t android-26 -g -v 3.1.0 -p .
 ```
+mklink AndroidManifest.xml src\main\AndroidManifest.xml

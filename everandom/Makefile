@@ -1,4 +1,5 @@
 Drive=g:
+gradle=g:\gradle-5.4.1\bin\gradle.bat
 PACKAGE=net.suicide.everandom
 packpath=net\\suicide\\everandom
 NAME=everandom
@@ -9,7 +10,7 @@ PLATFORM=$(SDK)\platforms\android-21
 platool=$(SDK)\platform-tools
 tools=$(SDK)\tools
 BUILD_TOOLS=$(SDK)\build-tools\21.1.2
-JAVA_HOME=$(Drive)\Java\jdk1.8.0_131
+JAVA_HOME=$(Drive)\Java\jdk1.8.0_201
 source=1.8
 target=1.8
 keystore=keystore
@@ -101,8 +102,15 @@ install: bin/$(NAME).apk
 	"${SDK}/platform-tools/adb" shell pm uninstall -k $(PACKAGE)
 	"${SDK}/platform-tools/adb" install -r $<
 
+# start Release
+startr: build
+	$(gradle) installRelease
+	$(platool)\adb shell am start -n $(PACKAGE)/.$(Main)
+
 clean:
 	if exist "gen" rmdir /s /q gen
+	$(NDK)\ndk-build clean
+	$(gradle) clean
 
 # JNI
 ifeq ($(OS),Windows_NT)
@@ -141,3 +149,9 @@ avd:
 
 device:
 	$(platool)\adb devices
+
+# D I W E F fatal S slient
+# -S filter
+# $(platool)\adb logcat *:V -S $(keyword)
+log:
+	$(platool)\adb logcat *:E

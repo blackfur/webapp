@@ -6,15 +6,15 @@ import android.widget.TextView;
 
 public class MainActivity extends Activity
 {
-   /*
    static {
       System.loadLibrary("msg");
    }
    public native String msg();
-   */
+   /*
    String msg(){
       return "Wednesday is Sunny.";
    }
+   */
 
     @Override
     public void onCreate(Bundle savedInstanceState)

@@ -29,7 +29,7 @@ android {
    defaultConfig {
       versionCode 20
       minSdkVersion 14
-      targetSdkVersion 28
+      targetSdkVersion 23
    }
     compileSdkVersion 'android-28'
     buildToolsVersion '28.0.3'
@@ -70,6 +70,7 @@ sourceCompatibility = 1.8
 dependencies {
     //compile 'com.android.support:support-v4:18.0.0'
     //compile project(':core')
+   //unitTestCompile 'com.google.android:android-test:4.1.1.4'
 }
 
 wrapper {
