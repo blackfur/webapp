@@ -1,7 +1,7 @@
 # Generate random List view for evernote
 
 android list targets
-android create project --target android-28 --name everandom --path . --activity MainActivity --package com.suicide.everandom
+android create project --target android-28 --name everandom --path . --activity MainActivity --package net.suicide.everandom
 ant help
 ant compile
 ant debug
@@ -23,4 +23,6 @@ javac -source 1.7 -target 1.7 -bootclasspath "${JAVA_HOME}/jre/lib/rt.jar" \
 ndk-build clean
 ndk-build
 ant debug install
+
+android create project -n everandom -a MainActivity -k net.suicide -t android-26 -g -v 3.1.0 -p .
 ```

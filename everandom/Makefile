@@ -1,6 +1,6 @@
 Drive=g:
-PACKAGE=com.suicide.everandom
-packpath=com\\suicide\\everandom
+PACKAGE=net.suicide.everandom
+packpath=net\\suicide\\everandom
 NAME=everandom
 Main=MainActivity
 NDK=$(Drive)\android-ndk-r16-beta1
