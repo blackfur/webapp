@@ -1,7 +1,7 @@
 {
   "name": "freess_ext",
   "version": "1.0.0",
-  "description": "Based on freeshadowsocks but add a ss client.",
+  "description": "Based on freeshadowsocks but pass ss info to Py sslocal and Run it.",
   "main": "index.js",
   "scripts": {
     "mocha": "mocha"

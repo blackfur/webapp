@@ -2,12 +2,11 @@ var assert= require('chai').assert;
 const c_isxb_top = require('../index').c_isxb_top
 
 describe('c_isxb_top', function () {
-   it('should fetch c_isxb_top serv info', function (done) {
+   it('should fetch c_isxb_top serv info', function () {
 
-      c_isxb_top().then(function(info){
+      return c_isxb_top().then(function(info){
          console.log(info);
          assert(info.address === 'c.isxb.top', 'c.isxb.top should be found.')
-         done();
       });
    });
 });
