@@ -1,3 +1,4 @@
+https://github.com/apereo/cas-overlay-template
 mkdir src\main\resources\etc
 /e include empty folders
 xcopy /e etc src\main\resources\etc
@@ -10,6 +11,14 @@ keytool -export -alias thekeystore -file thekeystore.crt -keystore thekeystore
 
 gradlew clean run --stacktrace
 https://localhost:5005/cas
+
+Could not get resource 'https://oss.sonatype.org/content/repositories/snapshots/org/apereo/cas/cas-server-webapp-jetty/6.1.0-RC4-SNAPSHOT/cas-server-webapp-jetty-6.1.0-RC4-20190510.184038-50.war'
+f:\\.m2\repository\org\apereo\cas\cas-server-webapp-jetty\6.1.0-RC4-SNAPSHOT\
+   cas-server-webapp-jetty-6.1.0-RC4-20190510.184038-50.war
+   cas-server-webapp-jetty-6.1.0-RC4-20190510.184038-50.war.md5
+   cas-server-webapp-jetty-6.1.0-RC4-20190510.184038-50.war.sha1
+   cas-server-webapp-jetty-6.1.0-RC4-SNAPSHOT.pom
+mavenLocal()
 
 CAS Overlay Template
 =======================

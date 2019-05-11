@@ -1,4 +1,4 @@
-JAVA_HOME=d:\\jdk-12.0.1
+JAVA_HOME=g:\\Java\\jdk-12
 resources=src\\main\resources
 cas=$(resources)\\etc\\cas
 pass=changeit
@@ -15,4 +15,5 @@ conf:
 
 clean:
 	if exist "$(resources)\etc" rmdir /s /q $(resources)\etc
+	if exist "etc\cas\$(keystore)" del etc\cas\$(keystore)
 	gradlew clean

@@ -1,8 +1,9 @@
 buildscript {
     repositories {
+        mavenLocal()
+        //maven { url '/path/to/local/repo'}
         maven{ url 'http://maven.aliyun.com/nexus/content/groups/public/' }
         maven{ url 'http://maven.aliyun.com/nexus/content/repositories/jcenter'}
-        mavenLocal()
         mavenCentral()
         jcenter()
         maven { url "https://repo.spring.io/libs-milestone" }
@@ -12,13 +13,15 @@ buildscript {
         classpath "de.undercouch:gradle-download-task:${project.gradleDownloadTaskVersion}"
         classpath "org.springframework.boot:spring-boot-gradle-plugin:${project.springBootVersion}"
         classpath "gradle.plugin.com.google.cloud.tools:jib-gradle-plugin:${project.jibVersion}"
+        classpath 'com.bmuschko:gradle-tomcat-plugin:2.5'
     }
 }
 
 repositories {
+    mavenLocal()
+   //maven { url 'f:\\.m2\\repository\\'}
    maven{ url 'http://maven.aliyun.com/nexus/content/groups/public/' }
    maven{ url 'http://maven.aliyun.com/nexus/content/repositories/jcenter'}
-    mavenLocal()
     mavenCentral()
     jcenter()
     maven { url "https://oss.sonatype.org/content/repositories/snapshots" }
@@ -30,6 +33,9 @@ repositories {
 def casServerVersion = project.'cas.version'
 def casWebApplicationBinaryName = "cas.war"
 
+compileJava.options.fork = true
+compileJava.options.forkOptions.executable ='g:\\Java\\jdk-12.0.1\\bin\\javac.exe'
+
 project.ext."casServerVersion" = casServerVersion
 project.ext."casWebApplicationBinaryName" = casWebApplicationBinaryName
 
@@ -39,6 +45,7 @@ apply from: rootProject.file("gradle/tasks.gradle")
 apply plugin: "war"
 apply plugin: "eclipse"
 apply plugin: "idea"
+apply plugin: 'com.bmuschko.tomcat'
 
 apply from: rootProject.file("gradle/springboot.gradle")
 apply from: rootProject.file("gradle/dockerjib.gradle")
@@ -46,6 +53,33 @@ apply from: rootProject.file("gradle/dockerjib.gradle")
 dependencies {
     compile "org.apereo.cas:cas-server-webapp${project.appServer}:${casServerVersion}"
     // Other CAS dependencies/modules may be listed here...
+   def tomcatVersion = '9.0.1'
+      tomcat "org.apache.tomcat.embed:tomcat-embed-core:${tomcatVersion}",
+            "org.apache.tomcat.embed:tomcat-embed-logging-juli:9.0.0.M6",
+            "org.apache.tomcat.embed:tomcat-embed-jasper:${tomcatVersion}"
+}
+
+tomcat {
+    httpProtocol = 'org.apache.coyote.http11.Http11Nio2Protocol'
+    ajpProtocol  = 'org.apache.coyote.ajp.AjpNio2Protocol'
+    //httpPort = 8080
+    //httpsPort = 8090
+    //enableSSL = true
+    //contextPath = 'sample-app'
+    
+    users {
+        user {
+            username = 'tomcat'
+            password = 's3crect'
+            roles = ['developers', 'admin']
+        }
+
+        user {
+            username = 'admin'
+            password = 's3crect'
+            roles = ['manager']
+        }
+    }
 }
 
 tasks.findByName("jibDockerBuild")
