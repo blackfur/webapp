@@ -16,6 +16,9 @@ buildscript {
         classpath 'com.bmuschko:gradle-tomcat-plugin:2.5'
     }
 }
+//compileJava.options.fork = true
+//compileJava.options.forkOptions.executable ='g:\\Java\\jdk-12.0.1\\bin\\javac.exe'
+
 
 repositories {
     mavenLocal()
@@ -32,9 +35,6 @@ repositories {
 
 def casServerVersion = project.'cas.version'
 def casWebApplicationBinaryName = "cas.war"
-
-compileJava.options.fork = true
-compileJava.options.forkOptions.executable ='g:\\Java\\jdk-12.0.1\\bin\\javac.exe'
 
 project.ext."casServerVersion" = casServerVersion
 project.ext."casWebApplicationBinaryName" = casWebApplicationBinaryName
