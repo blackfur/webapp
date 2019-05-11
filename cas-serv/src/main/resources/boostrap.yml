@@ -1,0 +1,7 @@
+#cas:
+   #serviceRegistry:
+      #initFromJson: true
+      #config:
+         #location: file:///etc/cas/services
+#cas.serviceRegistry.config.location=classpath:/services
+

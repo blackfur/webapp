@@ -4,6 +4,7 @@ import org.jasig.cas.client.session.SingleSignOutFilter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.ProviderManager;
@@ -23,15 +24,14 @@ import java.util.Arrays;
 @Configuration
 public class SecureConf extends WebSecurityConfigurerAdapter {
 
-      private AuthenticationProvider authenticationProvider;
+      AuthenticationProvider authenticationProvider;
     private AuthenticationEntryPoint authenticationEntryPoint;
     private SingleSignOutFilter singleSignOutFilter;
     private LogoutFilter logoutFilter;
 
     @Autowired
     public SecureConf(CasAuthenticationProvider casAuthenticationProvider, AuthenticationEntryPoint eP,
-                      LogoutFilter lF
-                          , SingleSignOutFilter ssF
+                      LogoutFilter lF , SingleSignOutFilter ssF
     ) {
         this.authenticationProvider = casAuthenticationProvider;
         this.authenticationEntryPoint = eP;
@@ -45,17 +45,17 @@ public class SecureConf extends WebSecurityConfigurerAdapter {
        auth.authenticationProvider(authenticationProvider);
     }
 
+    @Bean
+    public CasAuthenticationFilter casAuthenticationFilter(ServiceProperties sP) throws Exception {
+        CasAuthenticationFilter filter = new CasAuthenticationFilter();
+        filter.setServiceProperties(sP);
+        filter.setAuthenticationManager(authenticationManager());
+        return filter;
+    }
+
     @Override
     protected AuthenticationManager authenticationManager() throws Exception {
        return new ProviderManager(Arrays.asList(authenticationProvider));
-    }
-
-    @Bean
-    public CasAuthenticationFilter casAuthenticationFilter(ServiceProperties sP) throws Exception {
-       CasAuthenticationFilter filter = new CasAuthenticationFilter();
-       filter.setServiceProperties(sP);
-       filter.setAuthenticationManager(authenticationManager());
-       return filter;
     }
 
     @Override
@@ -70,6 +70,11 @@ public class SecureConf extends WebSecurityConfigurerAdapter {
           .permitAll()
           .and()
           .httpBasic()
-          .authenticationEntryPoint(authenticationEntryPoint);
+          .authenticationEntryPoint(authenticationEntryPoint)
+          .and()
+          .logout().logoutSuccessUrl("/logout")
+          .and()
+          .addFilterBefore(singleSignOutFilter, CasAuthenticationFilter.class)
+          .addFilterBefore(logoutFilter, LogoutFilter.class);
     }
 }

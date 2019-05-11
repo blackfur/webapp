@@ -3,10 +3,16 @@ package com.fakeghost.bookshelf.ctrl;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.web.authentication.logout.CookieClearingLogoutHandler;
+import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
+import org.springframework.security.web.authentication.rememberme.AbstractRememberMeServices;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 @RestController
 public class Secure{
@@ -15,10 +21,6 @@ public class Secure{
       return "redirect:/secured";
    }
    @GetMapping("/")
-   public String index() {
-      return "index";
-   }
-   @GetMapping
    @ResponseBody
    public String index(ModelMap modelMap) {
       Authentication auth = SecurityContextHolder.getContext()
@@ -33,5 +35,19 @@ String username = null;
       return null == username? "No permitted": username ;
       //return "secure/index";
    }
+
+   @GetMapping("/logout")
+   public String logout(
+         HttpServletRequest request,
+         HttpServletResponse response,
+         SecurityContextLogoutHandler logoutHandler) {
+      Authentication auth = SecurityContextHolder
+         .getContext().getAuthentication();
+      logoutHandler.logout(request, response, auth );
+      new CookieClearingLogoutHandler(
+            AbstractRememberMeServices.SPRING_SECURITY_REMEMBER_ME_COOKIE_KEY)
+         .logout(request, response, auth);
+      return "auth/logout";
+         }
 }
 
