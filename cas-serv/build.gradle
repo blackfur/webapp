@@ -1,6 +1,8 @@
 buildscript {
     repositories {
         mavenLocal()
+         maven {url "http://maven.aliyun.com/nexus/content/groups/public/"}
+        maven { url 'http://maven.aliyun.com/nexus/content/repositories/jcenter' }
         mavenCentral()
         jcenter()
         maven { url "https://repo.spring.io/libs-milestone" }
@@ -16,9 +18,12 @@ buildscript {
 
 repositories {
     mavenLocal()
+    maven {url "http://maven.aliyun.com/nexus/content/groups/public/"}
+   maven { url 'http://maven.aliyun.com/nexus/content/repositories/jcenter' }
     mavenCentral()
     jcenter()
-    maven { url "https://oss.sonatype.org/content/repositories/snapshots" }
+    //maven { url "https://oss.sonatype.org/content/repositories/snapshots" }
+    maven { url "http://oss.sonatype.org/content/repositories/releases" }
     maven { url "https://build.shibboleth.net/nexus/content/repositories/releases/" }
     maven { url "https://repo.spring.io/milestone/" }
     maven { url "https://oss.jfrog.org/artifactory/oss-snapshot-local" }
@@ -42,6 +47,9 @@ apply plugin: "com.google.cloud.tools.jib"
 dependencies {
     compile "org.apereo.cas:cas-server-webapp${project.appServer}:${casServerVersion}"
     // Other CAS dependencies/modules may be listed here...
+    compile "org.apereo.cas:cas-server-support-json-service-registry:${casServerVersion}"
+    compile "org.apereo.cas:cas-server-support-jdbc:${casServerVersion}"
+    compile "org.apereo.cas:cas-server-support-jdbc-drivers:${casServerVersion}"
 }
 
 tasks.findByName("jibDockerBuild")
