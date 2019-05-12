@@ -1,5 +1,6 @@
 package com.fakeghost.bookshelf;
 
+import com.fakeghost.bookshelf.model.Todo;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.core.convert.support.ConfigurableConversionService;
 import org.springframework.data.rest.core.config.RepositoryRestConfiguration;

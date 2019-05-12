@@ -1,5 +1,6 @@
-package com.fakeghost.bookshelf;
+package com.fakeghost.bookshelf.ctrl;
 
+import com.fakeghost.bookshelf.model.Employee;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RequestMethod;

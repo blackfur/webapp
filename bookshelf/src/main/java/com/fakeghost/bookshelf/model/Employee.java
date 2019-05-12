@@ -1,4 +1,4 @@
-package com.fakeghost.bookshelf;
+package com.fakeghost.bookshelf.model;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;

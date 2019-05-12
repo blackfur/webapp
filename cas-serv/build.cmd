@@ -115,7 +115,7 @@
         keytool -delete -alias cas -cacerts -storepass changeit -v
         @rem keytool -import -alias cas -storepass changeit -file %CAS_DIR%\cas.cer -keystore %JRE_HOME%\lib\security\cacerts
         keytool -import -noprompt -alias cas -storepass changeit -file %CAS_DIR%\cas.cer -cacerts
-        keytool -list -v -keystore %CAS_DIR%\cas.cer
+        keytool -list -v -storetype PKCS12 -storepass changeit -keystore %CAS_DIR%\thekeystore
     )
 @goto :EOF
 

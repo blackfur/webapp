@@ -16,3 +16,11 @@ stop:
 
 rm:
 	if exist "$(CATALINA_HOME)\webapps\$(Name).war" del $(CATALINA_HOME)\webapps\$(Name).war
+
+.PHONY: etc 
+etc:
+ifeq ($(OS), Windows_NT)
+	xcopy /y /e .\etc \etc
+else
+	rsync -ruhv ./etc/cas /etc/ 
+endif
