@@ -1,7 +1,13 @@
+Name=cas
+CATALINA_HOME=g:\apache-tomcat-9.0.17
+
+init:
+	set CATALINA_HOME=$(CATALINA_HOME)
+
 .PHONY: etc 
 etc:
 ifeq ($(OS), Windows_NT)
-	xcopy /y /e .\etc\cas \etc\cas
+	xcopy /y /e .\etc \etc
 else
 	rsync -ruhv ./etc/cas /etc/ 
 endif
@@ -19,3 +25,14 @@ else
 endif
 
 prepare: cert etc
+
+build\libs\$(Name).war:
+	.\build.cmd clean package
+
+run: init build\libs\$(Name).war 
+	copy /y build\libs\$(Name).war $(CATALINA_HOME)\webapps
+	if exist "$(CATALINA_HOME)\webapps\$(Name).war" start "" $(CATALINA_HOME)\bin\catalina.bat run
+
+stop: $(CATALINA_HOME)\webapps\$(Name).war
+	$(CATALINA_HOME)\bin\catalina.bat stop
+	if exist "$<" del $<

@@ -73,10 +73,17 @@ public class Cas {
       CasAuthenticationProvider provider = new CasAuthenticationProvider();
       provider.setServiceProperties(serviceProperties());
       provider.setTicketValidator(ticketValidator());
+      /*
       provider.setUserDetailsService(
             s -> new User("casuser", "Mellon", true, true, true, true,
                AuthorityUtils.createAuthorityList("ROLE_ADMIN")));
       provider.setKey("CAS_PROVIDER_LOCALHOST_9000");
+      */
+      provider.setUserDetailsService((s) -> new User(
+      "[email protected]", "testU",
+      true, true, true, true,
+    AuthorityUtils.createAuthorityList("ROLE_ADMIN")));
+    provider.setKey("CAS_PROVIDER_LOCALHOST_9000");
       return provider;
    }
     @Bean

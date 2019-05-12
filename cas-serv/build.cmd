@@ -109,9 +109,13 @@
         if not exist %CAS_DIR% mkdir %CAS_DIR%
         @echo on
         @echo Generating self-signed SSL cert for %DNAME% in %CAS_DIR%\thekeystore
-        keytool -genkeypair -alias cas -keyalg RSA -keypass changeit -storepass changeit -keystore %CAS_DIR%\thekeystore -dname %DNAME% -ext SAN=%CERT_SUBJ_ALT_NAMES%
+        keytool -genkeypair -storetype PKCS12 -alias cas -keyalg RSA -keypass changeit -storepass changeit -keystore %CAS_DIR%\thekeystore -dname %DNAME% -ext SAN=%CERT_SUBJ_ALT_NAMES%
         @echo Exporting cert for use in trust store (used by cas clients)
         keytool -exportcert -alias cas -storepass changeit -keystore %CAS_DIR%\thekeystore -file %CAS_DIR%\cas.cer
+        keytool -delete -alias cas -cacerts -storepass changeit -v
+        @rem keytool -import -alias cas -storepass changeit -file %CAS_DIR%\cas.cer -keystore %JRE_HOME%\lib\security\cacerts
+        keytool -import -noprompt -alias cas -storepass changeit -file %CAS_DIR%\cas.cer -cacerts
+        keytool -list -v -keystore %CAS_DIR%\cas.cer
     )
 @goto :EOF
 

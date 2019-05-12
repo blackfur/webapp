@@ -1,6 +1,6 @@
 {
     "@class" : "org.apereo.cas.services.RegexRegisteredService",
-    "serviceId" : "^http://192.168.137.1:9000/login/cas",
+    "serviceId" : "^https://127.0.0.1:9000/login/cas",
     "name" : "CAS Spring Secured App",
     "description": "This is a Spring App that usses the CAS Server for it's authentication",
     "id" : 19991,

@@ -107,8 +107,10 @@ task downloadShell (group: "shell", description: "Download CAS shell jar from sn
     doLast {
         def downloadFile
         if (isRunningCasServerSnapshot(casServerVersion)) {
-            def snapshotDir = "https://oss.sonatype.org/content/repositories/snapshots/org/apereo/cas/cas-server-support-shell/${casServerVersion}/"
-            def files = new ApacheURLLister().listFiles(new URL(snapshotDir))
+            //def snapshotDir = "https://oss.sonatype.org/content/repositories/snapshots/org/apereo/cas/cas-server-support-shell/${casServerVersion}/"
+            def publicDir = "https://oss.sonatype.org/content/repositories/public/org/apereo/cas/cas-server-support-shell/${casServerVersion}/"
+            //def files = new ApacheURLLister().listFiles(new URL(snapshotDir))
+            def files = new ApacheURLLister().listFiles(new URL(publicDir))
             files = files.sort{it.path}
             files.each {
                 if (it.path.endsWith(".jar")) {
