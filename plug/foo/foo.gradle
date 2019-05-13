@@ -1,0 +1,12 @@
+apply plugin: Hangout
+
+class Hangout implements Plugin<Project> {
+   void apply(Project p){
+      p.task('meal') { 
+         doLast {
+            println "I love Susi."
+         }
+      }
+   }
+}
+
