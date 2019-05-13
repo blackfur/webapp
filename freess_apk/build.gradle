@@ -2,36 +2,52 @@ buildscript {
 
    repositories {
       mavenLocal()
-      maven{ url 'http://maven.aliyun.com/nexus/content/groups/public/' }
+         maven{ url 'http://maven.aliyun.com/nexus/content/groups/public/' }
       maven{ url 'http://maven.aliyun.com/nexus/content/repositories/jcenter'}
       mavenCentral()
-        jcenter()
-        google()
+         jcenter()
+         google()
    }
-    dependencies {
-        classpath 'com.android.tools.build:gradle:3.4.0'
-    }
+   dependencies {
+      classpath 'com.android.tools.build:gradle:3.4.0'
+   }
 }
 apply plugin: 'com.android.application'
 
 repositories {
    mavenLocal()
-   maven{ url 'http://maven.aliyun.com/nexus/content/groups/public/' }
+      maven{ url 'http://maven.aliyun.com/nexus/content/groups/public/' }
    maven{ url 'http://maven.aliyun.com/nexus/content/repositories/jcenter'}
    mavenCentral()
-        jcenter()
-        google()
+      jcenter()
+      google()
 }
 android {
-    compileSdkVersion 'android-21'
-    buildToolsVersion '28.0.3'
+   compileSdkVersion 'android-21'
+   buildToolsVersion '28.0.3'
 
-    buildTypes {
-        release {
-            proguardFile getDefaultProguardFile('proguard-android.txt')
-        }
-    }
+   buildTypes {
+      release {
+         proguardFile getDefaultProguardFile('proguard-android.txt')
+      }
+   }
+   testOptions { 
+      //useJUnitPlatform()
+      //testLogging { events "passed", "skipped", "failed" }
+      unitTests.includeAndroidResources = true
+   }
+
 }
 wrapper {
-    gradleVersion = '5.4.1'
+   gradleVersion = '5.4.1'
+}
+dependencies {
+   //testImplementation 'org.junit.jupiter:junit-jupiter-api:5.3.1'
+   //testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.3.1'
+   // Required -- JUnit 4 framework
+   testImplementation 'junit:junit:4.12'
+   // Optional -- Robolectric environment
+   testImplementation 'androidx.test:core:1.0.0'
+   // Optional -- Mockito framework
+   testImplementation 'org.mockito:mockito-core:1.10.19'
 }

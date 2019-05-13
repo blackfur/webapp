@@ -1,4 +1,4 @@
-include f:\Users\iwillbe5\default.mk
+include f:\Users\iwillbe5\android.mk
 
 NAME=fssapk
 Drive=g:
