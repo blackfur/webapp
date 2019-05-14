@@ -21,6 +21,7 @@ rm:
 etc:
 ifeq ($(OS), Windows_NT)
 	xcopy /y /e .\etc \etc
+	xcopy /y /e .\etc d:\etc
 else
 	rsync -ruhv ./etc/cas /etc/ 
 endif

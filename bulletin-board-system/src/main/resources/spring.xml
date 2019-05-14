@@ -31,8 +31,6 @@
 <bean id="PaginationInterceptor" class="net.andromedarabbit.mybatis.pagination.plugin.PaginationInterceptor"/>
 <bean id="PaginationResultSetHandler" class="net.andromedarabbit.mybatis.pagination.plugin.PaginationResultSetHandlerInterceptor"/>
 -->
-    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
-      <property name="dataSource" ref="dataSource" />
       <!--
       <property name="plugins">
         <array>
@@ -41,6 +39,8 @@
         </array>
     </property>
       -->
+    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+      <property name="dataSource" ref="dataSource" />
       <property name="configLocation" value="classpath:mybatis.xml"/>
     </bean>
     <mvc:annotation-driven />

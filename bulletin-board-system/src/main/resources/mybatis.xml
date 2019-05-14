@@ -8,6 +8,9 @@
 	<typeAliases>
 		<typeAlias type="com.fakeghost.bbs.model.User" alias="User"/>
 	</typeAliases>
+   <!--
+      Valid values are SLF4J, LOG4J, LOG4J2, JDK_LOGGING, COMMONS_LOGGING, STDOUT_LOGGING, NO_LOGGING
+   -->
    <!-- No need to specify classpath: -->
     <mappers>
        <mapper resource="UserMapper.xml" />

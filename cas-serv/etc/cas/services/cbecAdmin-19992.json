@@ -1,0 +1,8 @@
+{
+    "@class" : "org.apereo.cas.services.RegexRegisteredService",
+    "serviceId" : "^http://127.0.0.1:8096/login/cas",
+    "name" : "Cbec Admin",
+    "description": "This is a Spring App that usses the CAS Server for it's authentication",
+    "id" : 19992,
+    "evaluationOrder" : 2
+}
