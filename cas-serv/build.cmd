@@ -17,7 +17,7 @@
 @if "%CERT_SUBJ_ALT_NAMES%" == "" set CERT_SUBJ_ALT_NAMES=dns:example.org,dns:localhost,dns:%COMPUTERNAME%,ip:127.0.0.1
 
 @rem Check for gradle in path, use it if found, otherwise use gradle wrapper
-@set GRADLE_CMD=gradle
+@set GRADLE_CMD=gradlew
 @where /q gradle
 @if %ERRORLEVEL% neq 0 set GRADLE_CMD=.\gradlew.bat
 
@@ -100,7 +100,6 @@
     @rem exec into runing container to look around, run jstack, check config, etc
     docker exec -it cas /bin/sh
 @goto :EOF
-
 
 :gencert
     where /q keytool

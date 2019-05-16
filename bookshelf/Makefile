@@ -1,4 +1,5 @@
 include f:\Users\iwillbe5\default.mk
+#include d:\default.mk
 
 Name=bookshelf
 public=public
