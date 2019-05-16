@@ -64,8 +64,7 @@ public class Cas {
    }
    @Bean
    public TicketValidator ticketValidator() {
-      return new Cas30ServiceTicketValidator(
-           cas_serv_host + "/cas");
+      return new Cas30ServiceTicketValidator(cas_serv_host + "/cas");
    }
    @Bean
    public CasAuthenticationProvider casAuthenticationProvider() {

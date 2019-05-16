@@ -1,5 +1,6 @@
+include d:\default.mk
+
 Name=bookshelf
-CATALINA_HOME=g:\apache-tomcat-9.0.17
 
 build\libs\$(Name).war:
 	gradlew clean bootWar

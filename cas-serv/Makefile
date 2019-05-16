@@ -30,9 +30,18 @@ prepare: cert etc
 build\libs\$(Name).war:
 	.\build.cmd package
 
-run: init etc clean build\libs\$(Name).war 
+pack:
+	.\build.cmd package
+
+cp:
 	copy /y build\libs\$(Name).war $(CATALINA_HOME)\webapps
+
+hot: stop pack cp tomcat
+
+tomcat:
 	if exist "$(CATALINA_HOME)\webapps\$(Name).war" start "" $(CATALINA_HOME)\bin\catalina.bat run
+
+run: init etc clean build\libs\$(Name).war cp tomcat
 
 stop: $(CATALINA_HOME)\webapps\$(Name).war
 	$(CATALINA_HOME)\bin\catalina.bat stop
