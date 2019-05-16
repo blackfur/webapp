@@ -1,5 +1,7 @@
+include f:\Users\iwillbe5\default.mk
+
 Name=bookshelf
-CATALINA_HOME=g:\apache-tomcat-9.0.17
+public=public
 
 build\libs\$(Name).war:
 	gradlew clean bootWar
@@ -9,18 +11,11 @@ watch: stop build\libs\$(Name).war
 	if exist "$(CATALINA_HOME)\webapps\$(Name).war" start "" $(CATALINA_HOME)\bin\catalina.bat run
 
 run:
-	start "" gradlew clean bootRun
+	build.cmd impcert
+	$(CMD) /c start "" gradlew clean bootRun
 
 stop:
 	$(CATALINA_HOME)\bin\catalina.bat stop
 
 rm:
 	if exist "$(CATALINA_HOME)\webapps\$(Name).war" del $(CATALINA_HOME)\webapps\$(Name).war
-
-.PHONY: etc 
-etc:
-ifeq ($(OS), Windows_NT)
-	xcopy /y /e .\etc \etc
-else
-	rsync -ruhv ./etc/cas /etc/ 
-endif

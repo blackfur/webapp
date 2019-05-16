@@ -37,15 +37,10 @@ String username = null;
    }
 
    @GetMapping("/logout")
-   public String logout(
-         HttpServletRequest request,
-         HttpServletResponse response,
-         SecurityContextLogoutHandler logoutHandler) {
-      Authentication auth = SecurityContextHolder
-         .getContext().getAuthentication();
+   public String logout( HttpServletRequest request, HttpServletResponse response, SecurityContextLogoutHandler logoutHandler) {
+      Authentication auth = SecurityContextHolder .getContext().getAuthentication();
       logoutHandler.logout(request, response, auth );
-      new CookieClearingLogoutHandler(
-            AbstractRememberMeServices.SPRING_SECURITY_REMEMBER_ME_COOKIE_KEY)
+      new CookieClearingLogoutHandler( AbstractRememberMeServices.SPRING_SECURITY_REMEMBER_ME_COOKIE_KEY)
          .logout(request, response, auth);
       return "auth/logout";
          }
