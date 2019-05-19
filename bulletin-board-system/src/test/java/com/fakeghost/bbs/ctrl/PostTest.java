@@ -26,4 +26,5 @@ public class PostTest extends MvcTestCase{
                 .andExpect(status().isOk()) .andDo(print()) .andReturn();
         //assertThat(resp.getResponse().getContentAsString(), is("1.0"));
     }
+
 }
