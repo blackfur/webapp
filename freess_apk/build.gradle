@@ -36,6 +36,9 @@ android {
       //testLogging { events "passed", "skipped", "failed" }
       unitTests.includeAndroidResources = true
    }
+   defaultConfig {
+      testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+   }
 
 }
 wrapper {
