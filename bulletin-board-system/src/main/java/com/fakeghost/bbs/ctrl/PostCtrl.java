@@ -14,6 +14,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import java.util.HashMap;
 import java.util.Map;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 
 @Controller
 @RequestMapping(value="/posts")
@@ -33,9 +36,10 @@ public class PostCtrl{
        Map<String, Object> resp = new HashMap<String, Object>();
 
         //List<com.fakeghost.bbs.model.Post> rows = repo.findAll(offset, limit);
-        Iterable<com.fakeghost.bbs.model.Post> rows = repo.findAll();
-        if(null !=rows&& rows.iterator().hasNext()){
-           resp.put("payload", rows.toString());
+         PageRequest argv = new PageRequest(offset, limit);
+        Page<Post> page = repo.findAll(argv);
+        if(null !=page && page.getSize() > 0){
+           resp.put("payload", page.getContent());
            resp.put("msg", "Successfully");
            log.info("Query posts Successfully.");
             return ResponseEntity.ok(resp);
