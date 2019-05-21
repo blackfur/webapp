@@ -17,6 +17,10 @@ $(document).ready( function () {
                   limit: argv.length
                },
                success: function(dat,stat, xhr){
+                  if (stat === 'nocontent'){
+                     alert(stat);
+                     return;
+                  }
                   notify({
                     data: util.jsonArr2matrix(dat.payload, _COLUMNS)
                   });

@@ -30,3 +30,14 @@ var getUrlParameter = function getUrlParameter(sParam) {
         }
     }
 };
+
+var include = function(filepath, tag){
+   $.get(filepath)
+   .then(function(resp){
+      return resp;
+   })
+   .then(function(data){
+      //document.querySelector(tag).innerHTML = data;
+      $('header').html(data);
+   });
+};

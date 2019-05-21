@@ -1,48 +1,43 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-	<meta charset="UTF-8">
-	<title></title>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="./css/view.css">
+    <link rel="stylesheet" type="text/css" href="DataTables-1.10.18/css/jquery.dataTables.css"/>
 </head>
 <body>
-   <div>
-      <span id='title'></span>
-      <span id='author'></span>
-      <span id='category'></span>
-      <span id='time'></span>
-   </div>
-   <div id='content'></div>
+   <header></header>
+<div class="reg">
+    <div class="header">
+        <h1>
+            <a href="/main.jsp" style="margin-left: 0">return</a>
+        </h1>
+        <h1 style="margin-left: 200px">
+           look around.
+        </h1>
+    </div>
+    <table id="poststbl" class="display">
+        <thead>
+           <tr>
+              <th>id</th>
+              <th>title</th>
+              <th>author</th>
+              <th>time</th>
+              <th>category</th>
+              <th>content</th>
+           </tr>
+        </thead>
+        <tbody> </tbody>
+    </table>
+</div>
 
-
-	<script src='jquery-3.4.0.js'></script>
-	<script src='global.js'></script>
-	<script src='util.js'></script>
-	<script>
-$(function(){
-   var id = getUrlParameter('id');
-   if(undefined ===id || id.length === 0){
-      alert('ID Not found.');
-      return;
-   }
-   $.ajax({
-      url: _url_posts + '/' + id,
-      success: function(dat){
-         $('#title').text(dat.title);
-         $(document).attr('title', dat.title);
-         $('#author').text(dat.author);
-         $('#category').text(dat.category);
-         $('#time').text(dat.time);
-         $('#content').text(dat.content);
-      },
-      error: function(xhr, stat){
-      }
-   });
-})
-	</script>
+    <script type="text/javascript" src="jquery-3.4.0.js"></script>
+    <script type="text/javascript" src="DataTables-1.10.18/js/jquery.dataTables.js"></script>
+    <script type="text/javascript" src="util.js"></script>
+    <script type="text/javascript" src="view.js"></script>
+    <script type="text/javascript">
+            ////
+            include('/comp/header.html','header');
+    </script>
 </body>
-   <style>
-.info {
-   padding-right: 2%;
-}
-   </style>
 </html>

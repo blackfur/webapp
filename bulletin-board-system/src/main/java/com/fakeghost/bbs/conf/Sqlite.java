@@ -13,7 +13,7 @@ import javax.sql.DataSource;
 import java.util.Properties;
 
 @Configuration
-@PropertySource("classpath:persistence.properties")
+@PropertySource("classpath:persistence.prop")
 public class Sqlite {
    @Autowired
    Environment env;
