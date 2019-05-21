@@ -1,6 +1,11 @@
 // import Util;
 var util = new Util();
 var _COLUMNS = ['id', 'title', 'author', 'createTime', 'category', 'content'];
+var _fmt = {
+   content: function(val){
+      return val.substr(1, 64) + '...';
+   }
+};
 
 var foo = "foo";
 
@@ -22,7 +27,7 @@ $(document).ready( function () {
                      return;
                   }
                   notify({
-                    data: util.jsonArr2matrix(dat.payload, _COLUMNS)
+                    data: util.jsonArr2matrix(dat.payload, _COLUMNS, _fmt)
                   });
                },
                error: function(xhr, stat){

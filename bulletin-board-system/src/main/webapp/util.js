@@ -3,14 +3,17 @@
 //
 function Util(){}
 
-Util.prototype.jsonArr2matrix = function(jsonArr, columns){
+Util.prototype.jsonArr2matrix = function(jsonArr, columns, format){
    // two dimensional array
    var matrix = [];
    for(var i=0, l= jsonArr.length; i<l; i++){
       var row = jsonArr[i];
       var arrRow = [];
       for(var j=0, len=columns.length; j<len; j++){
-         arrRow.push(row[columns[j]]);
+         var col = columns[j];
+         var fmt = format[col];
+         var val = fmt === undefined? row[col] : fmt(row[col]);
+         arrRow.push(val);
       }
       matrix.push(arrRow);
    }
