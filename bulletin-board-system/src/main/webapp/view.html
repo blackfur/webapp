@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title></title>
+</head>
+<body>
+   <div>
+      <span id='title'></span>
+      <span id='author'></span>
+      <span id='category'></span>
+      <span id='time'></span>
+   </div>
+   <div id='content'></div>
+
+
+	<script src='jquery-3.4.0.js'></script>
+	<script src='global.js'></script>
+	<script src='util.js'></script>
+	<script>
+$(function(){
+   var id = getUrlParameter('id');
+   if(undefined ===id || id.length === 0){
+      alert('ID Not found.');
+      return;
+   }
+   $.ajax({
+      url: _url_posts + '/' + id,
+      success: function(dat){
+         $('#title').text(dat.title);
+         $(document).attr('title', dat.title);
+         $('#author').text(dat.author);
+         $('#category').text(dat.category);
+         $('#time').text(dat.time);
+         $('#content').text(dat.content);
+      },
+      error: function(xhr, stat){
+      }
+   });
+})
+	</script>
+</body>
+   <style>
+.info {
+   padding-right: 2%;
+}
+   </style>
+</html>

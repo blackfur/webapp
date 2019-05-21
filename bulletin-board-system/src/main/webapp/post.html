@@ -8,15 +8,40 @@
    </head>
    <body>
       <div class="container">
-         <form action="">
             <div class="form-group">
                <label for="post">Post:</label>
-               <textarea class="form-control" rows="16" id="post"></textarea>
+               <br/>
+					<input type='text' placeholder='Title' id='title'/>
+               <br/>
+               <br/>
+               <textarea placeholder='Today I fuck Up.' id='content' class="form-control" rows="16" id="post"></textarea>
             </div>
-            <button type="submit" class="btn btn-primary">Submit</button>
-         </form>
+            <button id='submit' type="submit" class="btn btn-primary">Submit</button>
       </div>
    </body>
+	<script src='jquery-3.4.0.js'></script>
+	<script src='global.js'></script>
    <script>
+      //Test
+      $('#content').text('Coffee? Tea? or Me?!');
+
+		$('#submit').click(function(){
+			$.ajax({
+				url: _url_postsubmit,
+            method: 'POST',
+				data: {
+					content: $('#content').text(),
+					title: $('#title').text(),
+               author: Author,
+               category: Category,
+               createTime: Time
+				},
+				success: function(dat){
+					window.location.href = _url_postview + '?id=' + dat.id;
+				},
+				error: function(xhr, stat){
+				}
+			});
+		});
    </script>
 </html>

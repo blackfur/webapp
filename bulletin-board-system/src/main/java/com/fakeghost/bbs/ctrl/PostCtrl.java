@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.HashMap;
 import java.util.Map;
+import org.springframework.web.bind.annotation.PathVariable;
 
 @Controller
 @RequestMapping(value="/posts")
@@ -61,9 +62,23 @@ public class PostCtrl{
 
         repo.save(p);
         Map<String, Object> resp = new HashMap<>();
+		  resp.put("id", p.getId());
         resp.put("msg", "Success.");
         return ResponseEntity.ok().body(resp);
         // Method failure
         //return ResponseEntity.status(420).body(null);
+    }
+    @RequestMapping("/{id}")
+    public ResponseEntity findById( @PathVariable Long id) {
+
+        Map<String, Object> resp = new HashMap<String, Object>();
+        Post p= repo.findOne(id);
+        if(null !=p){
+           log.info("Query posts Successfully.");
+           return ResponseEntity.ok(p.hashmap());
+        }
+        resp.put("msg", "Not Found.");
+        // No Content
+         return ResponseEntity.status(204).body(resp);
     }
 }

@@ -1,5 +1,7 @@
 package com.fakeghost.bbs.model;
 
+import java.util.HashMap;
+import java.util.Map;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import lombok.Getter;
@@ -30,5 +32,15 @@ public class Post {
             "<td class='td1' style='text-align: center'>"+category+"</td>"+
             "<td class='td1' style='text-align: center'><a href='/BBS/read.jsp?id="+id+"'>"+title+"</a></td>"+
             "</tr>";
+    }
+    public Map<String, Object> hashmap(){
+       Map<String, Object> resp = new HashMap<String, Object>();
+       resp.put("title", title);
+       resp.put("id", id);
+       resp.put("author", author);
+       resp.put("content", content);
+       resp.put("createTime", createTime);
+       resp.put("category", category);
+       return resp;
     }
 }

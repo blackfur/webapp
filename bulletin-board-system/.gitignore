@@ -7,3 +7,5 @@
 *.log
 /data
 bootstrap-*-dist/
+*.dat
+*.dat-journal
