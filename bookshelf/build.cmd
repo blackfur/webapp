@@ -1,5 +1,6 @@
 @echo off
-
+@set JAVA_HOME=g:\Java\jdk1.8.0_201
+@set JRE_HOME=g:\Java\jre1.8.0_201
 @rem @set keytool=d:\Java\jdk1.8.0_73\bin\keytool.exe
 @rem @set JAVA_HOME=d:\Java\jdk1.8.0_73
 @rem @set JRE_HOME=d:\Java\jdk1.8.0_73\jre
@@ -11,6 +12,17 @@
 @rem   if client apps make https connection for ticket validation and compare name in cert (include sub. alt. names) 
 @rem   to name used to access CAS
 @if "%CERT_SUBJ_ALT_NAMES%" == "" set CERT_SUBJ_ALT_NAMES=dns:example.org,dns:localhost,dns:%COMPUTERNAME%,ip:127.0.0.1
+@set keytool=g:\Java\jdk1.8.0_201\bin\keytool.exe
+
+@if "%1" == "impcert" call:impcert
+@goto :EOF
+
+:impcert
+   %keytool% -delete -alias cas -keystore %JAVA_HOME%\jre\lib\security\cacerts -storepass changeit -v
+   %keytool% -delete -alias cas -keystore %JRE_HOME%\lib\security\cacerts -storepass changeit -v
+   %keytool% -import -noprompt -alias cas -storepass changeit -file %CAS_DIR%\cas.cer -keystore %JAVA_HOME%\jre\lib\security\cacerts
+   %keytool% -import -noprompt -alias cas -storepass changeit -file %CAS_DIR%\cas.cer -keystore %JRE_HOME%\lib\security\cacerts
+=======
 
 @if "%1" == "gencert" call:gencert
 @if "%1" == "cert" call:cert
@@ -55,13 +67,4 @@
         keytool -import -noprompt -storepass changeit -alias cas -file %CAS_DIR%\cas.cer -cacerts
         keytool -list -v -storetype PKCS12 -storepass changeit -keystore %CAS_DIR%\thekeystore
     )
-@goto :EOF
-
-:impcert
-   d:\jdk-12.0.1\bin\keytool.exe -delete -alias cas -storepass changeit -v -cacerts
-   d:\jdk-12.0.1\bin\keytool.exe -import -noprompt -alias cas -storepass changeit -file %CAS_DIR%\cas.cer -cacerts
-   d:\Java\jdk1.8.0_131\bin\keytool -delete -alias cas -storepass changeit -v -keystore d:\Java\jdk1.8.0_131\jre\lib\security\cacerts
-   d:\Java\jdk1.8.0_131\bin\keytool -noprompt -storepass changeit -import -alias cas -storepass changeit -file %CAS_DIR%\cas.cer -keystore d:\Java\jdk1.8.0_131\jre\lib\security\cacerts
-   d:\Java\jdk1.8.0_73\bin\keytool -delete -alias cas -storepass changeit -v -keystore d:\Java\jdk1.8.0_73\jre\lib\security\cacerts
-   d:\Java\jdk1.8.0_73\bin\keytool -noprompt -storepass changeit -import -alias cas -storepass changeit -file %CAS_DIR%\cas.cer -keystore d:\Java\jdk1.8.0_73\jre\lib\security\cacerts
 @goto :EOF

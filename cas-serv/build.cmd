@@ -1,5 +1,6 @@
 @echo off
 
+@set keytool=g:\Java\jdk-12.0.1\bin\keytool.exe
 @set JAVA_ARGS=-Xms500m -Xmx1g
 @set CAS_DIR=\etc\cas
 @set CONFIG_DIR=\etc\cas\config
@@ -32,6 +33,7 @@
 @if "%1" == "refresh" call:refresh %2 %3 %4
 @if "%1" == "help" call:help
 @if "%1" == "gencert" call:gencert
+@if "%1" == "impcert" call:impcert
 @if "%1" == "cli" call:cli
 @if "%1" == "debugcli" call:debugcli
 @if "%1" == "dependencies" call:dependencies
@@ -108,14 +110,19 @@
         if not exist %CAS_DIR% mkdir %CAS_DIR%
         @echo on
         @echo Generating self-signed SSL cert for %DNAME% in %CAS_DIR%\thekeystore
-        keytool -genkeypair -storetype PKCS12 -alias cas -keyalg RSA -keypass changeit -storepass changeit -keystore %CAS_DIR%\thekeystore -dname %DNAME% -ext SAN=%CERT_SUBJ_ALT_NAMES%
+        %keytool% -genkeypair -storetype PKCS12 -alias cas -keyalg RSA -keypass changeit -storepass changeit -keystore %CAS_DIR%\thekeystore -dname %DNAME% -ext SAN=%CERT_SUBJ_ALT_NAMES%
         @echo Exporting cert for use in trust store (used by cas clients)
-        keytool -exportcert -alias cas -storepass changeit -keystore %CAS_DIR%\thekeystore -file %CAS_DIR%\cas.cer
-        keytool -delete -alias cas -cacerts -storepass changeit -v
-        @rem keytool -import -alias cas -storepass changeit -file %CAS_DIR%\cas.cer -keystore %JRE_HOME%\lib\security\cacerts
-        keytool -import -noprompt -alias cas -storepass changeit -file %CAS_DIR%\cas.cer -cacerts
-        keytool -list -v -storetype PKCS12 -storepass changeit -keystore %CAS_DIR%\thekeystore
+        %keytool% -exportcert -alias cas -storepass changeit -keystore %CAS_DIR%\thekeystore -file %CAS_DIR%\cas.cer
+        %keytool% -delete -alias cas -cacerts -storepass changeit -v
+        @rem %keytool% -import -alias cas -storepass changeit -file %CAS_DIR%\cas.cer -keystore %JRE_HOME%\lib\security\cacerts
+        %keytool% -import -noprompt -alias cas -storepass changeit -file %CAS_DIR%\cas.cer -cacerts
+        %keytool% -list -v -storetype PKCS12 -storepass changeit -keystore %CAS_DIR%\thekeystore
     )
+@goto :EOF
+
+:impcert
+        %keytool% -delete -alias cas -cacerts -storepass changeit -v
+        %keytool% -import -noprompt -alias cas -storepass changeit -file %CAS_DIR%\cas.cer -cacerts
 @goto :EOF
 
 :cli 

@@ -21,13 +21,11 @@
     </properties>
 
     <dependencies>
-       <!--
-<dependency>
-  <groupId>com.github.andromedarabbit</groupId>
-  <artifactId>mybatis-pagination</artifactId>
-  <version>0.0.1</version>
-</dependency>
--->
+      <dependency>
+         <groupId>org.xerial</groupId>
+         <artifactId>sqlite-jdbc</artifactId>
+         <version>3.27.2.1</version>
+      </dependency>
         <!-- java.lang.ClassNotFoundException: com.sun.jna.Native -->
         <dependency><groupId>net.java.dev.jna</groupId><artifactId>jna</artifactId><version>4.2.2</version></dependency>
         <dependency>
@@ -35,22 +33,19 @@
             <artifactId>spring-boot-devtools</artifactId>
             <optional>true</optional>
         </dependency>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <!--org.elasticsearch:elasticsearch:jar:2.4.0:compile-->
-            <artifactId>spring-boot-starter-data-elasticsearch</artifactId>
-        </dependency>
       <dependency><groupId>org.springframework.boot</groupId><artifactId>spring-boot-starter-web</artifactId></dependency>
        <!-- Support for Ehcache and others -->          
       <dependency><groupId>org.springframework</groupId><artifactId>spring-context-support</artifactId></dependency>
       <dependency><groupId>org.springframework</groupId><artifactId>spring-jdbc</artifactId></dependency>
        <!-- To enable support for JSP -->
       <dependency><groupId>org.apache.tomcat.embed</groupId><artifactId>tomcat-embed-jasper</artifactId><scope>provided</scope></dependency>
+      <!--
       <dependency>
          <groupId>mysql</groupId>
          <artifactId>mysql-connector-java</artifactId>
          <version>8.0.15</version>
       </dependency>
+      -->
 <dependency>
     <groupId>com.github.penggle</groupId>
     <artifactId>kaptcha</artifactId>
@@ -84,14 +79,15 @@ Never write another getter or equals method again, with one annotation your clas
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
         </dependency>
-        <!--
+
         <dependency>
-            <groupId>net.jodah</groupId>
-            <artifactId>concurrentunit</artifactId>
-            <scope>test</scope>
-            <version>0.4.5-SNAPSHOT</version>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-rest</artifactId>
         </dependency>
-        -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-jpa</artifactId>
+        </dependency>
 
     </dependencies>
     <build>
@@ -132,22 +128,5 @@ Never write another getter or equals method again, with one annotation your clas
 
         </plugins>
     </build>
-
-    <!--
-<repositories>
-  <repository>
-    <id>jitpack.io</id>
-    <url>https://jitpack.io</url>
-	</repository>
-  <repository>
-    <id>ali</id> 
-    <url>http://maven.aliyun.com/nexus/content/groups/public/</url> 
-	</repository>
-  <repository>
-    <id>mvncenter</id> 
-    <url>https://repo.maven.apache.org/maven2</url> 
-	</repository>
-</repositories>
-    -->
 
 </project>

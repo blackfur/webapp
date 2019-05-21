@@ -7,8 +7,10 @@ init:
 .PHONY: etc 
 etc:
 ifeq ($(OS), Windows_NT)
-	xcopy /y /e .\etc \etc
-	xcopy /y /e .\etc d:\etc
+	xcopy /y /e .\etc f:\etc
+	xcopy /y /e f:\etc g:\etc
+	xcopy /y /e f:\etc c:\etc
+	.\build.cmd impcert
 else
 	rsync -ruhv ./etc/cas /etc/ 
 endif
@@ -29,6 +31,8 @@ prepare: cert etc
 
 build\libs\$(Name).war:
 	.\build.cmd package
+
+run: init etc build\libs\$(Name).war 
 
 pack:
 	.\build.cmd package

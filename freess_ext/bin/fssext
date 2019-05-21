@@ -4,7 +4,7 @@ require('..').c_isxb_top().then(
    (resp) => {
       console.info(resp)
       const spawn = require('child_process').spawn ;
-      const sslocalcmd = spawn('G:/Python37/Scripts/sslocal.exe', [
+      const sslocalcmd = spawn('g:/Python37-32/Scripts/sslocal.exe', [
          '-s', resp.address, 
          '-p', resp.port, 
          '-b', '127.0.0.1',
