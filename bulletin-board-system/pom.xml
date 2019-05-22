@@ -87,6 +87,13 @@ Never write another getter or equals method again, with one annotation your clas
         <testResources>
             <testResource> <directory>src/main/resources</directory> </testResource>
         </testResources>
+<!-- replace ${} -->
+         <resources>
+            <resource>
+                  <directory>src/main/resources</directory>
+                  <filtering>true</filtering>
+            </resource>
+         </resources>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -94,29 +101,43 @@ Never write another getter or equals method again, with one annotation your clas
                 <version>3.2.2</version>
             </plugin>
 
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-compiler-plugin</artifactId>
-        <version>3.8.0</version>
-        <configuration>
-          <source>1.8</source>
-          <target>1.8</target>
-        </configuration>
-      </plugin>
+            <plugin>
+               <groupId>org.apache.maven.plugins</groupId>
+               <artifactId>maven-compiler-plugin</artifactId>
+               <version>3.8.0</version>
+               <configuration>
+                  <source>1.8</source>
+                  <target>1.8</target>
+               </configuration>
+            </plugin>
 
-		<plugin>
-				<groupId>org.springframework.boot</groupId>
-				<artifactId>spring-boot-maven-plugin</artifactId>
-				<version>2.1.5.RELEASE</version>
-				<executions>
-					<execution>
-						<goals>
-							<goal>repackage</goal>
-						</goals>
-					</execution>
-				</executions>
-			</plugin>
-
+            <plugin>
+                  <groupId>org.springframework.boot</groupId>
+                  <artifactId>spring-boot-maven-plugin</artifactId>
+                  <version>2.1.5.RELEASE</version>
+                  <executions>
+                     <execution>
+                        <goals>
+                           <goal>repackage</goal>
+                        </goals>
+                     </execution>
+                  </executions>
+               </plugin>
+<!-- display active profile in compile phase -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-help-plugin</artifactId>
+                <version>3.1.0</version>
+                <executions>
+                    <execution>
+                        <id>show-profiles</id>
+                        <phase>compile</phase>
+                        <goals>
+                            <goal>active-profiles</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
         </plugins>
     </build>
 
@@ -142,5 +163,28 @@ Never write another getter or equals method again, with one annotation your clas
             <url>https://repo.spring.io/release</url>
         </repository>
  </repositories>
+
+<profiles>
+    <profile>
+        <id>dev</id>
+        <activation><activeByDefault>true</activeByDefault></activation>
+        <properties>
+            <serv.port>8080</serv.port>
+        </properties>
+    </profile>
+    <profile>
+        <id>prod</id>
+        <properties>
+            <serv.port>80</serv.port>
+        </properties>
+    </profile>
+<!-- skip unit test -->
+	<profile>
+		<id>xtest</id>
+		<properties>
+			<maven.test.skip>true</maven.test.skip>
+		</properties>
+	</profile>
+</profiles>
 
 </project>

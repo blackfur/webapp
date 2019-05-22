@@ -14,6 +14,7 @@ import java.util.Properties;
 
 //@Configuration
 //@PropertySource("classpath:persistence.prop")
+//@Profile({"dev", "default"})
 public class Sqlite {
    @Autowired
    Environment env;
