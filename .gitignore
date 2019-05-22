@@ -8,3 +8,4 @@ target/
 *.ico
 *.png
 vue.js
+dat/
