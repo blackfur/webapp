@@ -1,7 +1,7 @@
 @rem call %USERPROFILE%\default.cmd %*
 @echo off
 
-call d:\env.bat
+@call d:\env.bat
 
 @set port=9080
 @set public=d:\workspace\SuicideGame.com\bulletin-board-system\src\main\webapp
