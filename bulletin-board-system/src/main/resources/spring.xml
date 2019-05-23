@@ -16,4 +16,11 @@
     </bean>
     <mvc:annotation-driven />
 
+    <!--
+<jdbc:embedded-database id="dataSource" type="HSQL">
+   <jdbc:script location="classpath:hsql/schema.sql"/>
+   <jdbc:script location="classpath:hsql/dat.sql"/>
+</jdbc:embedded-database>
+-->
+
 </beans>

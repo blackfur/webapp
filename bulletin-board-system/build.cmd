@@ -1,5 +1,6 @@
 @echo off
 
+@set USERPROFILE=d:
 @call %USERPROFILE%\env.bat
 @rem @call d:\env.bat
 

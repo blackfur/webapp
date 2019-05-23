@@ -29,6 +29,7 @@
       <dependency>
          <groupId>org.hsqldb</groupId>
          <artifactId>hsqldb</artifactId>
+         <version>2.4.1</version>
          <scope>runtime</scope>
       </dependency>
         <!-- java.lang.ClassNotFoundException: com.sun.jna.Native -->
@@ -175,12 +176,14 @@ Never write another getter or equals method again, with one annotation your clas
         <activation><activeByDefault>true</activeByDefault></activation>
         <properties>
             <serv.port>8080</serv.port>
+            <ddl-auto>create-drop</ddl-auto>
         </properties>
     </profile>
     <profile>
         <id>prod</id>
         <properties>
             <serv.port>80</serv.port>
+            <ddl-auto>update</ddl-auto>
         </properties>
     </profile>
 <!-- skip unit test -->
