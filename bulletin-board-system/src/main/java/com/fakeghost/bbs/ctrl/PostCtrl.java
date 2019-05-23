@@ -2,10 +2,14 @@ package com.fakeghost.bbs.ctrl;
 
 import com.fakeghost.bbs.model.Post;
 import com.fakeghost.bbs.repo.PostRepo;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.hql.internal.ast.util.SessionFactoryHelper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.orm.hibernate4.SessionFactoryUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -18,6 +22,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 
+import javax.persistence.EntityManagerFactory;
+
 @Controller
 @RequestMapping(value="/posts")
 public class PostCtrl{
@@ -25,6 +31,8 @@ public class PostCtrl{
 
     @Autowired
     PostRepo repo;
+    //@Autowired SessionFactory sessionf;
+    //@Autowired EntityManagerFactory entitymf;
 
     @ResponseBody
     @RequestMapping
@@ -85,8 +93,16 @@ public class PostCtrl{
         // No Content
          return ResponseEntity.status(204).body(resp);
     }
+    // total page
     @RequestMapping("/total")
-    public int total(){
-getSession().createQuery("select count(*) from Book").uniqueResult()
+    @ResponseBody
+    public Long total(
+            @RequestParam long size
+    ){
+        //long all = sessionf.getCurrentSession().createQuery("select count(1) from post").getFirstResult();
+         //Session ss= entitymf.createEntityManager().unwrap(Session.class);
+        //long all = ss.createQuery("select count(1) from post").getFirstResult();
+        long all =  repo.count();
+        return all/size - 1;
     }
 }

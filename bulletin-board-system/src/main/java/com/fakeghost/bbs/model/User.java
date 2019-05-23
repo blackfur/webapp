@@ -11,9 +11,7 @@ import javax.persistence.*;
 @Table(name = "Users")
 @Getter @Setter @AllArgsConstructor @NoArgsConstructor
 public class User{
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private long id;
+    @Id @GeneratedValue(strategy = GenerationType.AUTO) long id;
 @Column(nullable = true)
    String nickname;
    String username;

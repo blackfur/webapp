@@ -41,6 +41,8 @@ public class PostTest extends MvcTestCase{
         mockMvc.perform(get("/posts").param("offset","0").param("limit","4"))
                 .andExpect(status().isOk()) .andDo(print()) .andReturn();
         //assertThat(resp.getResponse().getContentAsString(), is("1.0"));
+        mockMvc.perform(get("/posts/total").param("size","8"))
+                .andExpect(status().isOk()) .andDo(print()) .andReturn();
     }
 
 }

@@ -40,6 +40,12 @@
 
     <script type="text/javascript" src="jquery-3.4.0.js"></script>
     <script type="text/javascript" src="DataTables-1.10.18/js/jquery.dataTables.js"></script>
+
+    <!--
+<script src="https://keycdn.layerjs.org/libs/layerjs/layerjs-0.6.1.min.js"></script>
+<link href="https://keycdn.layerjs.org/libs/layerjs/layerjs-0.6.1.css" type="text/css" rel="stylesheet" /> 
+-->
+
     <script type="text/javascript" src="global.js"></script>
     <script type="text/javascript" src="util.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
@@ -53,7 +59,8 @@ var app = new Vue({
       list: [],
       page: 0,
       limit: 8,
-      total: 1
+      total: 1,
+      size: _PAGE_SIZE
    },
    methods: {
       previous: function(event) {
@@ -76,6 +83,7 @@ var app = new Vue({
       },
       refresh: function(){
          var scope = this;
+         // list
          $.ajax({
             url: _url_posts,
             data: {
@@ -91,6 +99,19 @@ var app = new Vue({
             },
             error: function(xhr, stat){
                alert(xhr.status);
+            }
+         });
+         // total page
+         $.ajax({
+            url: _url_total_post,
+            data: {
+               size: scope.size
+            },
+            success: function(dat, stat, xhr){
+               scope.total = dat;
+            },
+            error: function(xhr, stat){
+               alert(xhr.status)
             }
          });
       }

@@ -15,8 +15,7 @@ import javax.persistence.Id;
 @Entity
 @Getter @Setter @AllArgsConstructor @NoArgsConstructor
 public class Post {
-    @Id @GeneratedValue(strategy = GenerationType.AUTO)
-    private long id;
+    @Id @GeneratedValue(strategy = GenerationType.AUTO) long id;
     private String title;
     private String author;
     private String content;
