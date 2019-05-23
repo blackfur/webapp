@@ -85,4 +85,8 @@ public class PostCtrl{
         // No Content
          return ResponseEntity.status(204).body(resp);
     }
+    @RequestMapping("/total")
+    public int total(){
+getSession().createQuery("select count(*) from Book").uniqueResult()
+    }
 }

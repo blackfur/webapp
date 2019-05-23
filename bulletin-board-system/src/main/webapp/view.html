@@ -26,7 +26,17 @@
        <div>{{item.content}}</div>
        <br/>
     </div>
+    <div>
+       <a class='page' v-on:click="previous">previous</a>
+       <a class='page' v-on:click="next">next</a>
+    </div>
 </div>
+
+<style>
+.page {
+   padding-right: 2%;
+}
+</style>
 
     <script type="text/javascript" src="jquery-3.4.0.js"></script>
     <script type="text/javascript" src="DataTables-1.10.18/js/jquery.dataTables.js"></script>
@@ -43,26 +53,51 @@ var app = new Vue({
       list: [],
       page: 0,
       limit: 8,
+      total: 1
+   },
+   methods: {
+      previous: function(event) {
+         var scope = this;
+         if(scope.page <= 0){
+            scope.page = 0;
+            return;
+         }
+         scope.page = scope.page -1;
+         scope.refresh();
+      },
+      next: function(event) {
+         var scope = this;
+         if(scope.page >= scope.total - 1){
+            scope.page = scope.total - 1;
+            return;
+         }
+         scope.page = scope.page + 1;
+         scope.refresh();
+      },
+      refresh: function(){
+         var scope = this;
+         $.ajax({
+            url: _url_posts,
+            data: {
+               offset: scope.page,
+               limit: scope.limit
+            },
+            success: function(dat,stat, xhr){
+               if (stat === 'nocontent'){
+                  alert(stat);
+                  return;
+               }
+               scope.list = dat.payload;
+            },
+            error: function(xhr, stat){
+               alert(xhr.status);
+            }
+         });
+      }
    },
    mounted: function(){
       var scope = this;
-      $.ajax({
-         url: _url_posts,
-         data: {
-            offset: scope.page,
-            limit: scope.limit
-         },
-         success: function(dat,stat, xhr){
-            if (stat === 'nocontent'){
-               alert(stat);
-               return;
-            }
-            scope.list = dat.payload;
-         },
-         error: function(xhr, stat){
-            alert(xhr.status);
-         }
-      });
+      scope.refresh();
    }
 });
     </script>

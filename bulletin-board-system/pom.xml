@@ -177,6 +177,7 @@ Never write another getter or equals method again, with one annotation your clas
         <properties>
             <serv.port>8080</serv.port>
             <ddl-auto>create-drop</ddl-auto>
+            <datasource.url>jdbc:hsqldb:hsql://localhost</datasource.url>
         </properties>
     </profile>
     <profile>
@@ -184,6 +185,7 @@ Never write another getter or equals method again, with one annotation your clas
         <properties>
             <serv.port>80</serv.port>
             <ddl-auto>update</ddl-auto>
+            <datasource.url>jdbc:hsqldb:file:/opt/hsql/bookshelf;DB_CLOSE_DELAY=-1</datasource.url>
         </properties>
     </profile>
 <!-- skip unit test -->

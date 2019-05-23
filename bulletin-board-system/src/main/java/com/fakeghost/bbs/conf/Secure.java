@@ -38,7 +38,8 @@ public class Secure extends WebSecurityConfigurerAdapter {
            .cors().and()
           .csrf().disable()
           .authorizeRequests()
-          .antMatchers("/secured/**").hasRole("ADMIN")
+          .antMatchers("/secured/**").hasAuthority("ADMIN")
+                //.hasRole("ADMIN")
           /*
           .antMatchers("/anonymous*").anonymous()
           .antMatchers("/login*").permitAll()
