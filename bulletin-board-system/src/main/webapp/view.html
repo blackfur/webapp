@@ -7,7 +7,7 @@
 </head>
 <body>
    <header></header>
-<div class="reg">
+<div class="reg" id='app'>
     <div class="header">
         <h1>
             <a href="/main.jsp" style="margin-left: 0">return</a>
@@ -16,29 +16,55 @@
            look around.
         </h1>
     </div>
-    <table id="poststbl" class="display">
-        <thead>
-           <tr>
-              <th>id</th>
-              <th>title</th>
-              <th>author</th>
-              <th>time</th>
-              <th>category</th>
-              <th>content</th>
-           </tr>
-        </thead>
-        <tbody> </tbody>
-    </table>
+    <div v-for="item in list">
+       <!--
+       <a v-bind:href='"detail.html?id=" + item.id' class='title'>{{item.title}}</>
+       -->
+       <a v-bind:href="'detail.html?id=' + item.id" class='title'>
+          (&nbsp{{(item.title === undefined || item.title.length===0)? item.id : item.title}}&nbsp)
+       </a>
+       <div>{{item.content}}</div>
+       <br/>
+    </div>
 </div>
 
     <script type="text/javascript" src="jquery-3.4.0.js"></script>
     <script type="text/javascript" src="DataTables-1.10.18/js/jquery.dataTables.js"></script>
     <script type="text/javascript" src="global.js"></script>
     <script type="text/javascript" src="util.js"></script>
-    <script type="text/javascript" src="view.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
     <script type="text/javascript">
             ////
             include('/comp/header.html','header');
+///
+var app = new Vue({
+   el: '#app',
+   data: {
+      list: [],
+      page: 0,
+      limit: 8,
+   },
+   mounted: function(){
+      var scope = this;
+      $.ajax({
+         url: _url_posts,
+         data: {
+            offset: scope.page,
+            limit: scope.limit
+         },
+         success: function(dat,stat, xhr){
+            if (stat === 'nocontent'){
+               alert(stat);
+               return;
+            }
+            scope.list = dat.payload;
+         },
+         error: function(xhr, stat){
+            alert(xhr.status);
+         }
+      });
+   }
+});
     </script>
 </body>
 </html>

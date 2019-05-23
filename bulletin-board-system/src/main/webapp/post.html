@@ -28,15 +28,15 @@
       include('/comp/header.html','header');
 
       //Test
-      $('#content').text('Coffee? Tea? or Me?!');
+      $('#content').val('Coffee? Tea? or Me?!');
 
 		$('#submit').click(function(){
 			$.ajax({
 				url: _url_postsubmit,
             method: 'POST',
 				data: {
-					content: $('#content').text(),
-					title: $('#title').text(),
+					content: $('#content').val(),
+					title: $('#title').val(),
                author: Author,
                category: Category,
                createTime: Time
