@@ -1,7 +1,7 @@
 package com.fakeghost.bbs.repo;
 
 import com.fakeghost.bbs.App;
-import com.fakeghost.bbs.doc.Post;
+import com.fakeghost.bbs.model.Post;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.slf4j.Logger;
@@ -15,13 +15,14 @@ import java.util.Iterator;
 import static org.junit.Assert.assertTrue;
 
 @RunWith(SpringRunner.class)
-@SpringBootTest(classes = App.class)
+@SpringBootTest
 public class PostTest {
     final Logger log = LoggerFactory.getLogger(getClass());
     @Autowired
     PostRepo repo;
     @Test
     public void posts_ShouldReturnAllPosts(){
+		 repo.save(new Post("CN", "CN Sucks."));
         Iterable<Post> all = repo.findAll();
         Iterator<Post> transvers = all.iterator();
         assertTrue(transvers.hasNext());

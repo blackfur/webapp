@@ -18,6 +18,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.
 //@ContextConfiguration({"classpath:spring.xml"})
 //@ContextConfiguration(classes = {AppConf.class})
 //@WebAppConfiguration(value= "src/main/webapp")
+//@ActiveProfiles("default")
 @SpringBootTest(classes = {App.class}, webEnvironment=WebEnvironment.RANDOM_PORT)
 public abstract class MvcTestCase {
     @Autowired

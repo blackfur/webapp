@@ -23,6 +23,11 @@ public class Post {
     private String createTime;
     private String category;
 
+	 public Post(String title, String content){
+		 this.title = title;
+		 this.content = content;
+	 }
+
     @Override
     public String toString() {
             return "<tr>"+

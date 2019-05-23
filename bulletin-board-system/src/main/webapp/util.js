@@ -41,6 +41,6 @@ var include = function(filepath, tag){
    })
    .then(function(data){
       //document.querySelector(tag).innerHTML = data;
-      $('header').html(data);
+      $(tag).html(data);
    });
 };

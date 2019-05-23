@@ -1,7 +1,7 @@
 driverClassName=org.sqlite.JDBC
 #url=jdbc:sqlite:memory:bookshelf.dat?cache=shared
 #url=jdbc:sqlite:f:/etc/butter/bookshelf.dat
-url=jdbc:sqlite:bookshelf.dat
+url=jdbc:sqlite:dat/bookshelf.lite.dat
 username=
 password=
 hibernate.dialect=net.butter.SQLiteDialect

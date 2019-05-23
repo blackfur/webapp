@@ -1,7 +1,11 @@
 server:
+   port: @serv.port@
    servlet:
       #context-path: /api
 spring:
+   profiles:
+      active: default
+      #active: prod
    mvc:
       view:
          prefix: /WEB-INF/
