@@ -27,7 +27,7 @@ public class CreateServlet extends HttpServlet {
          msg.setTitle(title);
          msg.setAuthor(author);
          msg.setContent(content);
-         msg.setCreateTime(createTime);
+         //msg.setCreateTime(createTime);
          msg.setCategory(category);
          msgList.add(msg);
          servletContext.setAttribute("msgList", msgList);

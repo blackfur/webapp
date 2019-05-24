@@ -16,7 +16,7 @@ public class Post {
     private String title;
     private String author;
     private String content;
-    private String createTime;
+    //private String createTime;
     private String category;
 
     @Override

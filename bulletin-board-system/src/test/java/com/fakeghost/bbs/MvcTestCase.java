@@ -10,6 +10,7 @@ import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
+import org.springframework.test.context.ActiveProfiles;
 
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 
@@ -20,6 +21,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.
 //@WebAppConfiguration(value= "src/main/webapp")
 //@ActiveProfiles("default")
 @SpringBootTest(classes = {App.class}, webEnvironment=WebEnvironment.RANDOM_PORT)
+@ActiveProfiles("dev")
 public abstract class MvcTestCase {
     @Autowired
     protected WebApplicationContext wac;

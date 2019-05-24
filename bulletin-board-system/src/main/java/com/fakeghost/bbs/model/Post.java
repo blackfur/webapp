@@ -16,11 +16,11 @@ import javax.persistence.Id;
 @Getter @Setter @AllArgsConstructor @NoArgsConstructor
 public class Post {
     @Id @GeneratedValue(strategy = GenerationType.AUTO) long id;
-    private String title;
-    private String author;
-    private String content;
-    private String createTime;
-    private String category;
+    String title;
+    String content;
+    String author;
+    //String createTime;
+    String category;
 
 	 public Post(String title, String content){
 		 this.title = title;
@@ -32,7 +32,7 @@ public class Post {
             return "<tr>"+
             "<td class='td1' style='text-align: center'>"+id+"</td>"+
             "<td class='td1' style='text-align: center'>"+author+"</td>"+
-            "<td class='td1' style='text-align: center'>"+createTime+"</td>"+
+            //"<td class='td1' style='text-align: center'>"+createTime+"</td>"+
             "<td class='td1' style='text-align: center'>"+category+"</td>"+
             "<td class='td1' style='text-align: center'><a href='/BBS/read.jsp?id="+id+"'>"+title+"</a></td>"+
             "</tr>";
@@ -41,9 +41,9 @@ public class Post {
        Map<String, Object> resp = new HashMap<String, Object>();
        resp.put("title", title);
        resp.put("id", id);
-       resp.put("author", author);
        resp.put("content", content);
-       resp.put("createTime", createTime);
+       resp.put("author", author);
+       //resp.put("createTime", createTime);
        resp.put("category", category);
        return resp;
     }

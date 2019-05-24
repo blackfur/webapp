@@ -93,7 +93,10 @@ Never write another getter or equals method again, with one annotation your clas
     </dependencies>
     <build>
         <testResources>
-            <testResource> <directory>src/main/resources</directory> </testResource>
+           <testResource> 
+              <directory>src/main/resources</directory> 
+               <filtering>true</filtering>
+           </testResource>
         </testResources>
 <!-- replace ${} -->
          <resources>
@@ -123,6 +126,11 @@ Never write another getter or equals method again, with one annotation your clas
                   <groupId>org.springframework.boot</groupId>
                   <artifactId>spring-boot-maven-plugin</artifactId>
                   <version>2.1.5.RELEASE</version>
+                  <configuration>
+                        <profiles>
+                           <profile>dev</profile>
+                        </profiles>
+                  </configuration>
                   <executions>
                      <execution>
                         <goals>

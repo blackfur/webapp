@@ -1,6 +1,6 @@
 // import Util;
 var util = new Util();
-var _COLUMNS = ['id', 'title', 'author', 'createTime', 'category', 'content'];
+var _COLUMNS = ['id', 'title', 'author', 'category', 'content'];
 var _fmt = {
    content: function(val){
       return val.substr(1, 64) + '...';

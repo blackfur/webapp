@@ -61,7 +61,7 @@ public class PostCtrl{
     public ResponseEntity submit(
             @RequestParam String title,
             @RequestParam String author,
-            @RequestParam String createTime,
+            //@RequestParam String createTime,
             @RequestParam String category,
             @RequestParam String content
             ){
@@ -69,7 +69,7 @@ public class PostCtrl{
         p.setAuthor(author);
         p.setCategory(category);
         p.setTitle(title);
-        p.setCreateTime(createTime);
+        //p.setCreateTime(createTime);
         p.setContent(content);
 
         repo.save(p);
