@@ -16,25 +16,27 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
 
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
 import java.util.Iterator;
-
+import javax.transaction.Transactional;
 import static org.junit.Assert.assertTrue;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = {App.class}, webEnvironment=WebEnvironment.RANDOM_PORT)
 @ActiveProfiles("dev")
-@Transactional
+//@Transactional
 public class PostTest {
     final Logger log = LoggerFactory.getLogger(getClass());
 
-    @Autowired
-    PostRepo repo;
+    @Autowired PostRepo repo;
     @Autowired SessionFactory sessionf;
+   //@PersistenceContext EntityManager entitymr;
 
     @Test
     public void posts_ShouldReturnAllPosts(){
-		 repo.save(new Post("CN", "CN Sucks."));
+		 repo.save(new Post("CN", "CN Sucks.", System.currentTimeMillis()));
         Iterable<Post> all = repo.findAll();
         Iterator<Post> transvers = all.iterator();
         assertTrue(transvers.hasNext());
@@ -49,4 +51,22 @@ public class PostTest {
         assertTrue( null !=all && all >= 0);
         log.info(all.toString());
     }
+    @Test
+    public void ShouldRetrieveSavedOne(){
+       // Save
+        Post p = new Post();
+        p.setTimestamp(System.currentTimeMillis());
+        p.setTitle("Title");
+        p.setContent("txt");
+        log.info("##############################");
+        p = repo.save(p);
+        log.info("Saved ID: " + p.getId());
+        //entitymr.persist(p);
+        // Retrieve
+         //p = repo.findOne(p.getId());
+         //assertTrue(null != p);
+         log.info(p.toString());
+        log.info("##############################");
+    }
+
 }

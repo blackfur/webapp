@@ -21,29 +21,6 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @EnableTransactionManagement
 @PropertySource("classpath:hibernate.prop")
 public class HibernateConf{
-   /*
-	@Value("${db.driver}")
-	private String DRIVER;
- 
-	@Value("${db.password}")
-	private String PASSWORD;
- 
-	@Value("${db.url}")
-	private String URL;
- 
-	@Value("${db.username}")
-	private String USERNAME;
- 
-	@Bean
-	public DataSource dataSource() {
-		DriverManagerDataSource dataSource = new DriverManagerDataSource();
-		dataSource.setDriverClassName(DRIVER);
-		dataSource.setUrl(URL);
-		dataSource.setUsername(USERNAME);
-		dataSource.setPassword(PASSWORD);
-		return dataSource;
-	}
-   */
 	@Value("${PackagesToScan}")
 	String PACKAGES_TO_SCAN;
 	@Value("${hibernate.dialect}") String DIALECT;

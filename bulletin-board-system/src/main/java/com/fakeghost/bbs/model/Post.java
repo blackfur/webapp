@@ -21,10 +21,12 @@ public class Post {
     String author;
     //String createTime;
     String category;
+    long timestamp;
 
-	 public Post(String title, String content){
+	 public Post(String title, String content, long timestamp){
 		 this.title = title;
 		 this.content = content;
+       this.timestamp = timestamp;
 	 }
 
     @Override

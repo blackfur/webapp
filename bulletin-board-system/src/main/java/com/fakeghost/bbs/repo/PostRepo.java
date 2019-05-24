@@ -6,10 +6,12 @@ import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 import org.springframework.data.rest.core.annotation.RestResource;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import com.fakeghost.bbs.model.Post;
+import javax.transaction.Transactional;
 
 @CrossOrigin
 @RepositoryRestResource(collectionResourceRel = "posts", path = "posts")
 //public interface PostRepo extends CrudRepository<Post, Long> {
+@Transactional
 public interface PostRepo extends PagingAndSortingRepository<Post, Long> {
 
     @Override

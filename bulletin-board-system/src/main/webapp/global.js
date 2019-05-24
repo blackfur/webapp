@@ -1,5 +1,6 @@
 var _api_host_ = 'http://127.0.0.1:8080';
 var _url_posts= _api_host_ + '/posts';
+var _url_post_timestamp = _url_posts + '/timestamp';
 var _url_postsubmit =_api_host_ + '/posts/submit';
 var _url_postview =_api_host_ + '/detail.html';
 var _url_total_post=_api_host_ + '/posts/total';

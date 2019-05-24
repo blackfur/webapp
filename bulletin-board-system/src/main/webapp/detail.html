@@ -25,13 +25,13 @@ $(function(){
    include('/comp/header.html', 'header');
 
    //
-   var id = getUrlParameter('id');
-   if(undefined ===id || id.length === 0){
-      alert('ID Not found.');
+   var timestamp= getUrlParameter('timestamp');
+   if(undefined ===timestamp || timestamp.length === 0){
+      alert('TIMESTAMP Not found.');
       return;
    }
    $.ajax({
-      url: _url_posts + '/' + id,
+      url: _url_post_timestamp + '/' + timestamp,
       success: function(dat){
          $('#title').text(dat.title);
          $(document).attr('title', dat.title);

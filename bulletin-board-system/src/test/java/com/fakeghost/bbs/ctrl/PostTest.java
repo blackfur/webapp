@@ -18,6 +18,23 @@ public class PostTest extends MvcTestCase{
     public void posts_ShouldList() throws Exception {
         final Logger log = LoggerFactory.getLogger(getClass());
 
+        //mockMvc.perform(get("/posts/" + id)).  andExpect(status().isOk()) .andDo(print()) .andReturn();
+
+        mockMvc.perform(get("/posts").param("offset","0").param("limit","4"))
+                .andExpect(status().isOk()) .andDo(print()) .andReturn();
+        //assertThat(resp.getResponse().getContentAsString(), is("1.0"));
+        mockMvc.perform(get("/posts/total").param("size","8"))
+                .andExpect(status().isOk()) .andDo(print()) .andReturn();
+    }
+    @Test
+    public void ShouldfetchOne() throws Exception {
+
+        mockMvc.perform(get("/posts/timestamp/4096"))
+                .andExpect(status().isOk()) .andDo(print()) .andReturn();
+    }
+    @Test
+    public void SubmitShouldSuccess() throws Exception {
+
        MvcResult resp = mockMvc.perform(
                 get("/posts/submit")
                 .param("title","HTTP status code")
@@ -28,21 +45,12 @@ public class PostTest extends MvcTestCase{
             ) .andExpect(status().isOk()) .andDo(print()) 
          //.andExpect(content().string())
           .andReturn();
-
          String rstr = resp.getResponse().getContentAsString();
          ObjectMapper mapper = new ObjectMapper();
          Map<String, Object> m = mapper.readValue(rstr, Map.class);
          //mapper.writerWithDefaultPrettyPrinter().writeValueAsString(map);
-         String id = m.get("id").toString();
+         String timestamp= m.get("timestamp").toString();
 
-        mockMvc.perform(get("/posts/" + id)).
-              andExpect(status().isOk()) .andDo(print()) .andReturn();
-
-        mockMvc.perform(get("/posts").param("offset","0").param("limit","4"))
-                .andExpect(status().isOk()) .andDo(print()) .andReturn();
-        //assertThat(resp.getResponse().getContentAsString(), is("1.0"));
-        mockMvc.perform(get("/posts/total").param("size","8"))
-                .andExpect(status().isOk()) .andDo(print()) .andReturn();
     }
 
 }
