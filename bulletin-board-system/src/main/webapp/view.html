@@ -27,15 +27,27 @@
        <br/>
     </div>
     <div>
+       <span class='page-number'>{{page}}</span>
        <a class='page' v-on:click="previous">previous</a>
        <a class='page' v-on:click="next">next</a>
     </div>
 </div>
 
 <style>
-.page {
+.page-number{
    padding-right: 2%;
+   font-weight: bold;
 }
+.page {
+padding-right: 2%;
+text-decoration: underline;
+}
+
+.page:hover{
+color: blue;
+cursor: pointer;
+}
+
 </style>
 
     <script type="text/javascript" src="jquery-3.4.0.js"></script>
@@ -67,6 +79,7 @@ var app = new Vue({
          var scope = this;
          if(scope.page <= 0){
             scope.page = 0;
+            alert('No more.');
             return;
          }
          scope.page = scope.page -1;
@@ -76,6 +89,7 @@ var app = new Vue({
          var scope = this;
          if(scope.page >= scope.total - 1){
             scope.page = scope.total - 1;
+            alert('No more.');
             return;
          }
          scope.page = scope.page + 1;
