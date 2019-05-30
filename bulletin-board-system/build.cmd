@@ -1,7 +1,7 @@
 @echo off
 
-@set USERPROFILE=d:
-@rem @set USERPROFILE=f:\Users\iwillbe5
+@rem @set USERPROFILE=d:
+@set USERPROFILE=f:\Users\iwillbe5
 @call %USERPROFILE%\env.bat
 @rem @call d:\env.bat
 

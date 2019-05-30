@@ -1,21 +1,19 @@
-const translator = { 'IP Address': 'address', 'Port': 'port', 'Password': 'password', 'Method': 'method' }
-const C_ISXB_TOP = 'C.ISXB.TOP';
-
-var fss= require('free-shadowsocks');
+const superagent = require('superagent')
+const cherrio = require('cheerio')
+const url = 'https://t.netflybit.top/'
 
 module.exports = {
 
-   c_isxb_top: function(){
-      return fss().then((fsslist) => {
-         for(var i=0, l=fsslist.length; i<l; i++){
-            let info = fsslist[i]
-            //console.log(info)
-            if(undefined != info.address && info.address.length >0 && info.address.toUpperCase() === C_ISXB_TOP){
-               return info
-            }
-         }
-      }, (err) => {
-         console.error(err)
+   fetch: function(){
+      return superagent.get(url).then(function (res) {
+         let $ = cherrio.load(res.text)
+         var resp = {};
+         resp.address = $('span#host0').text();
+         resp.port= $('span#port0').text();
+         resp.password = $('span#pass0').text();
+         resp.method = $('span#encrypt0').text();
+         return resp;
       })
+
    }
 }

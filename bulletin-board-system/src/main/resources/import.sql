@@ -1,5 +1,6 @@
 INSERT INTO USERS (ID, USERNAME, PASSWORD, enabled) VALUES (0, 'root', 's3cret', true);
 INSERT INTO AUTHORITIES (AUTHORITY, USERNAME) VALUES ('ADMIN', 'root');
+
 insert into post (id, title, content, timestamp) values (0, 0, 'CN Sucks.', 4096);
 insert into post (id, title, content, timestamp) values (1, 1, 'CN Sucks.', 4097);
 insert into post (id, title, content, timestamp) values (2, 2, 'CN Sucks.', 4098);
@@ -33,3 +34,8 @@ insert into post (id, title, content, timestamp) values (29, 29, 'CN Sucks.', 41
 insert into post (id, title, content, timestamp) values (30, 30, 'CN Sucks.', 4126);
 insert into post (id, title, content, timestamp) values (31, 31, 'CN Sucks.', 4127);
 insert into post (id, title, content, timestamp) values (32, 32, 'CN Sucks.', 4128);
+
+insert into Comments (id, content, timestamp, belongto) values (0, 'Sleepy Now.', 34753, 4096);
+insert into Comments (id, content, timestamp, belongto) values (1, 'Sleepy Now.', 34754, 4096);
+insert into Comments (id, content, timestamp, belongto) values (2, 'Sleepy Now.', 34755, 4096);
+insert into Comments (id, content, timestamp, belongto) values (3, 'Sleepy Now.', 34757, 4096);

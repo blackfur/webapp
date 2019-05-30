@@ -6,16 +6,26 @@
 </head>
 <body>
    <header></header>
-   <div>
-      <span id='title'></span>
-      <span id='author'></span>
-      <span id='category'></span>
-      <span id='time'></span>
+   <div id='app'>
+      <div>
+         <span id='title'></span>
+         <span id='author'></span>
+         <span id='category'></span>
+         <span id='time'></span>
+      </div>
+      <div id='content'></div>
+      <br/>
+      <hr/>
+    <div v-for="item in comments">
+       <div>{{item.ip}}</div>
+       <br/>
+       <div>{{item.content}}</div>
+    </div>
    </div>
-   <div id='content'></div>
 
 
 	<script src='jquery-3.4.0.js'></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 	<script src='global.js'></script>
 	<script src='util.js'></script>
 
@@ -43,7 +53,18 @@ $(function(){
       error: function(xhr, stat){
       }
    });
-})
+});
+
+var app = new Vue({
+   el: '#app',
+   data: {
+      comments: []
+   },
+   methods: {
+      loadcmms: function(){}
+   }
+   mounted: function(){}
+});
 	</script>
 </body>
    <style>

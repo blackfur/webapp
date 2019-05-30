@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 
-require('..').c_isxb_top().then(
+require('..').fetch().then(
    (resp) => {
       console.info(resp)
       const spawn = require('child_process').spawn ;
