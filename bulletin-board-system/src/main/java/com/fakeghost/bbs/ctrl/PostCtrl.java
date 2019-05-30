@@ -2,6 +2,8 @@ package com.fakeghost.bbs.ctrl;
 
 import com.fakeghost.bbs.model.Post;
 import com.fakeghost.bbs.repo.PostRepo;
+//import com.wordnik.swagger.annotations.Api;
+//import com.wordnik.swagger.annotations.ApiOperation;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -13,13 +15,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.orm.hibernate4.SessionFactoryUtils;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
 import java.util.Map;
-import org.springframework.web.bind.annotation.PathVariable;
+
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -27,7 +27,8 @@ import org.springframework.data.domain.PageRequest;
 import javax.persistence.EntityManagerFactory;
 import javax.transaction.Transactional;
 
-@Controller
+@RestController
+//@Api(value="Posts", description="Operations pertaining to Post.")
 @RequestMapping(value="/posts")
 @Transactional
 public class PostCtrl{
@@ -38,6 +39,7 @@ public class PostCtrl{
     @Autowired SessionFactory sessionf;
     //@Autowired EntityManagerFactory entitymf;
 
+    //@ApiOperation(value = "Query list.")
     @ResponseBody
     @RequestMapping
     public ResponseEntity posts(

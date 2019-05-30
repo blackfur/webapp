@@ -27,4 +27,11 @@
 
    <tx:annotation-driven/>
 
+   <!-- 
+  Swagger 
+   <context:annotation-config />
+   <mvc:default-servlet-handler />
+   <bean id="documentationConfig" class="com.mangofactory.swagger.configuration.DocumentationConfig"/>
+   -->
+
 </beans>
