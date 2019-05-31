@@ -3,6 +3,10 @@ server:
    servlet:
       #context-path: /api
 spring:
+   redis:
+      host: 172.16.0.42
+      port: 6379
+      database: 0
    jpa:
       show-sql: true
       generate-ddl: true
