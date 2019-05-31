@@ -25,3 +25,7 @@ spring:
          additional-exclude: build/**
          log-condition-evaluation-delta: true
          enabled: true
+
+rabbitmq:
+   QueueNames: ladder
+   TopicExchange: bookshelf
