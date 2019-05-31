@@ -1,4 +1,3 @@
-package com.fakeghost;
 import org.junit.jupiter.api.Test;
  
 class JUnit5SampleTest {

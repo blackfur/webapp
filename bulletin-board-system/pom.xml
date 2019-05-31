@@ -111,6 +111,9 @@ Never write another getter or equals method again, with one annotation your clas
               <directory>src/main/resources</directory> 
                <filtering>true</filtering>
            </testResource>
+           <testResource> 
+              <directory>src/test/resources</directory> 
+           </testResource>
         </testResources>
 <!-- replace ${} -->
          <resources>
