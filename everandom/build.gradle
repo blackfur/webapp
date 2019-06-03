@@ -16,10 +16,11 @@ buildscript {
 
 allprojects {
     repositories {
-         mavenLocal()
+        mavenLocal()
         maven{ url 'http://maven.aliyun.com/nexus/content/groups/public/' }
         maven{ url 'http://maven.aliyun.com/nexus/content/repositories/jcenter'}
         mavenCentral()
+        //maven{ url "https://oss.sonatype.org/content/repositories/snapshots" }
         jcenter()
         google()
     }
@@ -65,11 +66,18 @@ android {
         }
 
     }
+      lintOptions {
+          checkReleaseBuilds false
+          // Or, if you prefer, you can continue to check for errors in release builds,
+          // but continue the build even when errors are found:
+          abortOnError false
+      }
 }
 
 sourceCompatibility = 1.8
 
 dependencies {
+	//compile 'com.evernote:android-sdk:2.0.0-RC4'
     //compile 'com.android.support:support-v4:18.0.0'
     //compile project(':core')
    //unitTestCompile 'com.google.android:android-test:4.1.1.4'
