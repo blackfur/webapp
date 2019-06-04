@@ -73,8 +73,19 @@ public class Warehouse extends SQLiteOpenHelper {
   
         // return note  
         return cursor2map(cursor);
-    }  
-  
+    }
+    Map<String, Object> selectOne(String title) {
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        Cursor cursor = db.query(TABLE_NOTES, new String[] { KEY_ID,  KEY_TITLE, KEY_CONTENT }, KEY_TITLE + "=?",
+                new String[] { String.valueOf(title) }, null, null, null, "1");
+        if (cursor != null)
+            cursor.moveToFirst();
+
+        // return note
+        return cursor2map(cursor);
+    }
+
     // code to get all notes in a list view  
     public List<Map<String, Object>> selectAll() {  
         List<Map<String, Object>> noteList = new ArrayList<Map<String, Object>>();  
