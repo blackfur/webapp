@@ -40,6 +40,7 @@ $(function(){
       alert('TIMESTAMP Not found.');
       return;
    }
+   var _TIMESTAMP = timestamp;
    $.ajax({
       url: _url_post_timestamp + '/' + timestamp,
       success: function(dat){
@@ -58,10 +59,15 @@ $(function(){
 var app = new Vue({
    el: '#app',
    data: {
-      comments: []
+      comments: [],
+
    },
    methods: {
-      loadcmms: function(){}
+      loadcmms: function(){
+         $.ajax({
+            url: _url_comments + '/' + _TIMESTAMP,
+         });
+      }
    }
    mounted: function(){}
 });

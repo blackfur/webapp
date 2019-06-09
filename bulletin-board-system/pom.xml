@@ -21,10 +21,12 @@
     </properties>
 
     <dependencies>
+       <!--
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-amqp</artifactId>
         </dependency>
+        -->
       <dependency>
          <groupId>org.springframework.boot</groupId>
          <artifactId>spring-boot-starter-data-redis</artifactId>
@@ -208,7 +210,10 @@ Never write another getter or equals method again, with one annotation your clas
         <properties>
             <serv.port>8080</serv.port>
             <ddl-auto>create-drop</ddl-auto>
+            <!--
             <datasource.url>jdbc:hsqldb:hsql://localhost</datasource.url>
+            -->
+            <datasource.url>jdbc:hsqldb:file:/opt/hsql/bookshelf;DB_CLOSE_DELAY=-1</datasource.url>
         </properties>
     </profile>
     <profile>

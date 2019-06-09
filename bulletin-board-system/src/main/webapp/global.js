@@ -4,6 +4,7 @@ var _url_post_timestamp = _url_posts + '/timestamp';
 var _url_postsubmit =_api_host_ + '/posts/submit';
 var _url_postview =_api_host_ + '/detail.html';
 var _url_total_post=_api_host_ + '/posts/total';
+var _url_comments = _url_posts + '/comments'
 var Author = '';
 var Time = '';
 var Category = '';
