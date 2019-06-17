@@ -4,11 +4,16 @@ import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.Scene;
+import javafx.scene.control.*;
 import javafx.scene.effect.BlendMode;
 import javafx.scene.effect.BoxBlur;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyCodeCombination;
+import javafx.scene.input.KeyCombination;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.CycleMethod;
 import javafx.scene.paint.LinearGradient;
@@ -21,6 +26,7 @@ import javafx.util.Duration;
 import lombok.extern.apachecommons.CommonsLog;
 
 import static java.lang.Math.random;
+import static sample.SuicideUtil.img;
 
 @CommonsLog(topic = "CONSOLE")
 public class Main extends Application {
@@ -29,55 +35,76 @@ public class Main extends Application {
         launch(args);
     }
 
-    public void start(Stage primaryStage) {
+    public void start(Stage primaryStage) throws Exception {
         Group root = new Group();
         Scene scene = new Scene(root, 400, 300, Color.BLACK);
         primaryStage.setScene(scene);
 
-        Group circles = new Group();
-        for (int i = 0; i < 8; i++) {
-            Circle circle = new Circle(64, Color.web("white", 0.05));
-            circle.setStrokeType(StrokeType.OUTSIDE);
-            circle.setStroke(Color.web("white", 1.0));
-            circle.setStrokeWidth(8);
-            circles.getChildren().add(circle);
-        }
-        circles.setEffect(new BoxBlur(10, 10, 3));
+        primaryStage.getIcons().add(img("/Tridactyl_100px.png"));
 
-        Rectangle colors = new Rectangle(scene.getWidth(), scene.getHeight(),
-                new LinearGradient(0f, 1f, 1f, 0f, true, CycleMethod.NO_CYCLE, new Stop(0, Color.web("#f8bd55")),
-                        new Stop(0.14, Color.web("#c0fe56")),
-                        new Stop(0.28, Color.web("#5dfbc1")),
-                        new Stop(0.43, Color.web("#64c2f8")),
-                        new Stop(0.57, Color.web("#be4af7")),
-                        new Stop(0.71, Color.web("#ed5fc2")),
-                        new Stop(0.85, Color.web("#ef504c")),
-                        new Stop(1, Color.web("#f2660f"))));
-        colors.widthProperty().bind(scene.widthProperty());
-        colors.heightProperty().bind(scene.heightProperty());
-
-        Group blendModeGroup =
-                new Group(new Group(new Rectangle(scene.getWidth(), scene.getHeight(),
-                        Color.BLACK), circles), colors);
-        colors.setBlendMode(BlendMode.OVERLAY);
-        root.getChildren().add(blendModeGroup);
-
-        Timeline timeline = new Timeline();
-        for (Node circle: circles.getChildren()) {
-            timeline.getKeyFrames().addAll(
-                    new KeyFrame(Duration.ZERO, // set start position at 0
-                            new KeyValue(circle.translateXProperty(), random() * 800),
-                            new KeyValue(circle.translateYProperty(), random() * 600)
-                    ),
-                    new KeyFrame(new Duration(4000), // set end position at 40s
-                            new KeyValue(circle.translateXProperty(), random() * 800),
-                            new KeyValue(circle.translateYProperty(), random() * 600)
-                    )
-            );
-        }
-// play 40s of animation
-        timeline.play();
+        menus(root, primaryStage);
 
         primaryStage.show();
+    }
+
+    static void menus(Group root, Stage primaryStage){
+        MenuBar menuBar = new MenuBar();
+        menuBar.prefWidthProperty().bind(primaryStage.widthProperty());
+        root.getChildren().add(menuBar);
+
+        // File menu - new, save, exit
+        Menu fileMenu = new Menu("_File");
+        MenuItem newMenuItem = new MenuItem("_New");
+        MenuItem saveMenuItem = new MenuItem("_Save");
+        saveMenuItem.setMnemonicParsing(true);
+        saveMenuItem.setAccelerator(new KeyCodeCombination(KeyCode.S, KeyCombination.SHORTCUT_DOWN));
+        MenuItem exitMenuItem = new MenuItem("_Exit");
+        exitMenuItem.setOnAction(actionEvent -> Platform.exit());
+
+        fileMenu.getItems().addAll(newMenuItem, saveMenuItem,
+                new SeparatorMenuItem(), exitMenuItem);
+
+        Menu webMenu = new Menu("_Web");
+        CheckMenuItem htmlMenuItem = new CheckMenuItem("_HTML");
+        htmlMenuItem.setSelected(true);
+        webMenu.getItems().add(htmlMenuItem);
+
+        CheckMenuItem cssMenuItem = new CheckMenuItem("_CSS");
+        cssMenuItem.setSelected(true);
+        webMenu.getItems().add(cssMenuItem);
+
+        Menu sqlMenu = new Menu("_SQL");
+        ToggleGroup tGroup = new ToggleGroup();
+        RadioMenuItem mysqlItem = new RadioMenuItem("_MySQL");
+        mysqlItem.setToggleGroup(tGroup);
+
+        RadioMenuItem oracleItem = new RadioMenuItem("_Oracle");
+        oracleItem.setToggleGroup(tGroup);
+        oracleItem.setSelected(true);
+
+        sqlMenu.getItems().addAll(mysqlItem, oracleItem,
+                new SeparatorMenuItem());
+
+        Menu tutorialManeu = new Menu("_Tutorial");
+        tutorialManeu.getItems().addAll(
+                new CheckMenuItem("_Java"),
+                new CheckMenuItem("Java_FX"),
+                new CheckMenuItem("_Swing"));
+
+        sqlMenu.getItems().add(tutorialManeu);
+
+        menuBar.getMenus().addAll(fileMenu, webMenu, sqlMenu);
+
+        // Context Menus
+        //ContextMenu  contextFileMenu = new ContextMenu(fileMenu);
+        /*
+        primaryStage.addEventHandler(MouseEvent.MOUSE_CLICKED,  (MouseEvent  me) ->  {
+            if (me.getButton() == MouseButton.SECONDARY  || me.isControlDown())  {
+                contextFileMenu.show(root, me.getScreenX(), me.getScreenY());
+            }  else  {
+                contextFileMenu.hide();
+            }
+        });
+         */
     }
 }
