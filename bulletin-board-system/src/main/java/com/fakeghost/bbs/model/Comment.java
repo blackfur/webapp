@@ -22,6 +22,7 @@ public class Comment {
     String ip;
     String content;
     long timestamp;
+    // post timestamp
     long belongto;
 
     @Override

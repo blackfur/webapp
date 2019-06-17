@@ -1,22 +1,28 @@
 package com.fakeghost.bbs.ctrl;
 
 import com.fakeghost.bbs.MvcTestCase;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.test.web.servlet.MvcResult;
+
+import java.util.Map;
+
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-import org.springframework.test.web.servlet.MvcResult;
-import static org.hamcrest.Matchers.containsString;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import java.io.IOException;
-import java.util.Map;
 
 public class PostTest extends MvcTestCase{
+    final Logger log = LoggerFactory.getLogger(getClass());
+
+    @Test
+    public void ShouldResturnAllComments() throws Exception{
+        mockMvc.perform(get("/posts/comments"))
+                .andExpect(status().isOk()) .andDo(print()) .andReturn();
+    }
     @Test
     public void posts_ShouldList() throws Exception {
-        final Logger log = LoggerFactory.getLogger(getClass());
 
         //mockMvc.perform(get("/posts/" + id)).  andExpect(status().isOk()) .andDo(print()) .andReturn();
 

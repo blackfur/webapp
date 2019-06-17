@@ -16,23 +16,28 @@
       <div id='content'></div>
       <br/>
       <hr/>
+      <!--
     <div v-for="item in comments">
        <div>{{item.ip}}</div>
        <br/>
        <div>{{item.content}}</div>
     </div>
+      -->
    </div>
 
+   <List id='comments' pagination='true'></List>
 
 	<script src='jquery-3.4.0.js'></script>
-    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+   <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 	<script src='global.js'></script>
 	<script src='util.js'></script>
+   <script src='/comp/List/index.js'></script>
 
 	<script>
 $(function(){
    // include components
    include('/comp/header.html', 'header');
+   include('/comp/List/index.html', 'List#comments');
 
    //
    var timestamp= getUrlParameter('timestamp');
@@ -41,6 +46,29 @@ $(function(){
       return;
    }
    var _TIMESTAMP = timestamp;
+
+
+   // load comments
+   setTimeout(function(){
+      List({
+         root: 'List#comments', 
+         item: '/comp/List/item.html',
+         adapter: function(data, row){
+            $(row).children('.content').text(data.content);
+         },
+         loader: function(done, fail){
+            $.ajax({
+               //url: _url_comments + '/' + timestamp,
+               url: _url_comments,
+               success: function(resp){
+                  done(resp.payload);
+               }
+            });
+         }
+      });
+   }, 0);
+
+   // load Post
    $.ajax({
       url: _url_post_timestamp + '/' + timestamp,
       success: function(dat){
@@ -56,21 +84,6 @@ $(function(){
    });
 });
 
-var app = new Vue({
-   el: '#app',
-   data: {
-      comments: [],
-
-   },
-   methods: {
-      loadcmms: function(){
-         $.ajax({
-            url: _url_comments + '/' + _TIMESTAMP,
-         });
-      }
-   }
-   mounted: function(){}
-});
 	</script>
 </body>
    <style>

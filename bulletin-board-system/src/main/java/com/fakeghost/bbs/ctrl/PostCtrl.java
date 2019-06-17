@@ -1,31 +1,25 @@
 package com.fakeghost.bbs.ctrl;
 
+import com.fakeghost.bbs.model.Comment;
 import com.fakeghost.bbs.model.Post;
+import com.fakeghost.bbs.repo.CommentRepo;
 import com.fakeghost.bbs.repo.PostRepo;
-//import com.wordnik.swagger.annotations.Api;
-//import com.wordnik.swagger.annotations.ApiOperation;
 import org.hibernate.Query;
-import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Restrictions;
-import org.hibernate.hql.internal.ast.util.SessionFactoryHelper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
-import org.springframework.orm.hibernate4.SessionFactoryUtils;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.*;
-
-import java.util.HashMap;
-import java.util.Map;
-
-import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
-import javax.persistence.EntityManagerFactory;
 import javax.transaction.Transactional;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 @RestController
 //@Api(value="Posts", description="Operations pertaining to Post.")
@@ -36,6 +30,10 @@ public class PostCtrl{
 
     @Autowired
     PostRepo repo;
+
+    @Autowired
+    CommentRepo commentRepo;
+
     @Autowired SessionFactory sessionf;
     //@Autowired EntityManagerFactory entitymf;
 
@@ -137,6 +135,27 @@ public class PostCtrl{
            return ResponseEntity.ok(p.hashmap());
         }
         resp.put("msg", "Not Found.");
+        // No Content
+         return ResponseEntity.status(204).body(resp);
+    }
+    @RequestMapping("/comments/{timestamp}")
+    public ResponseEntity comments( @PathVariable Long timestamp) {
+       return null;
+    }
+    @RequestMapping("/comments")
+    public ResponseEntity comments( ) {
+       Map<String, Object> resp = new HashMap<>();
+       List<Comment> list= new ArrayList<>();
+
+        Iterable<Comment> all = commentRepo.findAll();
+        all.forEach(list::add);
+        if(list.size() > 0){
+           resp.put("payload", list);
+           resp.put("msg", "Successfully");
+           log.info("Query comments Successfully.");
+            return ResponseEntity.ok(resp);
+        }
+        resp.put("msg", "No posts Found.");
         // No Content
          return ResponseEntity.status(204).body(resp);
     }
