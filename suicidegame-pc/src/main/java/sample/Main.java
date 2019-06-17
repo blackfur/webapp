@@ -5,13 +5,12 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import lombok.extern.apachecommons.CommonsLog;
 
 import java.net.URL;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
+@CommonsLog(topic = "CONSOLE")
 public class Main extends Application {
-    Log log = LogFactory.getLog(getClass());
 
     @Override
     public void start(Stage primaryStage) throws Exception{
