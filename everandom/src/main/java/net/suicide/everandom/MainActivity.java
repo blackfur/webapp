@@ -1,11 +1,9 @@
 package net.suicide.everandom;
 
-import android.app.ListActivity;
+import android.app.Activity;
 import android.os.Bundle;
 import android.util.Log;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import java.io.IOException;
@@ -13,7 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-public class MainActivity extends ListActivity
+public class MainActivity extends Activity
 {
     @Override
     public void onCreate(Bundle savedInstanceState)
@@ -26,7 +24,7 @@ public class MainActivity extends ListActivity
          wh.insert("", "peer");
          wh.insert("", "strawberry");
 
-        List<Map<String, Object>> list = null;
+        List<Map<String, Object>> list;
         try {
             list = wh.random();
         } catch (IOException e) {
@@ -34,11 +32,12 @@ public class MainActivity extends ListActivity
             Log.e(this.getClass().getSimpleName(), "Query Random fail.", e);
             return;
         }
-        List<String> arr = new ArrayList();
+
+        String[] strings = new String[list.size()];
          for(int i=0; i< list.size(); i++){
-            arr.add((String) list.get(i).get("content"));
+            strings[i] = (String)list.get(i).get("content");
          }
-         ListView lv = (ListView)findViewById(R.id.list);
-        lv.setAdapter(new NotesAdapter(this, (String[]) arr.toArray(), list));
+         ListView lv = findViewById(R.id.list);
+        lv.setAdapter(new NotesAdapter(this, strings, list));
     }
 }

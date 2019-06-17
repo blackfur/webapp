@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -23,13 +24,24 @@ public class NotesAdapter extends ArrayAdapter<String> {
 
     public View getView(int position, View view, ViewGroup parent) {
         LayoutInflater inflater=context.getLayoutInflater();
-        View rowView=inflater.inflate(R.layout.list_item, null,true);
+        View rowView;
+        Map<Integer, View> viewHolder;
+        if(null == view){
+            rowView=inflater.inflate(R.layout.list_item, null,true);
+            viewHolder = new HashMap<>();
+            TextView content = rowView.findViewById(R.id.content);
+            viewHolder.put(R.id.content, content);
+            rowView.setTag(viewHolder);
+        }else{
+            rowView = view;
+           viewHolder = (Map<Integer, View>) view.getTag();
+        }
 
-        TextView content = (TextView) rowView.findViewById(R.id.content);
 
+        TextView content = (TextView) viewHolder.get(R.id.content);
         content.setText((String)list.get(position).get("content"));
 
         return rowView;
 
-    };
+    }
 }

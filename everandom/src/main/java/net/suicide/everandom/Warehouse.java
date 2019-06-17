@@ -108,9 +108,9 @@ public class Warehouse extends SQLiteOpenHelper {
     }  
 
     public List<Map<String, Object>> random() throws IOException {
-        List<Map<String, Object>> noteList = new ArrayList<Map<String, Object>>();  
+        List<Map<String, Object>> noteList = new ArrayList<>();
         // Select All Query  
-        String selectQuery = "SELECT  * FROM " + TABLE_NOTES + " WHERE id IN (SELECT id FROM table ORDER BY RANDOM() LIMIT " + Appliance.prop("limit",ctx) + ")";
+        String selectQuery = "SELECT  * FROM " + TABLE_NOTES + " WHERE id IN (SELECT id FROM " + TABLE_NOTES + " ORDER BY RANDOM() LIMIT " + Appliance.prop("limit",ctx) + ")";
   
         SQLiteDatabase db = this.getWritableDatabase();  
         Cursor cursor = db.rawQuery(selectQuery, null);  
