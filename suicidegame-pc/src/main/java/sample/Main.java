@@ -6,12 +6,18 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
+import java.net.URL;
+
 public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception{
 
-        Parent root = FXMLLoader.load(getClass().getResource("sample.fxml"));
+        URL resource = getClass().getResource("/sample.fxml");
+        if(null == resource){
+            throw new Exception("file Not found.");
+        }
+        Parent root = FXMLLoader.load(resource);
         primaryStage.setTitle("Welcome to Heaven.");
         primaryStage.setScene(new Scene(root, 300, 275));
         primaryStage.show();
