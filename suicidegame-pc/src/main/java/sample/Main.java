@@ -29,17 +29,17 @@ public class Main extends Application {
         launch(args);
     }
 
-    public void start(Stage primaryStage) throws Exception {
+    public void start(Stage primaryStage) {
         Group root = new Group();
-        Scene scene = new Scene(root, 800, 600, Color.BLACK);
+        Scene scene = new Scene(root, 400, 300, Color.BLACK);
         primaryStage.setScene(scene);
 
         Group circles = new Group();
         for (int i = 0; i < 8; i++) {
-            Circle circle = new Circle(150, Color.web("white", 0.05));
+            Circle circle = new Circle(64, Color.web("white", 0.05));
             circle.setStrokeType(StrokeType.OUTSIDE);
-            circle.setStroke(Color.web("white", 0.16));
-            circle.setStrokeWidth(4);
+            circle.setStroke(Color.web("white", 1.0));
+            circle.setStrokeWidth(8);
             circles.getChildren().add(circle);
         }
         circles.setEffect(new BoxBlur(10, 10, 3));
@@ -69,7 +69,7 @@ public class Main extends Application {
                             new KeyValue(circle.translateXProperty(), random() * 800),
                             new KeyValue(circle.translateYProperty(), random() * 600)
                     ),
-                    new KeyFrame(new Duration(40000), // set end position at 40s
+                    new KeyFrame(new Duration(4000), // set end position at 40s
                             new KeyValue(circle.translateXProperty(), random() * 800),
                             new KeyValue(circle.translateYProperty(), random() * 600)
                     )
