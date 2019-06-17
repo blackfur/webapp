@@ -2,7 +2,10 @@ package sample;
 
 import javafx.scene.image.Image;
 
+import java.io.IOException;
 import java.net.URL;
+import java.util.HashMap;
+import java.util.Map;
 
 public class SuicideUtil {
     /**
@@ -18,4 +21,5 @@ public class SuicideUtil {
         }
         return new Image(resource.toString());
     }
+
 }
