@@ -18,24 +18,23 @@ import javafx.scene.shape.Rectangle;
 import javafx.scene.shape.StrokeType;
 import javafx.stage.Stage;
 import javafx.util.Duration;
-import lombok.extern.apachecommons.CommonsLog;
-
 import static java.lang.Math.random;
 
-@CommonsLog(topic = "CONSOLE")
-public class Main extends Application {
+
+public class ColorfulCircles extends Application {
 
     public static void main(String[] args) {
         launch(args);
     }
 
-    public void start(Stage primaryStage) throws Exception {
+    @Override
+    public void start(Stage primaryStage) {
         Group root = new Group();
         Scene scene = new Scene(root, 800, 600, Color.BLACK);
         primaryStage.setScene(scene);
 
         Group circles = new Group();
-        for (int i = 0; i < 8; i++) {
+        for (int i = 0; i < 30; i++) {
             Circle circle = new Circle(150, Color.web("white", 0.05));
             circle.setStrokeType(StrokeType.OUTSIDE);
             circle.setStroke(Color.web("white", 0.16));
@@ -60,24 +59,20 @@ public class Main extends Application {
                 new Group(new Group(new Rectangle(scene.getWidth(), scene.getHeight(),
                         Color.BLACK), circles), colors);
         colors.setBlendMode(BlendMode.OVERLAY);
-        root.getChildren().add(blendModeGroup);
 
+        root.getChildren().add(blendModeGroup);
         Timeline timeline = new Timeline();
-        for (Node circle: circles.getChildren()) {
+        for (Node circle : circles.getChildren()) {
             timeline.getKeyFrames().addAll(
                     new KeyFrame(Duration.ZERO, // set start position at 0
                             new KeyValue(circle.translateXProperty(), random() * 800),
-                            new KeyValue(circle.translateYProperty(), random() * 600)
-                    ),
+                            new KeyValue(circle.translateYProperty(), random() * 600)),
                     new KeyFrame(new Duration(40000), // set end position at 40s
                             new KeyValue(circle.translateXProperty(), random() * 800),
-                            new KeyValue(circle.translateYProperty(), random() * 600)
-                    )
-            );
+                            new KeyValue(circle.translateYProperty(), random() * 600)));
         }
-// play 40s of animation
+        // play 40s of animation
         timeline.play();
-
         primaryStage.show();
     }
 }
