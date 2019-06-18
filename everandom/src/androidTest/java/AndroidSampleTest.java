@@ -10,7 +10,7 @@ import static junit.framework.TestCase.assertEquals;
 @RunWith(AndroidJUnit4.class)
 public class AndroidSampleTest {
     @Test
-    public void sample() throws Exception {
+    public void sample() {
         assertEquals(1, 1);
         // Context of the app under test.
         Context appContext = InstrumentationRegistry.getTargetContext();

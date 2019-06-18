@@ -17,9 +17,9 @@ public class Warehouse extends SQLiteOpenHelper {
     private static final int DATABASE_VERSION = 1;  
     private static final String DATABASE_NAME = "bookshelf";  
     private static final String TABLE_NOTES = "notes";  
-    private static final String KEY_ID = "id";  
+    public static final String KEY_ID = "id";
     private static final String KEY_TITLE= "title";  
-    private static final String KEY_CONTENT= "content";
+    public static final String KEY_CONTENT= "content";
 
     Context ctx;
   
@@ -27,7 +27,7 @@ public class Warehouse extends SQLiteOpenHelper {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
         ctx = context;
         //3rd argument to be passed is CursorFactory instance
-    }  
+    }
   
     // Creating Tables  
     @Override  
@@ -110,7 +110,7 @@ public class Warehouse extends SQLiteOpenHelper {
     public List<Map<String, Object>> random() throws IOException {
         List<Map<String, Object>> noteList = new ArrayList<>();
         // Select All Query  
-        String selectQuery = "SELECT  * FROM " + TABLE_NOTES + " WHERE id IN (SELECT id FROM " + TABLE_NOTES + " ORDER BY RANDOM() LIMIT " + Appliance.prop("limit",ctx) + ")";
+        String selectQuery = "SELECT  * FROM " + TABLE_NOTES + " WHERE id IN (SELECT id FROM " + TABLE_NOTES + " ORDER BY RANDOM() LIMIT " + Hypnotic.prop("limit",ctx) + ")";
   
         SQLiteDatabase db = this.getWritableDatabase();  
         Cursor cursor = db.rawQuery(selectQuery, null);  
@@ -152,7 +152,14 @@ public class Warehouse extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();  
         db.delete(TABLE_NOTES, KEY_ID + " = ?",  new String[] { String.valueOf(id) });  
         db.close();  
-    }  
+    }
+    public void save(Map<String, Object> item){
+        SQLiteDatabase db = this.getWritableDatabase();
+        Object id = item.get(KEY_ID);
+        Object content = item.get(KEY_CONTENT);
+        db.execSQL("update notes set content = ? where id = ?", new String[]{content.toString(), id.toString()});
+        db.close();
+    }
   
     // Getting notes Count  
     public int count() {  

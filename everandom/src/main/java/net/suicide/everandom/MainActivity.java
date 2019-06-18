@@ -13,16 +13,14 @@ import java.util.Map;
 
 public class MainActivity extends Activity
 {
+    Warehouse wh;
     @Override
     public void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
         //
-         Warehouse wh = new Warehouse(this);
-         wh.insert("", "apple");
-         wh.insert("", "peer");
-         wh.insert("", "strawberry");
+         wh = new Warehouse(this);
 
         List<Map<String, Object>> list;
         try {
