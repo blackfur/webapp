@@ -136,7 +136,7 @@ public class Warehouse extends SQLiteOpenHelper {
     }
   
     // code to update the single note  
-    public int updateContact(int id, String title, String content) {  
+    public int update(int id, String title, String content) {
         SQLiteDatabase db = this.getWritableDatabase();  
   
         ContentValues values = new ContentValues();  

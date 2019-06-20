@@ -18,6 +18,7 @@ public class MainActivity extends FreakActivity
 {
     Warehouse wh;
     FloatingActionButton insertButton;
+    FloatingActionButton randomButton;
     ProgressBar progress;
 
     @Override
@@ -41,10 +42,22 @@ public class MainActivity extends FreakActivity
             }
         });
 
+
+        randomButton = findViewById(R.id.random);
+        randomButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+               random();
+            }
+        });
+
     }
     @Override
     protected void onStart(){
         super.onStart();
+        random();
+    }
+    void random(){
 
         new Thread(new Runnable() {
             public void run() {
