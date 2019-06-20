@@ -1,41 +1,80 @@
 package net.suicide.everandom;
 
-import android.app.Activity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.ListView;
-import android.widget.Toast;
+import android.widget.ProgressBar;
+import com.getbase.floatingactionbutton.FloatingActionButton;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-public class MainActivity extends Activity
+import static net.suicide.everandom.Hypnotic.go;
+import static net.suicide.everandom.Hypnotic.toast;
+
+public class MainActivity extends FreakActivity
 {
     Warehouse wh;
+    FloatingActionButton insertButton;
+    ProgressBar progress;
+
     @Override
     public void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
+
+        progress = findViewById(R.id.pBar);
+
         //
          wh = new Warehouse(this);
 
-        List<Map<String, Object>> list;
-        try {
-            list = wh.random();
-        } catch (IOException e) {
-            Toast.makeText(this, e.getMessage(), Toast.LENGTH_LONG);
-            Log.e(this.getClass().getSimpleName(), "Query Random fail.", e);
-            return;
-        }
+         progress.setVisibility(View.VISIBLE);
+         new Thread(new Runnable() {
+             public void run() {
+                 try {
+                     final List<Map<String, Object>>list = wh.random();
+                     if(list.size() == 0){
+                         toast(scope(), "Nothing!");
+                         return;
+                     }
+                     inflateList(list);
+                 } catch (final IOException e) {
+                     toast(scope(), e.getMessage());
+                     Log.e(this.getClass().getSimpleName(), "Query Random fail.", e);
+                     return;
+                 }
+             }
+         }).start();
 
-        String[] strings = new String[list.size()];
-         for(int i=0; i< list.size(); i++){
-            strings[i] = (String)list.get(i).get("content");
-         }
-         ListView lv = findViewById(R.id.list);
-        lv.setAdapter(new NotesAdapter(this, strings, list));
+
+        insertButton = findViewById(R.id.insert);
+        insertButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+               go(scope(), InsertActivity.class);
+            }
+        });
+
     }
+
+    void inflateList(final List<Map<String, Object>> list){
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                progress.setVisibility(View.GONE);
+                String[] strings = new String[list.size()];
+                for(int i=0; i< list.size(); i++){
+                    strings[i] = (String)list.get(i).get("content");
+                }
+                ListView lv = findViewById(R.id.list);
+                lv.setAdapter(new NotesAdapter(scope(), strings, list));
+
+            }
+        });
+
+    }
+
 }

@@ -42,7 +42,7 @@ public class EditorActivity extends Activity {
     public void onBackPressed() {
         final String inputtxt = input.getText().toString();
         if(TextUtils.isEmpty(inputtxt)){
-            Toast.makeText(this, "Should not be blank.", Toast.LENGTH_LONG);
+            Toast.makeText(this, "Should not be blank.", Toast.LENGTH_LONG).show();
         }else{
             new AlertDialog.Builder(this)
                     .setTitle("Save")
@@ -51,7 +51,7 @@ public class EditorActivity extends Activity {
                         public void onClick(DialogInterface dialog, int which) {
                             item.put(KEY_CONTENT, inputtxt);
                             warehouse.save(item);
-                            Toast.makeText(getApplicationContext(), "Saved.", Toast.LENGTH_LONG);
+                            Toast.makeText(getApplicationContext(), "Saved.", Toast.LENGTH_LONG).show();
                             EditorActivity.super.onBackPressed();
                         }
                     })

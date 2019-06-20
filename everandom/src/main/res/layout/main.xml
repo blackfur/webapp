@@ -20,15 +20,17 @@
             fab:fab_addButtonPlusIconColor="@color/half_black"
             fab:fab_addButtonSize="mini"
             fab:fab_labelStyle="@style/menu_labels_style"
-            fab:fab_labelsPosition="right">
+            fab:fab_labelsPosition="left">
 
         <com.getbase.floatingactionbutton.FloatingActionButton
+                android:id="@+id/insert"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 fab:fab_colorNormal="@color/white"
-                fab:fab_title="Label on the right"
+                fab:fab_title="Insert"
                 fab:fab_colorPressed="@color/white_pressed"/>
 
+        <!--
         <com.getbase.floatingactionbutton.FloatingActionButton
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -37,6 +39,7 @@
                 fab:fab_title="Another one on the right"
                 fab:fab_colorPressed="@color/white_pressed"/>
 
+        -->
     </com.getbase.floatingactionbutton.FloatingActionsMenu>
 
     <ListView
@@ -45,4 +48,13 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="50dp">
     </ListView>
+
+    <ProgressBar
+            android:id="@+id/pBar"
+            style="?android:attr/progressBarStyleLarge"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_centerHorizontal="true"
+            android:visibility="gone"/>
 </RelativeLayout>
