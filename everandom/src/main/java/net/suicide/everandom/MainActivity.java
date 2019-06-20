@@ -32,23 +32,6 @@ public class MainActivity extends FreakActivity
          wh = new Warehouse(this);
 
          progress.setVisibility(View.VISIBLE);
-         new Thread(new Runnable() {
-             public void run() {
-                 try {
-                     final List<Map<String, Object>>list = wh.random();
-                     if(list.size() == 0){
-                         toast(scope(), "Nothing!");
-                         return;
-                     }
-                     inflateList(list);
-                 } catch (final IOException e) {
-                     toast(scope(), e.getMessage());
-                     Log.e(this.getClass().getSimpleName(), "Query Random fail.", e);
-                     return;
-                 }
-             }
-         }).start();
-
 
         insertButton = findViewById(R.id.insert);
         insertButton.setOnClickListener(new View.OnClickListener() {
@@ -57,6 +40,28 @@ public class MainActivity extends FreakActivity
                go(scope(), InsertActivity.class);
             }
         });
+
+    }
+    @Override
+    protected void onStart(){
+        super.onStart();
+
+        new Thread(new Runnable() {
+            public void run() {
+                try {
+                    final List<Map<String, Object>>list = wh.random();
+                    if(list.size() == 0){
+                        toast(scope(), "Nothing!");
+                        // Nothing but still inflate!
+                    }
+                    inflateList(list);
+                } catch (final IOException e) {
+                    toast(scope(), e.getMessage());
+                    Log.e(this.getClass().getSimpleName(), "Query Random fail.", e);
+                    return;
+                }
+            }
+        }).start();
 
     }
 
