@@ -1,10 +1,12 @@
 package net.suicide.everandom;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.ListView;
 import android.widget.ProgressBar;
+import android.widget.Toast;
 import com.getbase.floatingactionbutton.FloatingActionButton;
 
 import java.io.IOException;
@@ -14,12 +16,20 @@ import java.util.Map;
 import static net.suicide.everandom.Hypnotic.go;
 import static net.suicide.everandom.Hypnotic.toast;
 
+import android.view.View.OnClickListener;
+import com.microsoft.onedrivesdk.picker.*;
+
 public class MainActivity extends FreakActivity
 {
     Warehouse wh;
     FloatingActionButton insertButton;
     FloatingActionButton randomButton;
+    FloatingActionButton syncBtn;
     ProgressBar progress;
+
+   private IPicker mPicker;
+     String ONEDRIVE_APP_ID = null;
+
 
     @Override
     public void onCreate(Bundle savedInstanceState)
@@ -51,6 +61,19 @@ public class MainActivity extends FreakActivity
             }
         });
 
+
+        try {
+            ONEDRIVE_APP_ID = Hypnotic.prop("onedrive.appid",scope());
+            syncBtn = findViewById(R.id.sync);
+            syncBtn.setOnClickListener(new View.OnClickListener() {
+                public void onClick(final View v) {
+                    mPicker = Picker.createPicker(ONEDRIVE_APP_ID);
+                    mPicker.startPicking(scope(), LinkType.DownloadLink);
+                }
+            });
+        } catch (IOException e) {
+            Log.e(getLocalClassName(), "Missing onedrive.appid: " + e);
+        }
     }
     @Override
     protected void onStart(){
@@ -94,5 +117,26 @@ public class MainActivity extends FreakActivity
         });
 
     }
+
+    @Override
+    protected void onActivityResult(final int requestCode, final int resultCode, final Intent data) {
+        // Get the results from the from the picker
+        final IPickerResult result = mPicker.getPickerResult(requestCode, resultCode, data);
+        Log.i(getLocalClassName(), result.getName()
+                + " | " + result.getLinkType()
+                + " | " + result.getLink()
+                + " | " + result.getSize()
+                + " | " + result.getThumbnailLinks().get("small")
+                + " | " + result.getThumbnailLinks().get("medium")
+                + " | " + result.getThumbnailLinks().get("large")
+        );
+
+        // Handle the case if nothing was picked
+        if (result == null) {
+            Toast.makeText(this, "Did not get a file from the picker!", Toast.LENGTH_LONG).show();
+            return;
+        }
+    }
+
 
 }

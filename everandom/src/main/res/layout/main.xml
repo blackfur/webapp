@@ -5,6 +5,13 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
 >
+    <ListView
+            android:id="@+id/list"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="50dp">
+    </ListView>
+
     <com.getbase.floatingactionbutton.FloatingActionsMenu
             android:id="@+id/right_labels"
             android:layout_width="wrap_content"
@@ -23,6 +30,13 @@
             fab:fab_labelsPosition="left">
 
         <com.getbase.floatingactionbutton.FloatingActionButton
+                android:id="@+id/sync"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                fab:fab_colorNormal="@color/white"
+                fab:fab_title="sync"
+                fab:fab_colorPressed="@color/white_pressed"/>
+        <com.getbase.floatingactionbutton.FloatingActionButton
                 android:id="@+id/insert"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -40,14 +54,6 @@
                 fab:fab_colorPressed="@color/white_pressed"/>
 
     </com.getbase.floatingactionbutton.FloatingActionsMenu>
-
-    <ListView
-            android:id="@+id/list"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="50dp">
-    </ListView>
-
     <ProgressBar
             android:id="@+id/pBar"
             style="?android:attr/progressBarStyleLarge"
@@ -56,4 +62,6 @@
             android:layout_centerInParent="true"
             android:layout_centerHorizontal="true"
             android:visibility="gone"/>
+
+
 </RelativeLayout>
