@@ -25,6 +25,8 @@
         <activity android:name=".EditorActivity" android:label="@string/app_name"/>
         <activity android:exported="true" android:name=".SyncActivity" android:label="@string/app_name"/>
         <activity android:exported="true" android:name=".UploadActivity" android:label="@string/app_name"/>
+        <activity android:exported="true" android:name=".ReplicaActivity" android:label="@string/app_name"/>
+        <activity android:exported="true" android:name=".RebornActivity" android:label="@string/app_name"/>
     </application>
 
 </manifest>

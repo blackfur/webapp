@@ -1,12 +1,10 @@
 package net.suicide.everandom;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.ListView;
 import android.widget.ProgressBar;
-import android.widget.Toast;
 import com.getbase.floatingactionbutton.FloatingActionButton;
 
 import java.io.IOException;
@@ -15,9 +13,6 @@ import java.util.Map;
 
 import static net.suicide.everandom.Hypnotic.go;
 import static net.suicide.everandom.Hypnotic.toast;
-
-import android.view.View.OnClickListener;
-import com.microsoft.onedrivesdk.picker.*;
 
 public class MainActivity extends FreakActivity
 {
@@ -70,6 +65,17 @@ public class MainActivity extends FreakActivity
         uploadBtn.setOnClickListener(new View.OnClickListener() {
             public void onClick(final View v) {
                 go(scope(), UploadActivity.class);
+            }
+        });
+
+        findViewById(R.id.reborn).setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                go(scope(), RebornActivity.class);
+            }
+        });
+        findViewById(R.id.replica).setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                go(scope(), ReplicaActivity.class);
             }
         });
     }
