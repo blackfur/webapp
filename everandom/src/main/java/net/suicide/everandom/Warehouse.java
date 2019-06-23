@@ -5,6 +5,7 @@ import android.content.Context;
 import android.database.Cursor;  
 import android.database.sqlite.SQLiteDatabase;  
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -12,10 +13,12 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import static net.suicide.everandom.Hypnotic.prop;
+
 
 public class Warehouse extends SQLiteOpenHelper {  
     private static final int DATABASE_VERSION = 1;  
-    private static final String DATABASE_NAME = "bookshelf";  
+    public static final String DATABASE_NAME = "bookshelf";
     private static final String TABLE_NOTES = "notes";  
     public static final String KEY_ID = "id";
     private static final String KEY_TITLE= "title";  
@@ -28,7 +31,15 @@ public class Warehouse extends SQLiteOpenHelper {
         ctx = context;
         //3rd argument to be passed is CursorFactory instance
     }
-  
+    public void onConfigure(SQLiteDatabase db) {
+        try {
+            prop("bookshelf.file", db.getPath(),ctx);
+        } catch (IOException e) {
+            Log.e(getClass().getCanonicalName(), "set Property of bookshelf.file: " + e.getMessage(), e);
+        }
+        super.onConfigure(db);
+    }
+
     // Creating Tables  
     @Override  
     public void onCreate(SQLiteDatabase db) {  
@@ -110,7 +121,7 @@ public class Warehouse extends SQLiteOpenHelper {
     public List<Map<String, Object>> random() throws IOException {
         List<Map<String, Object>> noteList = new ArrayList<>();
         // Select All Query  
-        String selectQuery = "SELECT  * FROM " + TABLE_NOTES + " WHERE id IN (SELECT id FROM " + TABLE_NOTES + " ORDER BY RANDOM() LIMIT " + Hypnotic.prop("limit",ctx) + ")";
+        String selectQuery = "SELECT  * FROM " + TABLE_NOTES + " WHERE id IN (SELECT id FROM " + TABLE_NOTES + " ORDER BY RANDOM() LIMIT " + prop("limit",ctx) + ")";
   
         SQLiteDatabase db = this.getWritableDatabase();  
         Cursor cursor = db.rawQuery(selectQuery, null);  

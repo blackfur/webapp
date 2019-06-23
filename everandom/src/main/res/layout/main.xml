@@ -30,6 +30,13 @@
             fab:fab_labelsPosition="left">
 
         <com.getbase.floatingactionbutton.FloatingActionButton
+                android:id="@+id/upload"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                fab:fab_colorNormal="@color/white"
+                fab:fab_title="upload"
+                fab:fab_colorPressed="@color/white_pressed"/>
+        <com.getbase.floatingactionbutton.FloatingActionButton
                 android:id="@+id/sync"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -52,8 +59,8 @@
                 fab:fab_colorNormal="@color/white"
                 fab:fab_title="random"
                 fab:fab_colorPressed="@color/white_pressed"/>
-
     </com.getbase.floatingactionbutton.FloatingActionsMenu>
+
     <ProgressBar
             android:id="@+id/pBar"
             style="?android:attr/progressBarStyleLarge"
@@ -62,6 +69,5 @@
             android:layout_centerInParent="true"
             android:layout_centerHorizontal="true"
             android:visibility="gone"/>
-
 
 </RelativeLayout>

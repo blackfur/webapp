@@ -25,10 +25,8 @@ public class MainActivity extends FreakActivity
     FloatingActionButton insertButton;
     FloatingActionButton randomButton;
     FloatingActionButton syncBtn;
+    FloatingActionButton uploadBtn;
     ProgressBar progress;
-
-   private IPicker mPicker;
-     String ONEDRIVE_APP_ID = null;
 
 
     @Override
@@ -62,18 +60,18 @@ public class MainActivity extends FreakActivity
         });
 
 
-        try {
-            ONEDRIVE_APP_ID = Hypnotic.prop("onedrive.appid",scope());
             syncBtn = findViewById(R.id.sync);
             syncBtn.setOnClickListener(new View.OnClickListener() {
                 public void onClick(final View v) {
-                    mPicker = Picker.createPicker(ONEDRIVE_APP_ID);
-                    mPicker.startPicking(scope(), LinkType.DownloadLink);
+                    go(scope(), SyncActivity.class);
                 }
             });
-        } catch (IOException e) {
-            Log.e(getLocalClassName(), "Missing onedrive.appid: " + e);
-        }
+        uploadBtn= findViewById(R.id.upload);
+        uploadBtn.setOnClickListener(new View.OnClickListener() {
+            public void onClick(final View v) {
+                go(scope(), UploadActivity.class);
+            }
+        });
     }
     @Override
     protected void onStart(){
@@ -116,26 +114,6 @@ public class MainActivity extends FreakActivity
             }
         });
 
-    }
-
-    @Override
-    protected void onActivityResult(final int requestCode, final int resultCode, final Intent data) {
-        // Get the results from the from the picker
-        final IPickerResult result = mPicker.getPickerResult(requestCode, resultCode, data);
-        Log.i(getLocalClassName(), result.getName()
-                + " | " + result.getLinkType()
-                + " | " + result.getLink()
-                + " | " + result.getSize()
-                + " | " + result.getThumbnailLinks().get("small")
-                + " | " + result.getThumbnailLinks().get("medium")
-                + " | " + result.getThumbnailLinks().get("large")
-        );
-
-        // Handle the case if nothing was picked
-        if (result == null) {
-            Toast.makeText(this, "Did not get a file from the picker!", Toast.LENGTH_LONG).show();
-            return;
-        }
     }
 
 

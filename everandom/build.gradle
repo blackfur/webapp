@@ -72,7 +72,11 @@ android {
             jniLibs.srcDirs = ['libs']
         }
 
+        test {
+            manifest.srcFile 'AndroidManifest.xml'
+        }
     }
+    
     lintOptions {
         checkReleaseBuilds false
         // Or, if you prefer, you can continue to check for errors in release builds,
