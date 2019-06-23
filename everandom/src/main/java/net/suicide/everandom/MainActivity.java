@@ -1,5 +1,6 @@
 package net.suicide.everandom;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -19,10 +20,7 @@ public class MainActivity extends FreakActivity
     Warehouse wh;
     FloatingActionButton insertButton;
     FloatingActionButton randomButton;
-    FloatingActionButton syncBtn;
-    FloatingActionButton uploadBtn;
     ProgressBar progress;
-
 
     @Override
     public void onCreate(Bundle savedInstanceState)
@@ -54,31 +52,18 @@ public class MainActivity extends FreakActivity
             }
         });
 
-
-            syncBtn = findViewById(R.id.sync);
-            syncBtn.setOnClickListener(new View.OnClickListener() {
-                public void onClick(final View v) {
-                    go(scope(), SyncActivity.class);
-                }
-            });
-        uploadBtn= findViewById(R.id.upload);
-        uploadBtn.setOnClickListener(new View.OnClickListener() {
-            public void onClick(final View v) {
-                go(scope(), UploadActivity.class);
-            }
-        });
-
-        findViewById(R.id.reborn).setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                go(scope(), RebornActivity.class);
-            }
-        });
-        findViewById(R.id.replica).setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                go(scope(), ReplicaActivity.class);
-            }
-        });
+        anchor(R.id.reborn, RebornActivity.class);
+        anchor(R.id.replica, ReplicaActivity.class);
     }
+
+   void anchor(int resid, final Class clazz){
+       findViewById(resid).setOnClickListener(new View.OnClickListener() {
+           public void onClick(View v) {
+               go(scope(), clazz);
+           }
+       });
+   }
+
     @Override
     protected void onStart(){
         super.onStart();
