@@ -2,9 +2,12 @@ package net.suicide.everandom;
 
 import android.os.Bundle;
 import android.os.Environment;
+import android.support.v4.util.Consumer;
 import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.File;
 import java.io.IOException;
@@ -16,6 +19,8 @@ public class ReplicaActivity extends FreakActivity{
 
     TextView logtxt;
     ProgressBar progress;
+    Warehouse warehouse;
+    Consumer onerror;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -25,26 +30,39 @@ public class ReplicaActivity extends FreakActivity{
         logtxt = findViewById(R.id.log);
         progress = findViewById(R.id.progress);
 
-        if(null == savedInstanceState){
-            // backup local bookshelf
-            String filepath = null;
-            try {
-                filepath = prop("bookshelf.file", scope());
-            } catch (IOException e) {
-                String err = "Missing bookshelf.file property: " + e.getMessage();
-                logtxt.append("\n\n" + err);
-                return;
-            }
-            logtxt.append("\n\nto Copy bookshelf file: " + filepath);
+        warehouse = new Warehouse(this);
 
-            final File src  = new File(filepath);
+        onerror = new Consumer() {
+            @Override
+            public void accept(Object o) {
+                int code = -1;
+                String message = "";
+                if(o instanceof JSONObject){
+                    JSONObject error = (JSONObject)o;
+                    try {
+                        code = error.getInt("code");
+                        message = error.getString("message");
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+                final String msg = message;
+                runOnUiThread(new Runnable() {
+                    public void run() {
+                        logtxt.append(msg);
+                    }
+                });
+            }
+        };
+
+        if(null == savedInstanceState){
             final File bookshelf= new File(Environment.getExternalStorageDirectory().getAbsolutePath()+"/" + getPackageName(), "bookshelf");
             progress.setVisibility(View.VISIBLE);
             new Thread(new Runnable() {
                 @Override
                 public void run() {
                     try {
-                        copy(src, bookshelf);
+                        warehouse.export(bookshelf, onerror);
                         appendlogtxt("\n\nCopied to: " + bookshelf.getAbsolutePath());
                     }  catch (Exception e) {
                         appendlogtxt("\n\n" + e.getMessage());
@@ -72,4 +90,5 @@ public class ReplicaActivity extends FreakActivity{
             }
         });
     }
+
 }

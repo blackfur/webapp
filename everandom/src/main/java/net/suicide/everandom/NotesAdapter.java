@@ -5,7 +5,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
+import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import java.util.HashMap;
@@ -15,15 +15,35 @@ import java.util.Map;
 import static net.suicide.everandom.Hypnotic.go;
 import static net.suicide.everandom.Warehouse.KEY_ID;
 
-public class NotesAdapter extends ArrayAdapter<String> {
+public class NotesAdapter extends BaseAdapter {
 
     final Activity context;
+
+    public void setList(List<Map<String, Object>> list) {
+        this.list = list;
+        notifyDataSetChanged();
+    }
+
     List<Map<String, Object>> list;
 
-    public NotesAdapter(Activity context,String[] arr, List<Map<String, Object>> list) {
-        super(context, R.layout.list_item, arr);
+    public NotesAdapter(Activity context, List<Map<String, Object>> list) {
         this.context=context;
         this.list = list;
+    }
+
+    @Override
+    public int getCount() {
+        return list.size();
+    }
+
+    @Override
+    public Object getItem(int position) {
+        return list.get(position);
+    }
+
+    @Override
+    public long getItemId(int position) {
+        return position;
     }
 
     public View getView(int position, View view, ViewGroup parent) {
@@ -57,7 +77,7 @@ public class NotesAdapter extends ArrayAdapter<String> {
                 Object id = item.get(KEY_ID);
                 Bundle bundle = new Bundle();
                 bundle.putString(KEY_ID, id.toString());
-                go(getContext(), EditorActivity.class, bundle);
+                go(context, EditorActivity.class, bundle);
             }
         });
 

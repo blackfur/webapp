@@ -5,9 +5,13 @@ import android.content.Context;
 import android.database.Cursor;  
 import android.database.sqlite.SQLiteDatabase;  
 import android.database.sqlite.SQLiteOpenHelper;
+import android.support.v4.util.Consumer;
+import android.text.TextUtils;
 import android.util.Log;
+import org.json.JSONException;
+import org.json.JSONObject;
 
-import java.io.IOException;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -137,6 +141,111 @@ public class Warehouse extends SQLiteOpenHelper {
         // return note list  
         return noteList;
     }
+    public List<Map<String, Object>> page(int offset, int limit) {
+        List<Map<String, Object>> noteList = new ArrayList<>();
+        // Select All Query
+
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor =db.rawQuery("select id, title, content from notes limit ? offset ?", new String[]{String.valueOf(limit), String.valueOf(offset)});
+
+        // looping through all rows and adding to list
+        if (cursor.moveToFirst()) {
+            do {
+                // Adding note to list
+                noteList.add(cursor2map(cursor));
+            } while (cursor.moveToNext());
+        }
+
+        // return note list
+        return noteList;
+    }
+    public JSONObject export(File destination, Consumer onerror) throws JSONException, IOException {
+       JSONObject error = new JSONObject();
+       Cursor cursor;
+       int total, offset = 0, limit = 64;
+       JSONObject buff = new JSONObject();
+        FileOutputStream output = null;
+        byte[] bytes;
+
+
+        if(!destination.exists()){
+            new File(destination.getParent()).mkdirs();
+            destination.createNewFile();
+        }
+        output= new FileOutputStream(destination);
+
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        cursor = db.rawQuery("select 1 from notes", null);
+        total = cursor.getCount();
+        cursor.close();
+
+        for(int i=0; i<total/limit; i++){
+            cursor =db.rawQuery("select id, title, content from notes limit ? offset ?", new String[]{String.valueOf(limit), String.valueOf(offset)});
+            offset += limit;
+            // looping through all rows and adding to list
+            if (cursor.moveToFirst()) {
+                do {
+                   buff.put("id", cursor.getString(0));
+                   buff.put("content", cursor.getString(1));
+                   buff.put("title", cursor.getString(2));
+
+                   bytes = (buff.toString() + "\n").getBytes();
+                   output.write(bytes);
+                   error.put("code", 201);
+                   error.put("message", buff.toString() + "\n");
+                   if(onerror!=null)
+                       onerror.accept(error);
+
+                } while (cursor.moveToNext());
+            }
+            cursor.close();
+            output.flush();
+        }
+        output.close();
+
+        error.put("code", 200);
+        return error;
+    }
+
+    public JSONObject restore(File source, Consumer onerror) throws JSONException, IOException {
+        JSONObject error = new JSONObject();
+        Cursor cursor;
+        int total, offset = 0, limit = 64;
+        JSONObject buff = new JSONObject();
+        byte[] bytes;
+        BufferedReader reader;
+        String oneline = "";
+        String row = "";
+
+        if(!source.exists()){
+            error.put("code", 404);
+            error.put("message", source.getAbsolutePath() + ": not exists!");
+            return error;
+        }
+        reader = new BufferedReader(new InputStreamReader(new FileInputStream(source)));
+        while(!TextUtils.isEmpty(oneline = reader.readLine())){
+            try{
+                row += oneline;
+                buff = new JSONObject(oneline);
+                update(buff);
+
+                error.put("code", 201);
+                error.put("message", row);
+                if(onerror!=null)
+                    onerror.accept(error);
+
+                row = "";
+            }catch(JSONException e){
+               continue;
+            }
+        }
+
+        reader.close();
+
+        error.put("code", 200);
+        return error;
+    }
 
     Map<String, Object> cursor2map(Cursor cursor){
          Map<String, Object> note= new HashMap<String, Object>();
@@ -145,18 +254,41 @@ public class Warehouse extends SQLiteOpenHelper {
          note.put("content", cursor.getString(2));
          return note;
     }
+
+    public long update(JSONObject row) throws JSONException {
+        int id = row.getInt("id");
+        String title = row.getString("title");
+        String content= row.getString("content");
+        return update(id, title, content);
+    }
   
     // code to update the single note  
-    public int update(int id, String title, String content) {
-        SQLiteDatabase db = this.getWritableDatabase();  
+    public long update(int id, String title, String content) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor;
+        long count;
+
+        cursor = db.rawQuery("select 1 from notes where id = ?", new String[]{String.valueOf(id)});
+        if(cursor.getCount() == 0){
+            ContentValues values = new ContentValues();
+            values.put(KEY_ID, id); // Contact Name
+            values.put(KEY_TITLE, title); // Contact Name
+            values.put(KEY_CONTENT, content); // Contact Phone
+            count = db.insert(TABLE_NOTES, null, values);
+            //db.close();
+            return count;
+        }
+
   
         ContentValues values = new ContentValues();  
         values.put(KEY_TITLE, title);  
         values.put(KEY_CONTENT, content);  
   
         // updating row  
-        return db.update(TABLE_NOTES, values, KEY_ID + " = ?",  new String[] { String.valueOf(id) });  
-    }  
+        count = db.update(TABLE_NOTES, values, KEY_ID + " = ?",  new String[] { String.valueOf(id) });
+        //db.close();
+        return  count;
+    }
   
     // Deleting single note  
     public void delete(int id) {  

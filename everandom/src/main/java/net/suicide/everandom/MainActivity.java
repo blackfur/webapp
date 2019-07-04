@@ -9,6 +9,7 @@ import android.widget.ProgressBar;
 import com.getbase.floatingactionbutton.FloatingActionButton;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -21,12 +22,17 @@ public class MainActivity extends FreakActivity
     FloatingActionButton insertButton;
     FloatingActionButton randomButton;
     ProgressBar progress;
+    NotesAdapter adapter;
 
     @Override
     public void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
+
+        adapter = new NotesAdapter(scope(), new String[]{}, new ArrayList<Map<String, Object>>());
+        ListView lv = findViewById(R.id.list);
+        lv.setAdapter(adapter);
 
         progress = findViewById(R.id.pBar);
 
@@ -95,17 +101,11 @@ public class MainActivity extends FreakActivity
             @Override
             public void run() {
                 progress.setVisibility(View.GONE);
-                String[] strings = new String[list.size()];
-                for(int i=0; i< list.size(); i++){
-                    strings[i] = (String)list.get(i).get("content");
-                }
-                ListView lv = findViewById(R.id.list);
-                lv.setAdapter(new NotesAdapter(scope(), strings, list));
+                adapter.setList(list);
 
             }
         });
 
     }
-
 
 }

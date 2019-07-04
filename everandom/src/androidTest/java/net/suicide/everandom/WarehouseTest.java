@@ -5,10 +5,12 @@ import android.os.Environment;
 import android.support.test.InstrumentationRegistry;
 import android.support.test.runner.AndroidJUnit4;
 import android.util.Log;
+import org.json.JSONException;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.Map;
 
 import static org.junit.Assert.assertEquals;
@@ -65,5 +67,24 @@ public class WarehouseTest {
         {
             Log.d("Files", "FileName:" + files[i].getName());
         }
+    }
+
+    @Test
+    public void should_exportBookshelf() throws IOException, JSONException {
+
+        Context appContext = InstrumentationRegistry.getTargetContext();
+        Warehouse wh = new Warehouse(appContext);
+        wh.insert("apple", "apple");
+        wh.insert("pear", "pear");
+        final File bookshelf= new File(Environment.getExternalStorageDirectory().getAbsolutePath()+"/" + appContext.getPackageName(), "bookshelf");
+        wh.export(bookshelf, null);
+    }
+    @Test
+    public void should_restoreBookshelf() throws IOException, JSONException {
+
+        Context appContext = InstrumentationRegistry.getTargetContext();
+        Warehouse wh = new Warehouse(appContext);
+        final File bookshelf= new File(Environment.getExternalStorageDirectory().getAbsolutePath()+"/" + appContext.getPackageName(), "bookshelf");
+        wh.restore(bookshelf, null);
     }
 }

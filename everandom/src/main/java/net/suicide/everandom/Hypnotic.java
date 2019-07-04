@@ -76,6 +76,9 @@ public class Hypnotic {
             while ( (size= input.read(buffer)) > 0) {
                 output.write(buffer, 0, size);
             }
+            output.flush();
+            input.close();
+            output.close();
         } catch (IOException e) {
             String err = "Can't access: \n"
                     + destination.getAbsolutePath()
