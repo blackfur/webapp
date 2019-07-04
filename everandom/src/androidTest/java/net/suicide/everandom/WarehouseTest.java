@@ -1,12 +1,14 @@
 package net.suicide.everandom;
 
 import android.content.Context;
+import android.os.Environment;
 import android.support.test.InstrumentationRegistry;
 import android.support.test.runner.AndroidJUnit4;
 import android.util.Log;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import java.io.File;
 import java.util.Map;
 
 import static org.junit.Assert.assertEquals;
@@ -43,5 +45,25 @@ public class WarehouseTest {
         Log.i(Tag, "After Saved: " + appletxt);
 
         assertEquals(appletxt, "pineapple");
+    }
+
+    @Test
+    public void should_ListFiles(){
+        String path = Environment.getExternalStorageDirectory().toString();
+
+        //Context appContext = InstrumentationRegistry.getTargetContext();
+        //String path = "/data/data/" + appContext.getPackageName() + "/database/";
+
+        Log.d("Files", "Path: " + path);
+        File directory = new File(path);
+        File[] files = directory.listFiles();
+        if(null == files){
+            return;
+        }
+        Log.d("Files", "Size: "+ files.length);
+        for (int i = 0; i < files.length; i++)
+        {
+            Log.d("Files", "FileName:" + files[i].getName());
+        }
     }
 }

@@ -46,6 +46,10 @@ public class NotesAdapter extends ArrayAdapter<String> {
 
         final Map<String, Object> item = list.get(position);
         TextView content = (TextView) viewHolder.get(R.id.content);
+        if(position%2 == 1)
+            content.setTextColor(context.getColor(R.color.pink));
+        else
+            content.setTextColor(context.getColor(R.color.white));
         content.setText((String)item.get("content"));
         content.setOnClickListener(new View.OnClickListener() {
             @Override

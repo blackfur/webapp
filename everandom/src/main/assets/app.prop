@@ -1,1 +1,4 @@
-limit=16
+limit=4
+onedrive.appid=3b022669-6e7f-4734-98c5-b66a1a4f5382
+#onedrive.appid=48122D4E
+bookshelf.file=/data/user/0/net.suicide.everandom/databases/bookshelf
