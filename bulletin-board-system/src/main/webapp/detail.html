@@ -16,16 +16,16 @@
       <div id='content'></div>
       <br/>
       <hr/>
-      <!--
-    <div v-for="item in comments">
-       <div>{{item.ip}}</div>
-       <br/>
-       <div>{{item.content}}</div>
-    </div>
-      -->
    </div>
 
+   <!--
    <List id='comments' pagination='true'></List>
+   -->
+   <div id="comments"></div>
+   <div>
+      <button id="comment_pre">Previous</button>
+      <button id="comment_next">Next</button>
+   </div>
 
 	<script src='jquery-3.4.0.js'></script>
    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
@@ -37,7 +37,7 @@
 $(function(){
    // include components
    include('/comp/header.html', 'header');
-   include('/comp/List/index.html', 'List#comments');
+   //include('/comp/List/index.html', 'List#comments');
 
    //
    var timestamp= getUrlParameter('timestamp');
@@ -49,6 +49,7 @@ $(function(){
 
 
    // load comments
+   /*
    setTimeout(function(){
       List({
          root: 'List#comments', 
@@ -67,6 +68,14 @@ $(function(){
          }
       });
    }, 0);
+   */
+   var comment_page = 0;
+   $.ajax({
+      url: _url_comments + '/' + timestamp,
+      success: function(resp){
+         done(resp.payload);
+      }
+   });
 
    // load Post
    $.ajax({
@@ -82,6 +91,7 @@ $(function(){
       error: function(xhr, stat){
       }
    });
+
 });
 
 	</script>
