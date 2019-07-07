@@ -45,7 +45,7 @@ public class RebornActivity extends FreakActivity{
                         Log.e(getClass().getCanonicalName(), "Read Response fail: ",e );
                     }
                 }
-                final String msg = "\n\n" + message;
+                final String msg = "\n" + message;
                 runOnUiThread(new Runnable() {
                     public void run() {
                         logtxt.append(msg);

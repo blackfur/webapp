@@ -21,6 +21,7 @@ public class MainActivity extends FreakActivity
     Warehouse wh;
     FloatingActionButton insertButton;
     FloatingActionButton randomButton;
+    FloatingActionButton searchBtn;
     ProgressBar progress;
     NotesAdapter adapter;
 
@@ -59,6 +60,7 @@ public class MainActivity extends FreakActivity
 
         anchor(R.id.reborn, RebornActivity.class);
         anchor(R.id.replica, ReplicaActivity.class);
+        anchor(R.id.search, SearchActivity.class);
     }
 
    void anchor(int resid, final Class clazz){

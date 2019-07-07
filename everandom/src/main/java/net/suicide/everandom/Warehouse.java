@@ -136,7 +136,8 @@ public class Warehouse extends SQLiteOpenHelper {
                 // Adding note to list
                 noteList.add(cursor2map(cursor));
             } while (cursor.moveToNext());  
-        }  
+        }
+        cursor.close();
   
         // return note list  
         return noteList;
@@ -321,6 +322,43 @@ public class Warehouse extends SQLiteOpenHelper {
   
         // return count  
         return cursor.getCount();  
-    }  
-  
-}  
+    }
+
+    public List<Map<String, Object>> search(final String words, final Consumer onerror) {
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                StringBuffer buff = new StringBuffer();
+                buff.append("%");
+                for(int i=0; i<words.length(); i++){
+                    String character = String.valueOf(words.charAt(i));
+                    if("%".equalsIgnoreCase(character)){
+                       character = "\\" + character;
+                    }
+                    buff.append(character);
+                    buff.append("%");
+                }
+
+                SQLiteDatabase db = getReadableDatabase();
+                Cursor cursor = db.rawQuery("select id, title, content from notes where content like ?", new String[]{buff.toString()});
+                List<Map<String, Object>> noteList = new ArrayList<>();
+                if (cursor.moveToFirst()) {
+                    do {
+                        // Adding note to list
+                        noteList.add(cursor2map(cursor));
+                    } while (cursor.moveToNext());
+                }
+                JSONObject error = new JSONObject();
+                try {
+                    error.put("code", 200);
+                    error.put("payload", noteList);
+                    onerror.accept(error);
+                } catch (JSONException e) {
+                    Log.e(getClass().getCanonicalName(), "Create response fail: ", e);
+                }
+                db.close();
+            }
+        }).start();
+        return null;
+    }
+}
