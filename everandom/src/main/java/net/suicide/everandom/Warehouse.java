@@ -179,16 +179,24 @@ public class Warehouse extends SQLiteOpenHelper {
         cursor = db.rawQuery("select 1 from notes", null);
         total = cursor.getCount();
         cursor.close();
+        if(total == 0){
+            error.put("code", 404);
+            error.put("message", "Nothing.");
+            if(onerror!=null)
+                onerror.accept(error);
+            return error;
+        }
 
-        for(int i=0; i<total/limit; i++){
+        double pages= Math.ceil(Float.valueOf(total )/ limit);
+        for(int i=0; i<pages; i++){
             cursor =db.rawQuery("select id, title, content from notes limit ? offset ?", new String[]{String.valueOf(limit), String.valueOf(offset)});
             offset += limit;
             // looping through all rows and adding to list
             if (cursor.moveToFirst()) {
                 do {
                    buff.put("id", cursor.getString(0));
-                   buff.put("content", cursor.getString(1));
-                   buff.put("title", cursor.getString(2));
+                   buff.put("title", cursor.getString(1));
+                   buff.put("content", cursor.getString(2));
 
                    bytes = (buff.toString() + "\n").getBytes();
                    output.write(bytes);
@@ -228,7 +236,7 @@ public class Warehouse extends SQLiteOpenHelper {
             try{
                 row += oneline;
                 buff = new JSONObject(oneline);
-                update(buff);
+               update(buff);
 
                 error.put("code", 201);
                 error.put("message", row);
@@ -277,7 +285,7 @@ public class Warehouse extends SQLiteOpenHelper {
             count = db.insert(TABLE_NOTES, null, values);
             //db.close();
             return count;
-        }
+        }cursor.close();
 
   
         ContentValues values = new ContentValues();  

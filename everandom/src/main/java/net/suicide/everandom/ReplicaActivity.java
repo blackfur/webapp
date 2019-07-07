@@ -10,10 +10,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.File;
-import java.io.IOException;
-
-import static net.suicide.everandom.Hypnotic.copy;
-import static net.suicide.everandom.Hypnotic.prop;
 
 public class ReplicaActivity extends FreakActivity{
 
