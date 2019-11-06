@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.support.annotation.RequiresApi;
 import android.support.v4.util.Consumer;
+import android.util.Log;
 import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -32,7 +33,6 @@ public class RebornActivity extends FreakActivity{
         warehouse = new Warehouse(this);
 
         onerror = new Consumer() {
-            @Override
             public void accept(Object o) {
                 int code = -1;
                 String message = "";
@@ -42,10 +42,10 @@ public class RebornActivity extends FreakActivity{
                         code = error.getInt("code");
                         message = error.getString("message");
                     } catch (JSONException e) {
-                        e.printStackTrace();
+                        Log.e(getClass().getCanonicalName(), "Read Response fail: ",e );
                     }
                 }
-                final String msg = message;
+                final String msg = "\n" + message;
                 runOnUiThread(new Runnable() {
                     public void run() {
                         logtxt.append(msg);

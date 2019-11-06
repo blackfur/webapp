@@ -70,7 +70,7 @@ public class NotesAdapter extends BaseAdapter {
             content.setTextColor(context.getColor(R.color.pink));
         else
             content.setTextColor(context.getColor(R.color.white));
-        content.setText((String)item.get("content"));
+        content.setText(item.get("content").toString());
         content.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

@@ -21,6 +21,7 @@ public class MainActivity extends FreakActivity
     Warehouse wh;
     FloatingActionButton insertButton;
     FloatingActionButton randomButton;
+    FloatingActionButton searchBtn;
     ProgressBar progress;
     NotesAdapter adapter;
 
@@ -30,7 +31,7 @@ public class MainActivity extends FreakActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
 
-        adapter = new NotesAdapter(scope(), new String[]{}, new ArrayList<Map<String, Object>>());
+        adapter = new NotesAdapter(scope(), new ArrayList<Map<String, Object>>());
         ListView lv = findViewById(R.id.list);
         lv.setAdapter(adapter);
 
@@ -43,7 +44,6 @@ public class MainActivity extends FreakActivity
 
         insertButton = findViewById(R.id.insert);
         insertButton.setOnClickListener(new View.OnClickListener() {
-            @Override
             public void onClick(View view) {
                go(scope(), InsertActivity.class);
             }
@@ -60,6 +60,7 @@ public class MainActivity extends FreakActivity
 
         anchor(R.id.reborn, RebornActivity.class);
         anchor(R.id.replica, ReplicaActivity.class);
+        anchor(R.id.search, SearchActivity.class);
     }
 
    void anchor(int resid, final Class clazz){
